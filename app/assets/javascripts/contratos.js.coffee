@@ -5,7 +5,7 @@ ready = ->
 	$('form').on 'click', '.quitar_campos', () ->
 		$(this).prev('input[type=hidden]').val('1')
 		$(this).closest('.row').hide()
-		event.preventDefauld()
+		event.preventDefault()
 
 	$('form').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()

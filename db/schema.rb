@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719195837) do
+ActiveRecord::Schema.define(version: 20150721140620) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20150719195837) do
   end
 
   add_index "contratos_items", ["contrato_id"], name: "index_contratos_items_on_contrato_id"
+
+  create_table "contratos_personas_tipos", force: :cascade do |t|
+    t.integer  "contrato_id"
+    t.integer  "inquilino_id"
+    t.integer  "propietario_id"
+    t.integer  "garante_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "contratos_personas_tipos", ["contrato_id"], name: "index_contratos_personas_tipos_on_contrato_id"
 
   create_table "personas", force: :cascade do |t|
     t.string   "codigo"

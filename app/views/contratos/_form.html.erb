@@ -20,6 +20,12 @@
     <%= f.label :carpeta %><br>
     <%= f.text_field :carpeta %>
   </div>
+  <%= f.label :inquilino_ids %>
+  <%= f.collection_select :inquilino_ids, Persona.where(:es_inquilino => true), :id, :nombre, {}, {multiple: true} %>
+  <%= f.label :propietario_ids %>
+  <%= f.collection_select :propietario_ids, Persona.where(:es_propietario => true), :id, :nombre, {}, {multiple: true} %>
+  <%= f.label :garante_ids %>
+  <%= f.collection_select :garante_ids, Persona.where(:es_garante => true), :id, :nombre, {}, {multiple: true} %>
   <div class="field">
     <%= f.label :fecha %><br>
     <%= f.date_select :fecha %>
