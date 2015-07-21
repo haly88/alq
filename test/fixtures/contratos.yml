@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codigo: MyString
+  nombre: MyString
+  activo: false
+  descripcion: MyString
+  carpeta: MyString
+  fecha: 2015-07-19
+
+two:
+  codigo: MyString
+  nombre: MyString
+  activo: false
+  descripcion: MyString
+  carpeta: MyString
+  fecha: 2015-07-19

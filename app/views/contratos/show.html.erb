@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Codigo:</strong>
+  <%= @contrato.codigo %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @contrato.nombre %>
+</p>
+
+<p>
+  <strong>Activo:</strong>
+  <%= @contrato.activo %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @contrato.descripcion %>
+</p>
+
+<p>
+  <strong>Carpeta:</strong>
+  <%= @contrato.carpeta %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @contrato.fecha %>
+</p>
+
+<%= link_to 'Edit', edit_contrato_path(@contrato) %> |
+<%= link_to 'Back', contratos_path %>

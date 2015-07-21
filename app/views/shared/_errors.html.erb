@@ -1,0 +1,10 @@
+<% if modelo.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(modelo.errors.count, "error") %> prohibited this groupinv modelorom being saved:</h2>
+    <ul>
+    <% modelo.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

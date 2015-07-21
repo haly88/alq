@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codigo: MyString
+  nombre: MyString
+  activo: false
+  descripcion: MyText
+  es_inquilino: false
+  es_propietario: false
+  es_garante: false
+  es_otro: false
+  telefono: MyString
+  email: MyString
+  direccion: MyString
+
+two:
+  codigo: MyString
+  nombre: MyString
+  activo: false
+  descripcion: MyText
+  es_inquilino: false
+  es_propietario: false
+  es_garante: false
+  es_otro: false
+  telefono: MyString
+  email: MyString
+  direccion: MyString

@@ -1,0 +1,10 @@
+<div class="row">
+	<%= f.label :monto %>
+	<%= f.number_field :monto %>
+	<%= f.label :fecha_desde %>
+	<%= f.date_select :fecha_desde %>
+	<%= f.label :fecha_hasta %>
+	<%= f.date_select :fecha_hasta %>
+	<%= f.hidden_field :_destroy %>
+	<%= link_to 'X', '', :class => 'quitar_campos' %>
+</div>

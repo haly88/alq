@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contrato_id: 
+  fecha_desde: 2015-07-19
+  fecha_hasta: 2015-07-19
+  monto: 9.99
+
+two:
+  contrato_id: 
+  fecha_desde: 2015-07-19
+  fecha_hasta: 2015-07-19
+  monto: 9.99
