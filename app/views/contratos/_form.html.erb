@@ -1,4 +1,3 @@
-
 <%= simple_form_for(@contrato) do |f| %>
   <%= f.input :codigo %>
   <%= f.input :nombre %>
@@ -9,10 +8,11 @@
   <%= f.association :propietarios, :label_method => :nombre,:collection => Persona.where(:es_propietario => true) %>
   <%= f.association :garantes, :label_method => :nombre,:collection => Persona.where(:es_garante => true) %>
   <%= f.input :fecha %>
-  <%= f.fields_for :contratos_items do |builder| %>
-    <%= render "contratos_items_fields", :f => builder %>
+  <%= f.simple_fields_for :contratos_items do |f| %>
+    <%= render "contratos_items_fields", :f => f %>
   <% end %>
   <%= link_to_add_fields "+", f, :contratos_items %>
   <%= f.button :submit %>
 <% end %>
+
 
