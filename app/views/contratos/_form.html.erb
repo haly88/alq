@@ -1,42 +1,39 @@
-<%= form_for(@contrato) do |f| %>
-  <%= render "shared/errors", modelo: @contrato %>
-  <div class="field">
-    <%= f.label :codigo %><br>
-    <%= f.text_field :codigo %>
-  </div>
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :activo %><br>
-    <%= f.check_box :activo %>
-  </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_field :descripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :carpeta %><br>
-    <%= f.text_field :carpeta %>
-  </div>
-  <%= f.label :inquilino_ids %>
-  <%= f.collection_select :inquilino_ids, Persona.where(:es_inquilino => true), :id, :nombre, {}, {multiple: true} %>
-  <%= f.label :propietario_ids %>
-  <%= f.collection_select :propietario_ids, Persona.where(:es_propietario => true), :id, :nombre, {}, {multiple: true} %>
-  <%= f.label :garante_ids %>
-  <%= f.collection_select :garante_ids, Persona.where(:es_garante => true), :id, :nombre, {}, {multiple: true} %>
-  <div class="field">
-    <%= f.label :fecha %><br>
-    <%= f.date_select :fecha %>
-  </div>
-  <div class="field">
-    <%= f.fields_for :contratos_items do |builder| %>
-      <%= render "contratos_items_fields", :f => builder %>
+<div class="row">
+  <div class="panel">
+    <%= form_for(@contrato) do |f| %>
+      <%= render "shared/errors", modelo: @contrato %>
+      <div class="row">
+        <%= f.text_field :codigo, label: 'Codigo' %>
+        <%= f.text_field :nombre, label: 'Codigo' %>
+        <%= f.check_box :activo, label: 'Codigo' %>
+      </div>
+      <div class="field">
+        <%= f.label :descripcion %><br>
+        <%= f.text_area :descripcion %>
+      </div>
+      <div class="field">
+        <%= f.label :carpeta %><br>
+        <%= f.text_field :carpeta %>
+      </div>
+      <%= f.label :inquilino_ids %>
+      <%= f.collection_select :inquilino_ids, Persona.where(:es_inquilino => true), :id, :nombre, {}, {multiple: true} %>
+      <%= f.label :propietario_ids %>
+      <%= f.collection_select :propietario_ids, Persona.where(:es_propietario => true), :id, :nombre, {}, {multiple: true} %>
+      <%= f.label :garante_ids %>
+      <%= f.collection_select :garante_ids, Persona.where(:es_garante => true), :id, :nombre, {}, {multiple: true} %>
+      <div class="field">
+        <%= f.label :fecha %><br>
+        <%= f.date_select :fecha %>
+      </div>
+      <div class="field">
+        <%= f.fields_for :contratos_items do |builder| %>
+          <%= render "contratos_items_fields", :f => builder %>
+        <% end %>
+        <%= link_to_add_fields "+", f, :contratos_items %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
     <% end %>
-    <%= link_to_add_fields "+", f, :contratos_items %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

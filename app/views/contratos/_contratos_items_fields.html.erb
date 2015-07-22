@@ -1,10 +1,18 @@
 <div class="row">
-	<%= f.label :monto %>
-	<%= f.number_field :monto %>
-	<%= f.label :fecha_desde %>
-	<%= f.date_select :fecha_desde %>
-	<%= f.label :fecha_hasta %>
-	<%= f.date_select :fecha_hasta %>
+	<div class="columns medium-4">
+		<%= f.label :monto %>
+		<%= f.number_field :monto %>
+	</div>
+	<div class="columns medium-3">
+		<%= f.label :fecha_desde %>
+		<%= f.date_select :fecha_desde %>
+	</div>
+	<div class="columns medium-3">
+		<%= f.label :fecha_hasta %>
+		<%= f.date_select :fecha_hasta %>
+	</div>
 	<%= f.hidden_field :_destroy %>
-	<%= link_to 'X', '', :class => 'quitar_campos' %>
+	<div class="columns medium-2">
+		<%= link_to 'X', '', :class => 'quitar_campos' %>
+	</div>
 </div>
