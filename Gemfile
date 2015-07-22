@@ -49,4 +49,4 @@ group :development, :test do
 end
 
 gem 'foundation-rails'
-
+gem 'simple_form'

@@ -10,7 +10,7 @@ class Persona < ActiveRecord::Base
   validate :tipo_de_persona
 
   def tipo_de_persona
-  	 errors.add(:persona_id, "sin tipo") unless self.es_algo?
+  	 errors.add(:es_inquilino, "sin tipo") unless self.es_algo?
   end
 
   def es_algo?

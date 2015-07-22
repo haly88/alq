@@ -15,7 +15,11 @@
     <div class="row">
       <p id="notice"><%= flash[:notice] %></p>
       <p id="alert"><%= flash[:alert] %></p>
-    </div> 
-    <%= yield %>
+    </div>
+    <div class="row">
+      <div class="panel">
+        <%= yield %>
+      </div> 
+    </div>
   </body>
 </html>
