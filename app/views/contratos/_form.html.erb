@@ -1,18 +1,31 @@
 <%= simple_form_for(@contrato) do |f| %>
-  <%= f.input :codigo %>
-  <%= f.input :nombre %>
-  <%= f.input :activo %>
-  <%= f.input :descripcion %>
-  <%= f.input :carpeta %>
-  <%= f.association :inquilinos, :label_method => :nombre,:collection => Persona.where(:es_inquilino => true) %>
-  <%= f.association :propietarios, :label_method => :nombre,:collection => Persona.where(:es_propietario => true) %>
-  <%= f.association :garantes, :label_method => :nombre,:collection => Persona.where(:es_garante => true) %>
-  <%= f.input :fecha %>
-  <%= f.simple_fields_for :contratos_items do |f| %>
-    <%= render "contratos_items_fields", :f => f %>
-  <% end %>
-  <%= link_to_add_fields "+", f, :contratos_items %>
+  <ul class="tabs" data-tab>
+    <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+    <li class="tab-title"><a data-no-turbolink='true' href="#cuotas">Cuotas</a></li>
+  </ul>
+  <div class="tabs-content">
+    <div class="content active" id="general">
+      <%= f.input :codigo %>
+      <%= f.input :nombre %>
+      <%= f.input :descripcion %>
+      <%= f.input :carpeta %>
+      <%= f.association :inquilinos, :label_method => :nombre,:collection => Persona.where(:es_inquilino => true) %>
+      <%= f.association :propietarios, :label_method => :nombre,:collection => Persona.where(:es_propietario => true) %>
+      <%= f.association :garantes, :label_method => :nombre,:collection => Persona.where(:es_garante => true) %>
+      <%= f.input :fecha %>
+    </div>
+    <div class="content" id="cuotas">
+      <%= f.simple_fields_for :contratos_items do |f| %>
+        <%= render "contratos_items_fields", :f => f %>
+      <% end %>
+      <%= link_to_add_fields "+", f, :contratos_items %>
+    </div>
+  </div>
   <%= f.button :submit %>
 <% end %>
+  
+  
+  
+
 
 
