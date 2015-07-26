@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721140620) do
+ActiveRecord::Schema.define(version: 20150726003846) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -45,6 +45,39 @@ ActiveRecord::Schema.define(version: 20150721140620) do
   end
 
   add_index "contratos_personas_tipos", ["contrato_id"], name: "index_contratos_personas_tipos_on_contrato_id"
+
+  create_table "inmueble_tipos", force: :cascade do |t|
+    t.string   "codigo"
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inmuebles", force: :cascade do |t|
+    t.string   "codigo"
+    t.string   "descripcion"
+    t.boolean  "activo",           default: true
+    t.integer  "inmueble_tipo_id"
+    t.string   "direccion"
+    t.string   "piso"
+    t.string   "depto"
+    t.string   "localidad"
+    t.string   "codigo_postal"
+    t.string   "administracion"
+    t.string   "adm_email"
+    t.string   "adm_tel1"
+    t.string   "adm_tel2"
+    t.string   "adm_tel3"
+    t.string   "encargado"
+    t.string   "enc_email"
+    t.string   "enc_tel1"
+    t.string   "enc_tel2"
+    t.string   "enc_tel3"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "inmuebles", ["inmueble_tipo_id"], name: "index_inmuebles_on_inmueble_tipo_id"
 
   create_table "personas", force: :cascade do |t|
     t.string   "codigo"

@@ -50,3 +50,4 @@ end
 
 gem 'foundation-rails'
 gem 'simple_form'
+gem 'chosen-rails'

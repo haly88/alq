@@ -1,0 +1,42 @@
+<%= simple_form_for(@inmueble) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <ul class="tabs" data-tab>
+      <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+      <li class="tab-title"><a data-no-turbolink='true' href="#administracion">Administracion</a></li>
+      <li class="tab-title"><a data-no-turbolink='true' href="#encargado">Encargado</a></li>
+    </ul>
+    <div class="tabs-content">
+      <div class="content active" id="general">
+        <%= f.input :codigo %>
+        <%= f.input :descripcion %>
+        <%= f.input :activo %>
+        <%= f.association :inmueble_tipo %>
+        <%= f.input :direccion %>
+        <%= f.input :piso %>
+        <%= f.input :depto %>
+        <%= f.input :localidad %>
+        <%= f.input :codigo_postal %>
+      </div>
+      <div class="content" id="administracion">
+        <%= f.input :administracion %>
+        <%= f.input :adm_email, :label => 'Email' %>
+        <%= f.input :adm_tel1, :label => 'Telefono 1' %>
+        <%= f.input :adm_tel2, :label => 'Telefono 2' %>
+        <%= f.input :adm_tel3, :label => 'Telefono 3' %>
+      </div>
+      <div class="content" id="encargado">
+      <%= f.input :encargado %>
+      <%= f.input :enc_email, :label => 'Email' %>
+      <%= f.input :enc_tel1, :label => 'Telefono 1' %>
+      <%= f.input :enc_tel2, :label => 'Telefono 2' %>
+      <%= f.input :enc_tel3, :label => 'Telefono 3' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
