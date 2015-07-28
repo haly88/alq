@@ -27,7 +27,6 @@ class ContratosController < ApplicationController
   # POST /contratos
   # POST /contratos.json
   def create
-    binding.pry
     @contrato = Contrato.new(contrato_params)
 
     respond_to do |format|

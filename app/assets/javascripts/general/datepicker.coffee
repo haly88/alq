@@ -1,6 +1,3 @@
-ready = ->
-	$ ->
-  	$('.datepicker').datepicker()
-  	return
-$(document).on('page:load', ready)
-$(document).ready(ready)
+jQuery ->
+	$('.datepicker').datepicker
+		dateFormat: 'yy-mm-dd'

@@ -8,13 +8,14 @@
     <div class="tabs-content">
       <div class="content active" id="general">
         <%= f.input :codigo %>
+        <%= f.input :activo %>
         <%= f.input :nombre %>
         <%= f.input :descripcion %>
         <%= f.input :carpeta %>
         <%= f.association :inquilinos, :label_method => :nombre,:collection => Persona.where(:es_inquilino => true) %>
         <%= f.association :propietarios, :label_method => :nombre,:collection => Persona.where(:es_propietario => true) %>
         <%= f.association :garantes, :label_method => :nombre,:collection => Persona.where(:es_garante => true) %>
-        <%= f.input :fecha %>
+        <%= f.input :fecha, as: :string, input_html: {:class => 'datepicker'} %>
       </div>
       <div class="content" id="cuotas">
         <%= f.simple_fields_for :contratos_items do |f| %>
