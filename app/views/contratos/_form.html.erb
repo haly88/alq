@@ -15,7 +15,7 @@
         <%= f.association :inquilinos, :label_method => :nombre,:collection => Persona.where(:es_inquilino => true) %>
         <%= f.association :propietarios, :label_method => :nombre,:collection => Persona.where(:es_propietario => true) %>
         <%= f.association :garantes, :label_method => :nombre,:collection => Persona.where(:es_garante => true) %>
-        <%= f.input :fecha, as: :string, input_html: {:class => 'datepicker'} %>
+        <%= f.input :fecha, as: :string %>
       </div>
       <div class="content" id="cuotas">
         <%= f.simple_fields_for :contratos_items do |f| %>

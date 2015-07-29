@@ -12,7 +12,7 @@
         <%= f.input :codigo %>
         <%= f.input :descripcion %>
         <%= f.input :activo %>
-        <%= f.association :inmueble_tipo %>
+        <%= f.association :inmueble_tipo, :label_method => :nombre %>
         <%= f.input :direccion %>
         <%= f.input :piso %>
         <%= f.input :depto %>

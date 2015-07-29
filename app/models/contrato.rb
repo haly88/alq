@@ -1,4 +1,5 @@
 class Contrato < ActiveRecord::Base
+	belongs_to :inmueble
 	has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo" 
  	has_many :contratos_propietarios, class_name: "ContratosPersonasTipo"
   has_many :contratos_garantes, class_name: "ContratosPersonasTipo"
