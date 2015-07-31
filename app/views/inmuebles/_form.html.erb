@@ -13,11 +13,11 @@
         <%= f.input :descripcion %>
         <%= f.input :activo %>
         <%= f.association :inmueble_tipo, :label_method => :nombre %>
-        <%= f.input :direccion %>
+        <%= f.input :direccion, :label => 'Direccion (google maps)', :placeholder => 'Ej: Arenales 2500, CABA'%>
         <%= f.input :piso %>
         <%= f.input :depto %>
-        <%= f.input :localidad %>
-        <%= f.input :codigo_postal %>
+        <%= f.input :localidad, disabled: true %>
+        <%= f.input :codigo_postal, disabled: true %>
       </div>
       <div class="content" id="administracion">
         <%= f.input :administracion %>

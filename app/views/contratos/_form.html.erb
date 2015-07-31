@@ -7,15 +7,29 @@
     </ul>
     <div class="tabs-content">
       <div class="content active" id="general">
-        <%= f.input :codigo %>
-        <%= f.input :activo %>
-        <%= f.input :nombre %>
-        <%= f.input :descripcion %>
-        <%= f.input :carpeta %>
-        <%= f.association :inquilinos, :label_method => :nombre,:collection => Persona.where(:es_inquilino => true) %>
-        <%= f.association :propietarios, :label_method => :nombre,:collection => Persona.where(:es_propietario => true) %>
-        <%= f.association :garantes, :label_method => :nombre,:collection => Persona.where(:es_garante => true) %>
-        <%= f.input :fecha, as: :string %>
+        <div class="row">
+          <%= f.input :codigo %>
+          <%= f.input :nombre %>
+          <%= f.input :carpeta %>
+          <%= f.input :activo %>
+        </div>
+        <div class="row">
+          <%= f.association :inmueble, :label_method => :direccion_completa, :collection => Inmueble.sin_usar %>
+        <!-- Inmueble.includes(:contrato).where(:contratos => {:inmueble_id => nil})
+ (Todos los inmuebles no usados)-->
+        
+        </div>
+        <div class="row">
+          <%= f.association :inquilinos, :label_method => :nombre, :collection => Persona.where(:es_inquilino => true) %>
+          <%= f.association :propietarios, :label_method => :nombre, :collection => Persona.where(:es_propietario => true) %>
+          <%= f.association :garantes, :label_method => :nombre, :collection => Persona.where(:es_garante => true) %>
+        </div>
+        <div class="row">
+          <%= f.input :fecha, as: :string, :input_html => {:class => 'datepicker'} %>
+        </div>
+        <div class="row">
+          <%= f.input :descripcion, as: :text, :wrapper => :inline_form_text %>
+        </div>
       </div>
       <div class="content" id="cuotas">
         <%= f.simple_fields_for :contratos_items do |f| %>

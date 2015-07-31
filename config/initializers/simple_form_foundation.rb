@@ -61,7 +61,7 @@ SimpleForm.setup do |config|
   # Note that you need to adapt this wrapper to your needs. If you need a 4
   # columns form then change the wrapper class to 'small-3', if you need
   # only two use 'small-6' and so on.
-  config.wrappers :inline_form, tag: 'div', class: 'column small-4', hint_class: :field_with_hint, error_class: :error do |b|
+  config.wrappers :inline_form, tag: 'div', class: 'column medium-3 end', hint_class: :field_with_hint, error_class: :error do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -69,7 +69,21 @@ SimpleForm.setup do |config|
     b.optional :min_max
     b.optional :readonly
 
-    b.use :label, class: 'hidden-for-small-up'
+    b.use :label
+    b.use :input
+
+    b.use :error, wrap_with: { tag: :small, class: :error }
+    # b.use :hint,  wrap_with: { tag: :span, class: :hint }
+  end
+  config.wrappers :inline_form_text, tag: 'div', class: 'column medium-12', hint_class: :field_with_hint, error_class: :error do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+
+    b.use :label
     b.use :input
 
     b.use :error, wrap_with: { tag: :small, class: :error }
@@ -103,5 +117,5 @@ SimpleForm.setup do |config|
   config.error_notification_class = 'alert-box alert'
 
   # The default wrapper to be used by the FormBuilder.
-  config.default_wrapper = :vertical_form
+  config.default_wrapper = :inline_form
 end

@@ -1,6 +1,6 @@
 class Inmueble < ActiveRecord::Base
-	belongs_to :inmueble_tipo
 	has_one :contrato
+	belongs_to :inmueble_tipo
 
 	validates :codigo, :uniqueness => {:case_sensitive => false}, :presence => true
 	#Validacion compuesta
@@ -8,5 +8,10 @@ class Inmueble < ActiveRecord::Base
 	validates :piso, :uniqueness => {:case_sensitive => false, :scope => [:direccion, :depto]}
 	validates :depto, :uniqueness => {:case_sensitive => false, :scope => [:direccion, :piso]}
 
-  
+	scope :sin_usar, ->{includes(:contrato).where(:contratos => {:inmueble_id => nil})}
+
+
+	def direccion_completa
+			direccion + ' ' + piso + ' ' + depto
+	end 
 end
