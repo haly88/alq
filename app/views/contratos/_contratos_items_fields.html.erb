@@ -1,7 +1,7 @@
 <div class="row">
 	<%= f.input :monto %>
-	<%= f.input :fecha_desde %>
-	<%= f.input :fecha_hasta %>
+	<%= f.input :fecha_desde, as: :string, :input_html => {:class => 'datepicker', data: {inputmask:"'alias': 'date'" }} %>
+	<%= f.input :fecha_hasta, as: :string, :input_html => {:class => 'datepicker', data: {inputmask:"'alias': 'date'" }} %>
 	<%= f.hidden_field :_destroy %>
 	<%= link_to 'X', '', :class => 'quitar_campos' %>
 </div>

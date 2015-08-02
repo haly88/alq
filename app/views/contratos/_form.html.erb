@@ -14,7 +14,7 @@
           <%= f.input :activo %>
         </div>
         <div class="row">
-          <%= f.association :inmueble, :label_method => :direccion_completa, :collection => Inmueble.sin_usar %>
+          <%= f.association :inmueble, :label_method => :direccion_completa %>
         <!-- Inmueble.includes(:contrato).where(:contratos => {:inmueble_id => nil})
  (Todos los inmuebles no usados)-->
         
@@ -25,7 +25,7 @@
           <%= f.association :garantes, :label_method => :nombre, :collection => Persona.where(:es_garante => true) %>
         </div>
         <div class="row">
-          <%= f.input :fecha, as: :string, :input_html => {:class => 'datepicker'} %>
+          <%= f.input :fecha, as: :string, :input_html => {:class => 'datepicker', data: {inputmask:"'alias': 'date'" }} %>
         </div>
         <div class="row">
           <%= f.input :descripcion, as: :text, :wrapper => :inline_form_text %>
