@@ -15,19 +15,10 @@
   <body>
   <%= render "layouts/general/globales" %>
   <%= render "layouts/general/navbar" %>
+  <%= render "layouts/general/accion_bar" %>
     <div class="row">
       <p id="notice"><%= flash[:notice] %></p>
       <p id="alert"><%= flash[:alert] %></p>
-    </div>
-    <div class="row">
-      <div class="panel">
-          <%= link_to :back do %>
-            <i class="fa fa-2x fa-arrow-left"></i>
-          <% end %>
-          <input type="submit" name="commit" form='<%= "#{action_name}_#{controller_name.singularize}_#{params[:id]}" %>'>
-          <i class="fa fa-2x fa-floppy-o"></i>
-          <i class="fa fa-2x fa-trash-o"></i>
-      </div>
     </div>
     <div class="row">
       <div class="panel">

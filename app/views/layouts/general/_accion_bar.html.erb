@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="panel">
+    <%= link_to '<i class="fa fa-2x fa-arrow-left"></i>'.html_safe, :back %>
+    <% if action_name == 'edit' %>
+      <!-- <input type="submit" form='<%= "#{action_name}_#{controller_name.singularize}_#{params[:id]}" %>'> -->
+      <a href="#" id="accion_guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
+      <a href="#" id="accion_borrar"><i class="fa fa-2x fa-trash-o"></i></a>
+    <% elsif action_name == 'new' %>
+      <a href="#" id="accion_guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
+    <% end %>
+    
+  </div>
+</div>
