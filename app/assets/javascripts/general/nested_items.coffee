@@ -11,7 +11,10 @@ ready = ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
+    $.fn.initChosen()
+    $.fn.initDatepicker()
+    $.fn.initInputMask()
     event.preventDefault()
-    
+		
 $(document).on('page:load', ready)
 $(document).ready(ready)
