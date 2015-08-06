@@ -1,13 +1,13 @@
 <div class="row">
   <div class="panel">
-    <%= link_to '<i class="fa fa-2x fa-arrow-left"></i>'.html_safe, :back %>
-    <% if action_name == 'edit' %>
-      <!-- <input type="submit" form='<%= "#{action_name}_#{controller_name.singularize}_#{params[:id]}" %>'> -->
-      <a href="#" id="accion_guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
-      <a href="#" id="accion_borrar"><i class="fa fa-2x fa-trash-o"></i></a>
-    <% elsif action_name == 'new' %>
-      <a href="#" id="accion_guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
+    <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, :back %>
+    <% if action_name == 'index' %>
+      <a href="<%= '/' + controller_path + '/new' %>" id="nuevo"><i class="fa fa-2x fa-file-o"></i></a>
+    <% elsif action_name == 'new' || action_name == 'create' %>
+      <a href="#" id="guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
+    <% elsif action_name == 'edit' %>
+      <a href="#" id="guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
+      <a href="#" id="borrar"><i class="fa fa-2x fa-trash-o"></i></a>
     <% end %>
-    
   </div>
 </div>
