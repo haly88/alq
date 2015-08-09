@@ -31,9 +31,10 @@ ActiveRecord::Schema.define(version: 20150729185715) do
     t.integer  "contrato_id"
     t.date     "fecha_desde"
     t.date     "fecha_hasta"
-    t.decimal  "monto"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.decimal  "monto",       precision: 12, scale: 4
+    t.decimal  "saldo",       precision: 12, scale: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "contratos_items", ["contrato_id"], name: "index_contratos_items_on_contrato_id"

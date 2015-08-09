@@ -15,6 +15,7 @@ ready = ->
     $.fn.initDatepicker()
     $.fn.initInputMask()
     $.fn.initDateMask()
+    $.fn.initDecimalMask()
     event.preventDefault()
 		
 $(document).on('page:load', ready)

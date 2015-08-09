@@ -5,6 +5,7 @@ ready = () ->
 	$.fn.initDatepicker()
 	$.fn.initInputMask()
 	$.fn.initDateMask()
+	$.fn.initDecimalMask()
 
 $.fn.initChosen = () ->
 	$('select').chosen
@@ -21,6 +22,9 @@ $.fn.initDatepicker = () ->
 
 $.fn.initDateMask = () ->
 	$('input.date').inputmask('alias': 'date')
+
+$.fn.initDecimalMask = () ->
+	$('input.decimal').inputmask('alias': 'currency', digits: 4)
 
 $.fn.initInputMask = () ->
 	$(":input").inputmask()
