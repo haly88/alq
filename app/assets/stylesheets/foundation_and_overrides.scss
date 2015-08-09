@@ -995,8 +995,8 @@ $row-width: rem-calc(1200);// $row-width: rem-calc(1000);
 // $panel-border-color: scale-color($panel-bg, $lightness: -11%);
 
 // We use these to set default inner padding and bottom margin
-// $panel-margin-bottom: rem-calc(20);
-// $panel-padding: rem-calc(20);
+$panel-margin-bottom: rem-calc(0);
+$panel-padding: rem-calc(5);
 
 // We use these to set default font colors
 // $panel-font-color: $oil;

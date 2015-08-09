@@ -13,6 +13,7 @@
  *= require chosen
  *= require jquery-ui/datepicker
  *= require foundation_and_overrides
- *= require_tree .
+ *= require scaffolds
+ *= require app
  *= require_self
  */

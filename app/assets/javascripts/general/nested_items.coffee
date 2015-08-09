@@ -14,6 +14,7 @@ ready = ->
     $.fn.initChosen()
     $.fn.initDatepicker()
     $.fn.initInputMask()
+    $.fn.initDateMask()
     event.preventDefault()
 		
 $(document).on('page:load', ready)

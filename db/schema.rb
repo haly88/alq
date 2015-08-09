@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 20150729185715) do
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
     t.string   "nombre"
-    t.boolean  "activo",      null: false
+    t.boolean  "activo",      default: true
     t.string   "descripcion"
     t.string   "carpeta"
     t.date     "fecha"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "inmueble_id"
   end
 

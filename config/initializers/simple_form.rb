@@ -164,3 +164,10 @@ SimpleForm.setup do |config|
   # Defines which i18n scope will be used in Simple Form.
   # config.i18n_scope = 'simple_form'
 end
+
+module SimpleForm
+  class FormBuilder < ActionView::Helpers::FormBuilder
+    map_type :integer, :decimal, :float, to: SimpleForm::Inputs::StringInput
+    map_type :date, :datetime, to: SimpleForm::Inputs::StringInput
+  end
+end

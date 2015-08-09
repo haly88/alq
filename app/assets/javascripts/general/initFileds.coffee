@@ -4,6 +4,7 @@ ready = () ->
 	$.fn.initChosen()
 	$.fn.initDatepicker()
 	$.fn.initInputMask()
+	$.fn.initDateMask()
 
 $.fn.initChosen = () ->
 	$('select').chosen
@@ -15,8 +16,11 @@ $.fn.updateChosen = (objeto) ->
 	objeto.trigger("chosen:updated")
 
 $.fn.initDatepicker = () ->
-	$('.datepicker').datepicker
+	$('input.date').datepicker
 			dateFormat: 'dd-mm-yy'
+
+$.fn.initDateMask = () ->
+	$('input.date').inputmask('alias': 'date')
 
 $.fn.initInputMask = () ->
 	$(":input").inputmask()

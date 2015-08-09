@@ -1,13 +1,15 @@
 <div class="row">
-  <div class="panel">
-    <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, :back %>
+  <div class="panel panelAcciones">
     <% if action_name == 'index' %>
-      <a href="<%= '/' + controller_path + '/new' %>" id="nuevo"><i class="fa fa-2x fa-file-o"></i></a>
+      <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path, :title => "Atras" %>
+      <a href="<%= root_path + controller_path + '/new' %>" id="nuevo" title="Nuevo"><i class="fa fa-2x fa-file-o"></i></a>
     <% elsif action_name == 'new' || action_name == 'create' %>
-      <a href="#" id="guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
+      <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path+controller_path, :title => "Atras" %>
+      <a href="#" id="guardar" title="Guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
     <% elsif action_name == 'edit' %>
-      <a href="#" id="guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
-      <a href="#" id="borrar"><i class="fa fa-2x fa-trash-o"></i></a>
+      <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path+controller_path, :title => "Atras" %>
+      <a href="#" id="guardar" title="Guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
+      <%= link_to '<i class="fa fa-2x fa-trash-o"></i>'.html_safe, root_path+controller_path+'/'+params[:id], method: :delete, data: { confirm: 'Borrar?' } %>
     <% end %>
   </div>
 </div>
