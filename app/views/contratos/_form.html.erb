@@ -1,5 +1,6 @@
 <%= simple_form_for(@contrato) do |f| %>
   <%= f.error_notification %>
+  <%= f.error :base %>
   <div class="form-inputs">
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>

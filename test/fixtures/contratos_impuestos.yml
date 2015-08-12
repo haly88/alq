@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contrato_id: 
+  impuesto_id: 
+  monto: 9.99
+  fecha_vencimiento: 2015-08-11
+  fecha_pago: 2015-08-11
+  pago: false
+
+two:
+  contrato_id: 
+  impuesto_id: 
+  monto: 9.99
+  fecha_vencimiento: 2015-08-11
+  fecha_pago: 2015-08-11
+  pago: false

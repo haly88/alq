@@ -1,4 +1,6 @@
 <%= simple_form_for(@persona) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error :base %>
   <%= f.input :codigo %>
   <%= f.input :nombre %>
   <%= f.input :descripcion %>

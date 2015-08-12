@@ -54,10 +54,10 @@ class InmueblesController < ApplicationController
   # DELETE /inmuebles/1
   # DELETE /inmuebles/1.json
   def destroy
-    @inmueble.destroy
-    respond_to do |format|
-      format.html { redirect_to inmuebles_url, notice: 'Inmueble was successfully destroyed.' }
-      format.json { head :no_content }
+    if @inmueble.destroy
+      redirect_to inmuebles_url, notice: 'Inmueble was successfully destroyed.' 
+    else
+      render :edit 
     end
   end
 

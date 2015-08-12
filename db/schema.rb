@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729185715) do
+ActiveRecord::Schema.define(version: 20150811170539) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(version: 20150729185715) do
   end
 
   add_index "contratos", ["inmueble_id"], name: "index_contratos_on_inmueble_id"
+
+  create_table "contratos_impuestos", force: :cascade do |t|
+    t.integer  "contrato_id"
+    t.integer  "impuesto_id"
+    t.decimal  "monto",             precision: 12, scale: 4
+    t.date     "fecha_vencimiento"
+    t.date     "fecha_pago"
+    t.boolean  "pago"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "contratos_impuestos", ["contrato_id"], name: "index_contratos_impuestos_on_contrato_id"
+  add_index "contratos_impuestos", ["impuesto_id"], name: "index_contratos_impuestos_on_impuesto_id"
 
   create_table "contratos_items", force: :cascade do |t|
     t.integer  "contrato_id"
@@ -49,6 +63,15 @@ ActiveRecord::Schema.define(version: 20150729185715) do
   end
 
   add_index "contratos_personas_tipos", ["contrato_id"], name: "index_contratos_personas_tipos_on_contrato_id"
+
+  create_table "impuestos", force: :cascade do |t|
+    t.string   "codigo"
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.integer  "cantidad_meses_defecto"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "inmueble_tipos", force: :cascade do |t|
     t.string   "codigo"

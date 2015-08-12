@@ -1,4 +1,7 @@
 class Contrato < ActiveRecord::Base
+
+	has_many :contratos_impuestos, :dependent => :destroy
+	has_many :impuestos, :through => :contratos_impuestos
 	belongs_to :inmueble
 	has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo" 
  	has_many :contratos_propietarios, class_name: "ContratosPersonasTipo"

@@ -1,5 +1,5 @@
 class Inmueble < ActiveRecord::Base
-	has_one :contrato
+	has_one :contrato, :dependent => :restrict_with_error
 	belongs_to :inmueble_tipo
 
 	validates :codigo, :uniqueness => {:case_sensitive => false}, :presence => true

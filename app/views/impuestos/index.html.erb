@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Cantidad meses defecto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @impuestos.each do |impuesto| %>
+      <tr>
+        <td><%= impuesto.codigo %></td>
+        <td><%= impuesto.nombre %></td>
+        <td><%= impuesto.descripcion %></td>
+        <td><%= impuesto.cantidad_meses_defecto %></td>
+        <td><%= link_to 'Show', impuesto %></td>
+        <td><%= link_to 'Edit', edit_impuesto_path(impuesto) %></td>
+        <td><%= link_to 'Destroy', impuesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
