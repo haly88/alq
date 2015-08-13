@@ -28,29 +28,20 @@ class ContratosController < ApplicationController
   # POST /contratos.json
   def create
     @contrato = Contrato.new(contrato_params)
-
-    respond_to do |format|
-      if @contrato.save
-        format.html { redirect_to @contrato, notice: 'Contrato was successfully created.' }
-        format.json { render :show, status: :created, location: @contrato }
-      else
-        format.html { render :new }
-        format.json { render json: @contrato.errors, status: :unprocessable_entity }
-      end
+    if @contrato.save
+      redirect_to @contrato, notice: 'Guardado.'
+    else
+      render :new 
     end
   end
 
   # PATCH/PUT /contratos/1
   # PATCH/PUT /contratos/1.json
   def update
-    respond_to do |format|
-      if @contrato.update(contrato_params)
-        format.html { redirect_to @contrato, notice: 'Contrato was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contrato }
-      else
-        format.html { render :edit }
-        format.json { render json: @contrato.errors, status: :unprocessable_entity }
-      end
+    if @contrato.update(contrato_params)
+      redirect_to [:edit, @contrato], notice: 'Actualizado.' 
+    else
+      render :edit 
     end
   end
 
@@ -58,10 +49,7 @@ class ContratosController < ApplicationController
   # DELETE /contratos/1.json
   def destroy
     @contrato.destroy
-    respond_to do |format|
-      format.html { redirect_to contratos_url, notice: 'Contrato was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to contratos_url, notice: 'Borrado.'
   end
 
   private

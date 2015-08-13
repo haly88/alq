@@ -36,7 +36,7 @@
         <%= f.simple_fields_for :contratos_items do |f| %>
           <%= render "contratos_items_fields", :f => f %>
         <% end %>
-        <%= link_to_add_fields "+", f, :contratos_items %>
+        <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_items %>
       </div>
     </div>
   </div>

@@ -12,9 +12,13 @@
   </head>
 
   <body>
-  <%= render "layouts/general/globales" %>
-  <%= render "layouts/general/navbar" %>
-  <%= render "layouts/general/accion_bar" %>
+    <%= render "layouts/general/globales" %>
+    <%= render "layouts/general/navbar" %>
+    <div class="row">
+      <div class="panel panelAcciones">
+        <%= render "layouts/general/accion_bar" %>
+      </div> 
+    </div>
     <div class="row">
       <p id="notice"><%= flash[:notice] %></p>
       <p id="alert"><%= flash[:alert] %></p>

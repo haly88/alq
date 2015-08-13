@@ -28,7 +28,7 @@ class ContratosItemsController < ApplicationController
 
     respond_to do |format|
       if @contratos_item.save
-        format.html { redirect_to @contratos_item, notice: 'Contratos item was successfully created.' }
+        format.html { redirect_to @contratos_item, notice: 'Guardado.' }
         format.json { render :show, status: :created, location: @contratos_item }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ContratosItemsController < ApplicationController
   def update
     respond_to do |format|
       if @contratos_item.update(contratos_item_params)
-        format.html { redirect_to @contratos_item, notice: 'Contratos item was successfully updated.' }
+        format.html { redirect_to @contratos_item, notice: 'Actualizado.' }
         format.json { render :show, status: :ok, location: @contratos_item }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class ContratosItemsController < ApplicationController
   def destroy
     @contratos_item.destroy
     respond_to do |format|
-      format.html { redirect_to contratos_items_url, notice: 'Contratos item was successfully destroyed.' }
+      format.html { redirect_to contratos_items_url, notice: 'Borrado.' }
       format.json { head :no_content }
     end
   end
