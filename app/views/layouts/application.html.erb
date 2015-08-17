@@ -19,10 +19,11 @@
         <%= render "layouts/general/accion_bar" %>
       </div> 
     </div>
-    <div class="row">
-      <p id="notice"><%= flash[:notice] %></p>
-      <p id="alert"><%= flash[:alert] %></p>
-    </div>
+    <% if notice %>
+      <div data-alert class="row alert-box success">
+        <%= notice %>
+      </div>
+    <% end %>
     <div class="row">
       <div class="panel">
         <%= yield %>

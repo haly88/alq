@@ -1,15 +1,31 @@
 <%= simple_form_for(@persona) do |f| %>
   <%= f.error_notification %>
   <%= f.error :base %>
-  <%= f.input :codigo %>
-  <%= f.input :nombre %>
-  <%= f.input :descripcion %>
-  <%= f.input :es_inquilino %>
-  <%= f.input :es_propietario %>
-  <%= f.input :es_garante %>
-  <%= f.input :es_otro %>
-  <%= f.input :telefono %>
-  <%= f.input :email %>
-  <%= f.input :direccion %>
-  <%= f.button :submit %>
+  <div class="form-inputs">
+    <ul class="tabs" data-tab>
+      <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+    </ul>
+    <div class="tabs-content">
+      <div class="content active" id="general">
+        <div class="row">
+          <%= f.input :codigo %>
+          <%= f.input :nombre %>
+        </div>
+        <div class="row">
+          <%= f.input :es_inquilino %>
+          <%= f.input :es_propietario %>
+          <%= f.input :es_garante %>
+          <%= f.input :es_otro %>
+        </div>
+        <div class="row">
+          <%= f.input :telefono %>
+          <%= f.input :email %>
+          <%= f.input :direccion %>
+        </div>
+        <div class="row">
+          <%= f.input :descripcion, :wrapper => :inline_form_text %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

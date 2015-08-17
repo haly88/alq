@@ -17,6 +17,7 @@ class ContratosController < ApplicationController
     @contrato = Contrato.new
     1.times do
       contratos_item = @contrato.contratos_items.build
+      contratos_impuesto = @contrato.contratos_impuestos.build
     end
   end
 
@@ -62,6 +63,7 @@ class ContratosController < ApplicationController
     def contrato_params
       params.require(:contrato).permit(:codigo, :nombre, :activo, :descripcion, :carpeta, :fecha, :inmueble_id,
       :inquilino_ids => [], :propietario_ids => [], :garante_ids => [],
-      contratos_items_attributes: [:id, :monto, :fecha_desde, :fecha_hasta, :_destroy])
+      contratos_items_attributes: [:id, :monto, :fecha_desde, :fecha_hasta, :_destroy],
+      contratos_impuestos_attributes: [:id, :impuesto_id, :monto, :fecha_vencimiento, :fecha_pago, :pago, :_destroy])
     end
 end

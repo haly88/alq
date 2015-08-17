@@ -5,6 +5,7 @@
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
       <li class="tab-title"><a data-no-turbolink='true' href="#cuotas">Cuotas</a></li>
+      <li class="tab-title"><a data-no-turbolink='true' href="#impuestos">Impuestos</a></li>
     </ul>
     <div class="tabs-content">
       <div class="content active" id="general">
@@ -16,6 +17,7 @@
         </div>
         <div class="row">
           <%= f.association :inmueble, :label_method => :direccion_completa %>
+          <%= link_to '<i class="fa fa-plus-square"></i>'.html_safe, new_inmueble_path, :target => "_blank" %>
         <!-- Inmueble.includes(:contrato).where(:contratos => {:inmueble_id => nil})
  (Todos los inmuebles no usados)-->
         
@@ -24,6 +26,7 @@
           <%= f.association :inquilinos, :label_method => :nombre, :collection => Persona.where(:es_inquilino => true) %>
           <%= f.association :propietarios, :label_method => :nombre, :collection => Persona.where(:es_propietario => true) %>
           <%= f.association :garantes, :label_method => :nombre, :collection => Persona.where(:es_garante => true) %>
+          <%= link_to '<i class="fa fa-plus-square"></i>'.html_safe, new_persona_path, :target => "_blank" %>
         </div>
         <div class="row">
           <%= f.input :fecha %>
@@ -33,10 +36,24 @@
         </div>
       </div>
       <div class="content" id="cuotas">
+        <div class="row" >
+          <%= f.input :fecha_inicio, :as => 'date' %>
+          <%= f.input :cuotas, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 99" }} %>
+          <%= f.input :monto_inicio, as: 'decimal' %>
+          <%= f.input :incremento, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999" }} %>
+          <%= f.input :cada, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12" }} %>
+          <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#' %>
+        </div>
         <%= f.simple_fields_for :contratos_items do |f| %>
           <%= render "contratos_items_fields", :f => f %>
         <% end %>
         <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_items %>
+      </div>
+      <div class="content" id="impuestos">
+        <%= f.simple_fields_for :contratos_impuestos do |f| %>
+          <%= render "contratos_impuestos_fields", :f => f %>
+        <% end %>
+        <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_impuestos %>
       </div>
     </div>
   </div>

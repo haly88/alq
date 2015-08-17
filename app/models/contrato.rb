@@ -1,7 +1,10 @@
 class Contrato < ActiveRecord::Base
 
+	attr_accessor :fecha_inicio, :cuotas, :monto_inicio, :incremento, :cada
+
 	has_many :contratos_impuestos, :dependent => :destroy
-	has_many :impuestos, :through => :contratos_impuestos
+	accepts_nested_attributes_for :contratos_impuestos, :allow_destroy => true
+
 	belongs_to :inmueble
 	has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo" 
  	has_many :contratos_propietarios, class_name: "ContratosPersonasTipo"

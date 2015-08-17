@@ -3,9 +3,9 @@
 ready = () ->
 	$.fn.initChosen()
 	$.fn.initDatepicker()
-	$.fn.initInputMask()
 	$.fn.initDateMask()
 	$.fn.initDecimalMask()
+	$.fn.initInputMask()
 
 $.fn.initChosen = () ->
 	$('select').chosen
