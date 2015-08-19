@@ -42,7 +42,7 @@
           <%= f.input :monto_inicio, as: 'decimal' %>
           <%= f.input :incremento, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999" }} %>
           <%= f.input :cada, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12" }} %>
-          <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#' %>
+          <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'cuotas_refresh' %>
         </div>
         <%= f.simple_fields_for :contratos_items do |f| %>
           <%= render "contratos_items_fields", :f => f %>
