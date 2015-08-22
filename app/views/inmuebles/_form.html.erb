@@ -9,34 +9,44 @@
     </ul>
     <div class="tabs-content">
       <div class="content active" id="general">
-        <%= f.input :codigo %>
-        <%= f.input :descripcion %>
-        <%= f.input :activo %>
-        <%= f.association :inmueble_tipo, :label_method => :nombre %>
-        <%= f.input :direccion, :label => 'Direccion (google maps)', :placeholder => 'Ej: Arenales 2500, CABA'%>
-        <%= f.input :piso %>
-        <%= f.input :depto %>
-        <%= f.input :localidad, disabled: true %>
-        <%= f.input :codigo_postal, disabled: true %>
+        <div class="row">
+          <%= f.association :inmueble_tipo, :label_method => :nombre %>
+          <%= f.input :codigo %>
+          <%= f.input :activo %>
+        </div>
+        <div class="row">
+          <%= f.input :direccion, :label => 'Direccion (google maps)', :placeholder => 'Ej: Arenales 2500, CABA'%>
+          <%= f.input :piso %>
+          <%= f.input :depto %>
+          <%= f.input :localidad, disabled: true %>
+          <%= f.input :codigo_postal, disabled: true %>
+        </div>
+        <div class="row">
+          <%= f.input :descripcion, as: :text, wrapper:'inline_form_text' %>
+        </div>
       </div>
       <div class="content" id="administracion">
-        <%= f.input :administracion %>
-        <%= f.input :adm_email, :label => 'Email' %>
-        <%= f.input :adm_tel1, :label => 'Telefono 1' %>
-        <%= f.input :adm_tel2, :label => 'Telefono 2' %>
-        <%= f.input :adm_tel3, :label => 'Telefono 3' %>
+        <div class="row">
+          <%= f.input :administracion %>
+        </div> 
+        <div class="row">
+          <%= f.input :adm_email, :label => 'Email' %>
+          <%= f.input :adm_tel1, :label => 'Telefono 1' %>
+          <%= f.input :adm_tel2, :label => 'Telefono 2' %>
+          <%= f.input :adm_tel3, :label => 'Telefono 3' %>
+        </div>
       </div>
       <div class="content" id="encargado">
-      <%= f.input :encargado %>
-      <%= f.input :enc_email, :label => 'Email' %>
-      <%= f.input :enc_tel1, :label => 'Telefono 1' %>
-      <%= f.input :enc_tel2, :label => 'Telefono 2' %>
-      <%= f.input :enc_tel3, :label => 'Telefono 3' %>
+      <div class="row">
+        <%= f.input :encargado %>
+      </div>
+      <div class="row">
+        <%= f.input :enc_email, :label => 'Email' %>
+        <%= f.input :enc_tel1, :label => 'Telefono 1' %>
+        <%= f.input :enc_tel2, :label => 'Telefono 2' %>
+        <%= f.input :enc_tel3, :label => 'Telefono 3' %>
+      </div>
       </div>
     </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
   </div>
 <% end %>

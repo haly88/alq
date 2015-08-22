@@ -5,10 +5,10 @@ ready = ->
 	$('form').on 'click', '.quitar_campos', () ->
 		$(this).prev('input[type=hidden]').val('1')
 		$(this).closest('.row').hide()
-		event.preventDefault()
+		return false
 
 
-	$('.add_fields').click () ->
+	$('form').on 'click', '.add_fields', () ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
@@ -17,16 +17,30 @@ ready = ->
     $.fn.initInputMask()
     $.fn.initDateMask()
     $.fn.initDecimalMask()
-    event.preventDefault()
+    return false
+
 
   $('#cuotas_refresh').click ->
-    fechaInicio = $('#contrato_fecha_inicio').datepicker("getDate")
-    $('#contrato_fecha_inicio').datepicker("setDate", "fechaInicio + 3m")
-    $('.contratos_items_fecha_desde').last().datepicker("setDate", "fechaInicio + 1m")
-    if cuotas 
+    cuotas = Number($('#contrato_cuotas').val())
+    fechaInicio = $.datepicker.parseDate("dd/mm/yy", $('#contrato_fecha_inicio').val())
+    montoInicio = Number($('#contrato_monto_inicio').val())
+    incremento = (1 + (Number($('#contrato_incremento').val()) / 100))
+    cada = Number($('#contrato_cada').val())
+    $('.contratos_items_destroy').val('1')
+    $('.contratos_items_row').hide()
+    contador = 0
+    if cuotas and fechaInicio and montoInicio
       for [1..cuotas]
+        contador = contador + 1
         $('.content.active .add_fields').click()
-        
+        fechaInicio = new Date(fechaInicio.setMonth(fechaInicio.getMonth()+1))
+        $('.contratos_items_fecha_desde:last').val($.datepicker.formatDate("dd/mm/yy", fechaInicio))
+        $('.contratos_items_monto:last').val(montoInicio)
+        if contador == cada
+          contador = 0
+          montoInicio = montoInicio * incremento
+    
+
     
 $(document).on('page:load', ready)
 $(document).ready(ready)

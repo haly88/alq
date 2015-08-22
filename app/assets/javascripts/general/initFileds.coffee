@@ -17,17 +17,18 @@ $.fn.updateChosen = (objeto) ->
 	objeto.trigger("chosen:updated")
 
 $.datepicker.setDefaults
-	dateFormat: 'dd-mm-yy'
+  dateFormat: 'dd-mm-yy'
 
 $.fn.initDatepicker = () ->
-	$('input.date').datepicker
+	$('input.date').datepicker()
+		
 
 $.fn.initDateMask = () ->
 	$('input.date').inputmask('alias': 'date')
 
 
 $.fn.initDecimalMask = () ->
-	$('input.decimal').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true)
+	$('input.decimal').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true, "autoUnmask": true)
 
 $.fn.initInputMask = () ->
 	$(":input").inputmask()

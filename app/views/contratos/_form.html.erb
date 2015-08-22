@@ -1,4 +1,4 @@
-<%= simple_form_for(@contrato) do |f| %>
+<%= simple_form_for @contrato, defaults: { placeholder: false, hint: false } do |f| %>
   <%= f.error_notification %>
   <%= f.error :base %>
   <div class="form-inputs">
@@ -37,20 +37,20 @@
       </div>
       <div class="content" id="cuotas">
         <div class="row" >
-          <%= f.input :fecha_inicio, :as => 'date' %>
-          <%= f.input :cuotas, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 99" }} %>
-          <%= f.input :monto_inicio, as: 'decimal' %>
-          <%= f.input :incremento, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999" }} %>
-          <%= f.input :cada, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12" }} %>
+          <%= f.input :fecha_inicio, :as => 'date', required: true %>
+          <%= f.input :cuotas, required: true, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 99" }} %>
+          <%= f.input :monto_inicio, required: true, as: 'decimal' %>
+          <%= f.input :incremento, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999, 'autoUnmask' : true" }} %>
+          <%= f.input :cada, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12, 'autoUnmask' : true" }} %>
           <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'cuotas_refresh' %>
         </div>
-        <%= f.simple_fields_for :contratos_items do |f| %>
+        <%= f.simple_fields_for :contratos_items, defaults: { placeholder: false, hint: false }  do |f| %>
           <%= render "contratos_items_fields", :f => f %>
         <% end %>
         <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_items %>
       </div>
       <div class="content" id="impuestos">
-        <%= f.simple_fields_for :contratos_impuestos do |f| %>
+        <%= f.simple_fields_for :contratos_impuestos, defaults: { placeholder: false, hint: false } do |f| %>
           <%= render "contratos_impuestos_fields", :f => f %>
         <% end %>
         <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_impuestos %>
