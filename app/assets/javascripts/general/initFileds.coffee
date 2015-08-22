@@ -22,10 +22,8 @@ $.datepicker.setDefaults
 $.fn.initDatepicker = () ->
 	$('input.date').datepicker()
 		
-
 $.fn.initDateMask = () ->
 	$('input.date').inputmask('alias': 'date')
-
 
 $.fn.initDecimalMask = () ->
 	$('input.decimal').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true, "autoUnmask": true)
