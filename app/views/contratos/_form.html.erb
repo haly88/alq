@@ -17,7 +17,7 @@
         </div>
         <div class="row">
           <%= f.association :inmueble, :label_method => :direccion_completa %>
-          <%= link_to '<i class="fa fa-plus-square"></i>'.html_safe, new_inmueble_path, :target => "_blank" %>
+          <%= link_to '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, new_inmueble_path, :target => "_blank" %>
         <!-- Inmueble.includes(:contrato).where(:contratos => {:inmueble_id => nil})
  (Todos los inmuebles no usados)-->
         
@@ -26,13 +26,15 @@
           <%= f.association :inquilinos, :label_method => :nombre, :collection => Persona.where(:es_inquilino => true) %>
           <%= f.association :propietarios, :label_method => :nombre, :collection => Persona.where(:es_propietario => true) %>
           <%= f.association :garantes, :label_method => :nombre, :collection => Persona.where(:es_garante => true) %>
-          <%= link_to '<i class="fa fa-plus-square"></i>'.html_safe, new_persona_path, :target => "_blank" %>
+          <%= link_to '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, new_persona_path, :target => "_blank" %>
         </div>
         <div class="row">
           <%= f.input :fecha %>
         </div>
         <div class="row">
-          <%= f.input :descripcion, as: :text, :wrapper => :inline_form_text %>
+          <div class="columns medium-8">
+            <%= f.input :descripcion, as: :text, :wrapper => :inline_form %>
+          </div>
         </div>
       </div>
       <div class="content" id="cuotas">
@@ -59,6 +61,13 @@
 
       <!-- Contratos Impuestos -->
       <div class="content" id="impuestos">
+        <div class="row">
+          <div class="columns medium-2"><%= f.label :impuesto %></div>
+          <div class="columns medium-2"><%= f.label :fecha_pago %></div>
+          <div class="columns medium-2"><%= f.label :monto %></div>
+          <div class="columns medium-2"><%= f.label :fecha_vencimiento %></div>
+          <div class="columns medium-2 end"><%= f.label :pago %></div>
+        </div>
         <%= f.simple_fields_for :contratos_impuestos, defaults: { placeholder: false, hint: false } do |f| %>
           <%= render "contratos_impuestos_fields", :f => f %>
         <% end %>

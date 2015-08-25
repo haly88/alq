@@ -1,0 +1,25 @@
+<%= simple_form_for @liquidacion do |f| %>
+  <%= f.error_notification %>
+  <%= f.error :base %>
+
+  <div class="form-inputs">
+    <ul class="tabs" data-tab>
+      <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+    </ul>
+    <div class="tabs-content">
+      <div class="content active" id="general">
+        <div class="row">
+          <%= f.association :contrato, label_method: :selector_contratos, wrapper: :inline_form %>
+          <%= f.input :fecha %>
+        </div>
+        <div class="row">
+          <%= f.input :neto %>
+          <%= f.input :descuento %>
+          <%= f.input :comision %>
+          <%= f.input :total %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

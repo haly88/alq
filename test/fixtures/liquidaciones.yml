@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contrato_id: 
+  fecha: 2015-08-24
+  neto: 9.99
+  descuento: 9.99
+  comision: 9.99
+  total: 9.99
+
+two:
+  contrato_id: 
+  fecha: 2015-08-24
+  neto: 9.99
+  descuento: 9.99
+  comision: 9.99
+  total: 9.99

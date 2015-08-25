@@ -13,9 +13,6 @@ $.fn.initChosen = () ->
 		no_results_text: 'Sin resultados'
 		width: '100%'
 
-$.fn.updateChosen = (objeto) ->
-	objeto.trigger("chosen:updated")
-
 $.datepicker.setDefaults
   dateFormat: 'dd-mm-yy'
 

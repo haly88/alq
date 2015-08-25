@@ -18,4 +18,8 @@ class Contrato < ActiveRecord::Base
 	#Validaciones
 	validates :codigo, :inmueble_id, :presence => true 
 	validates :inmueble_id, :uniqueness => true
+
+	def selector_contratos
+		nombre + " - " + inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
+	end
 end
