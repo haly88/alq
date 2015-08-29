@@ -2,6 +2,8 @@ class Contrato < ActiveRecord::Base
 
 	attr_accessor :fecha_inicio, :cuotas, :monto_inicio, :incremento, :cada
 
+	has_many :liquidaciones, :dependent => :destroy
+
 	has_many :contratos_impuestos, :dependent => :destroy
 	accepts_nested_attributes_for :contratos_impuestos, :allow_destroy => true
 
@@ -21,5 +23,9 @@ class Contrato < ActiveRecord::Base
 
 	def selector_contratos
 		nombre + " - " + inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
+	end
+
+	def total
+		contratos_items.sum(:monto)
 	end
 end

@@ -15,6 +15,10 @@ class LiquidacionesController < ApplicationController
   # GET /liquidaciones/new
   def new
     @liquidacion = Liquidacion.new
+    @contrato = Contrato.find(params[:contrato]) if params[:contrato]
+  end
+
+  def select
   end
 
   # GET /liquidaciones/1/edit
@@ -30,9 +34,11 @@ class LiquidacionesController < ApplicationController
       if @liquidacion.save
         format.html { redirect_to @liquidacion, notice: 'Liquidacion was successfully created.' }
         format.json { render :show, status: :created, location: @liquidacion }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @liquidacion.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

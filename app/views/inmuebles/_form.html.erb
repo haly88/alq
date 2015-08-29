@@ -22,7 +22,9 @@
           <%= f.input :codigo_postal, disabled: true %>
         </div>
         <div class="row">
-          <%= f.input :descripcion, as: :text, wrapper:'inline_form_text' %>
+          <div class="columns medium-8">
+            <%= f.input :descripcion, as: :text, wrapper:'inline_form' %>
+          </div>
         </div>
       </div>
       <div class="content" id="administracion">

@@ -9,17 +9,26 @@
     <div class="tabs-content">
       <div class="content active" id="general">
         <div class="row">
-          <%= f.association :contrato, label_method: :selector_contratos, wrapper: :inline_form %>
+          <div class="columns medium-4">
+            <%= f.association :contrato, label_method: :selector_contratos, wrapper: :inline_form %>
+          </div>
           <%= f.input :fecha %>
+          <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh' %>
         </div>
-        <div class="row">
-          <%= f.input :neto %>
-          <%= f.input :descuento %>
-          <%= f.input :comision %>
-          <%= f.input :total %>
-        </div>
+        <% if @contrato %>
+          <div class="row">
+            <%= simple_form_for @contrato do |f| %>
+              <%= f.input :total, readonly: true %>
+            <% end %>
+          </div>
+          <div class="row">
+            <%= f.input :neto %>
+            <%= f.input :descuento %>
+            <%= f.input :comision %>
+            <%= f.input :total %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
-
 <% end %>
