@@ -15,7 +15,7 @@ class LiquidacionesController < ApplicationController
   # GET /liquidaciones/new
   def new
     @liquidacion = Liquidacion.new
-    @contrato = Contrato.find(params[:contrato]) if params[:contrato]
+    @liquidacion.contrato_id = params[:contrato] if params[:contrato]
   end
 
   def select
@@ -75,6 +75,7 @@ class LiquidacionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def liquidacion_params
-      params.require(:liquidacion).permit(:contrato_id, :fecha, :neto, :descuento, :comision, :total)
+      params.require(:liquidacion).permit(:contrato_id, :inquilino_id, :propietario_id,
+      :fecha, :neto, :descuento, :comision, :total)
     end
 end

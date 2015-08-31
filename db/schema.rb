@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824231502) do
+ActiveRecord::Schema.define(version: 20150829181332) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -109,12 +109,14 @@ ActiveRecord::Schema.define(version: 20150824231502) do
   create_table "liquidaciones", force: :cascade do |t|
     t.integer  "contrato_id"
     t.date     "fecha"
-    t.decimal  "neto",        precision: 12, scale: 4
-    t.decimal  "descuento",   precision: 12, scale: 4
-    t.decimal  "comision",    precision: 12, scale: 4
-    t.decimal  "total",       precision: 12, scale: 4
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.decimal  "neto",           precision: 12, scale: 4
+    t.decimal  "descuento",      precision: 12, scale: 4
+    t.decimal  "comision",       precision: 12, scale: 4
+    t.decimal  "total",          precision: 12, scale: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "inquilino_id"
+    t.integer  "propietario_id"
   end
 
   add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id"

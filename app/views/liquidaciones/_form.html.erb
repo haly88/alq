@@ -12,13 +12,24 @@
           <div class="columns medium-4">
             <%= f.association :contrato, label_method: :selector_contratos, wrapper: :inline_form %>
           </div>
+          <div class="columns medium-2">
+            <%= f.label :inquilino_id %>
+            <%= f.grouped_collection_select :inquilino_id, Contrato.order(:nombre), :inquilinos, :selector_contratos, :id, :nombre, include_blank: true  %>
+          </div>
+          <div class="columns medium-2">
+            <%= f.label :propietario_id %>
+            <%= f.grouped_collection_select :propietario_id, Contrato.order(:nombre), :propietarios, :selector_contratos, :id, :nombre, include_blank: true  %>
+          </div>
+          <!--<%= f.association :propietario, label_method: :nombre, :collection => Persona.where(:es_propietario => true) %> -->
           <%= f.input :fecha %>
           <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh' %>
         </div>
-        <% if @contrato %>
+        <% if @liquidacion.contrato %>
           <div class="row">
-            <%= simple_form_for @contrato do |f| %>
+            <%= simple_form_for @liquidacion.contrato do |f| %>
               <%= f.input :total, readonly: true %>
+              <%= f.input :pagado, readonly: true %>
+              <%= f.input :saldo, readonly: true %>
             <% end %>
           </div>
           <div class="row">

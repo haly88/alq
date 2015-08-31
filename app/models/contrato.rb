@@ -28,4 +28,12 @@ class Contrato < ActiveRecord::Base
 	def total
 		contratos_items.sum(:monto)
 	end
+
+	def pagado
+		liquidaciones.sum(:total)
+	end
+
+	def saldo
+		total - pagado
+	end
 end
