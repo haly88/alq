@@ -22,7 +22,7 @@ class Contrato < ActiveRecord::Base
 	validates :inmueble_id, :uniqueness => true
 
 	def selector_contratos
-		nombre + " - " + inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
+		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
 	end
 
 	def total

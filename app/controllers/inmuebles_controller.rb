@@ -25,29 +25,20 @@ class InmueblesController < ApplicationController
   # POST /inmuebles.json
   def create
     @inmueble = Inmueble.new(inmueble_params)
-
-    respond_to do |format|
-      if @inmueble.save
-        format.html { redirect_to @inmueble, notice: 'Inmueble was successfully created.' }
-        format.json { render :show, status: :created, location: @inmueble }
-      else
-        format.html { render :new }
-        format.json { render json: @inmueble.errors, status: :unprocessable_entity }
-      end
+    if @inmueble.save
+      redirect_to [:edit, @inmueble], notice: 'Inmueble was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /inmuebles/1
   # PATCH/PUT /inmuebles/1.json
   def update
-    respond_to do |format|
-      if @inmueble.update(inmueble_params)
-        format.html { redirect_to @inmueble, notice: 'Inmueble was successfully updated.' }
-        format.json { render :show, status: :ok, location: @inmueble }
-      else
-        format.html { render :edit }
-        format.json { render json: @inmueble.errors, status: :unprocessable_entity }
-      end
+    if @inmueble.update(inmueble_params)
+      redirect_to [:edit, @inmueble], notice: 'Inmueble was successfully updated.'
+    else
+      render :edit
     end
   end
 
