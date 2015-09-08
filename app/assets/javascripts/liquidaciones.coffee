@@ -21,6 +21,12 @@ ready = ->
 
     $('#liquidacion_propietario_id').change ->
       $('#liquidacion_inquilino_id').val('').trigger('chosen:updated')
+      contrato = $('#liquidacion_propietario_id :selected').closest('optgroup').prop('label')
+      escaped_contrato = contrato.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
+      if contrato
+        contrato = $('#liquidacion_contrato_id option').filter(->
+          $(this).text() == contrato
+        ).prop('selected', true).trigger('chosen:updated')
 
     inquilinos = $('#liquidacion_inquilino_id').html()
     propietario = $('#liquidacion_propietario_id').html()

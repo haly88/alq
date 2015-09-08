@@ -30,30 +30,20 @@ class LiquidacionesController < ApplicationController
   def create
     @liquidacion = Liquidacion.new(liquidacion_params)
 
-    respond_to do |format|
-      if @liquidacion.save
-        format.html { redirect_to @liquidacion, notice: 'Liquidacion was successfully created.' }
-        format.json { render :show, status: :created, location: @liquidacion }
-        format.js
-      else
-        format.html { render :new }
-        format.json { render json: @liquidacion.errors, status: :unprocessable_entity }
-        format.js
-      end
+    if @liquidacion.save
+      redirect_to @liquidacion, notice: 'Liquidacion was successfully created.' 
+    else
+      render :new 
     end
   end
 
   # PATCH/PUT /liquidaciones/1
   # PATCH/PUT /liquidaciones/1.json
   def update
-    respond_to do |format|
-      if @liquidacion.update(liquidacion_params)
-        format.html { redirect_to @liquidacion, notice: 'Liquidacion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @liquidacion }
-      else
-        format.html { render :edit }
-        format.json { render json: @liquidacion.errors, status: :unprocessable_entity }
-      end
+    if @liquidacion.update(liquidacion_params)
+      redirect_to [:edit, @liquidacion], notice: 'Liquidacion was successfully updated.'
+    else
+      render :edit 
     end
   end
 
@@ -61,10 +51,7 @@ class LiquidacionesController < ApplicationController
   # DELETE /liquidaciones/1.json
   def destroy
     @liquidacion.destroy
-    respond_to do |format|
-      format.html { redirect_to liquidaciones_url, notice: 'Liquidacion was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to liquidaciones_url, notice: 'Liquidacion was successfully destroyed.'
   end
 
   private
