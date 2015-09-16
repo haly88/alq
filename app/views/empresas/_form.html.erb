@@ -1,0 +1,27 @@
+<%= simple_form_for(@empresa) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error :base %>
+
+  <div class="form-inputs">
+    <ul class="tabs" data-tab>
+      <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+    </ul>
+    <div class="tabs-content">
+      <div class="content active" id="general">
+        <div class="row">
+          <%= f.input :nombre %>
+          <%= f.input :razon_social %>
+        </div>
+        <div class="row">
+          <%= f.input :direccion %>
+          <%= f.input :piso %>
+          <%= f.input :depto %>
+        </div>
+        <div class="row">
+          <%= f.input :telefono %>
+          <%= f.input :email %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

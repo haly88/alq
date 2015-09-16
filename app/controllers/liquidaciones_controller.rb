@@ -18,9 +18,6 @@ class LiquidacionesController < ApplicationController
     @liquidacion.contrato_id = params[:contrato] if params[:contrato]
   end
 
-  def select
-  end
-
   # GET /liquidaciones/1/edit
   def edit
   end

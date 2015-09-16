@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :empresas, only: [:update, :edit]
   resources :liquidaciones
   resources :impuestos
   resources :inmuebles

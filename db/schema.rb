@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829181332) do
+ActiveRecord::Schema.define(version: 20150915000739) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -63,6 +63,18 @@ ActiveRecord::Schema.define(version: 20150829181332) do
   end
 
   add_index "contratos_personas_tipos", ["contrato_id"], name: "index_contratos_personas_tipos_on_contrato_id"
+
+  create_table "empresas", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "razon_social"
+    t.string   "direccion"
+    t.string   "piso"
+    t.string   "depto"
+    t.string   "telefono"
+    t.string   "email"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "impuestos", force: :cascade do |t|
     t.string   "codigo"
