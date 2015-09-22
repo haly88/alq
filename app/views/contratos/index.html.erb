@@ -1,4 +1,4 @@
-<table>
+<table class="display responsive no-wrap">
   <thead>
     <tr>
       <th>Codigo</th>
@@ -7,22 +7,17 @@
       <th>Descripcion</th>
       <th>Carpeta</th>
       <th>Fecha</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @contratos.each do |contrato| %>
       <tr>
-        <td><%= contrato.codigo %></td>
+        <td><%= link_to contrato.codigo, edit_contrato_path(contrato)  %></td>
         <td><%= contrato.nombre %></td>
         <td><%= contrato.activo %></td>
         <td><%= contrato.descripcion %></td>
         <td><%= contrato.carpeta %></td>
         <td><%= contrato.fecha %></td>
-        <td><%= link_to 'Show', contrato %></td>
-        <td><%= link_to 'Edit', edit_contrato_path(contrato) %></td>
-        <td><%= link_to 'Destroy', contrato, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

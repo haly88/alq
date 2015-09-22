@@ -6,6 +6,7 @@ ready = () ->
 	$.fn.initDateMask()
 	$.fn.initDecimalMask()
 	$.fn.initInputMask()
+	$.fn.initTables()
 
 $.fn.initChosen = () ->
 	$('select').chosen
@@ -27,6 +28,9 @@ $.fn.initDecimalMask = () ->
 
 $.fn.initInputMask = () ->
 	$(":input").inputmask()
+
+$.fn.initTables = () ->
+	$("table").DataTable responsive: true
 
 $(document).ready(ready)
 $(document).on('page:load',ready)

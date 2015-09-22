@@ -7,7 +7,11 @@
   <a href="#" id="guardar" title="Guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
 
 <% elsif action_name == 'edit' or action_name == 'update' %>
-  <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path+controller_path, :title => "Atras" %>
+  <% if controller_path != 'empresas' %>
+    <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path + controller_path, :title => "Atras" %>
+  <% else %>
+    <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path, :title => "Atras" %>
+  <% end %>
   <a href="#" id="guardar" title="Guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
   <%= link_to '<i class="fa fa-2x fa-trash-o"></i>'.html_safe, root_path+controller_path+'/'+params[:id], method: :delete, data: { confirm: 'Esta seguro?' } %>
   <% if controller_name == 'contratos' %>
