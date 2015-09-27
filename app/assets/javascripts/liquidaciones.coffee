@@ -9,6 +9,9 @@ ready = ->
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_propietario_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_contrato_id').prop('disabled', true).trigger('chosen:updated')
+    $('#liquidacion_fecha').prop('disabled', true)
+    $('#liquidacion_refresh').hide()
+
   else
     $('#liquidacion_inquilino_id').change ->
       $('#liquidacion_propietario_id').val('').trigger('chosen:updated')
@@ -41,6 +44,10 @@ ready = ->
       else
         $('#liquidacion_inquilino_id').empty().trigger('chosen:updated')
         $('#liquidacion_propietario_id').empty().trigger('chosen:updated')
+
+  $('#liquidacion_refresh').click ->
+    $('#liquidacion_liquidacion_refresh').val(1)
+    $('.simple_form').submit()
 
 $(document).on('page:load', ready)
 $(document).ready(ready)

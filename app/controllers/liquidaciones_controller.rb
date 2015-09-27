@@ -26,11 +26,14 @@ class LiquidacionesController < ApplicationController
   # POST /liquidaciones.json
   def create
     @liquidacion = Liquidacion.new(liquidacion_params)
-
-    if @liquidacion.save
-      redirect_to @liquidacion, notice: 'Liquidacion was successfully created.' 
-    else
+    if liquidacion_params[:liquidacion_refresh] == "1"
       render :new 
+    else
+      if @liquidacion.save
+        redirect_to @liquidacion, notice: 'Guardado' 
+      else
+        render :new 
+      end
     end
   end
 
@@ -38,7 +41,7 @@ class LiquidacionesController < ApplicationController
   # PATCH/PUT /liquidaciones/1.json
   def update
     if @liquidacion.update(liquidacion_params)
-      redirect_to [:edit, @liquidacion], notice: 'Liquidacion was successfully updated.'
+      redirect_to [:edit, @liquidacion], notice: 'Actualizado'
     else
       render :edit 
     end
@@ -48,7 +51,7 @@ class LiquidacionesController < ApplicationController
   # DELETE /liquidaciones/1.json
   def destroy
     @liquidacion.destroy
-    redirect_to liquidaciones_url, notice: 'Liquidacion was successfully destroyed.'
+    redirect_to liquidaciones_url, notice: 'Borrado'
   end
 
   private
@@ -60,6 +63,6 @@ class LiquidacionesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def liquidacion_params
       params.require(:liquidacion).permit(:contrato_id, :inquilino_id, :propietario_id,
-      :fecha, :neto, :descuento, :comision, :total)
+      :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh)
     end
 end

@@ -1,4 +1,4 @@
-<table>
+<table class="display responsive no-wrap">
   <thead>
     <tr>
       <th>Contrato</th>
@@ -7,22 +7,18 @@
       <th>Descuento</th>
       <th>Comision</th>
       <th>Total</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @liquidaciones.each do |liquidacion| %>
       <tr>
-        <td><%= liquidacion.contrato %></td>
+        <td><%= link_to liquidacion.contrato.nombre, edit_liquidacion_path(liquidacion) %></td>
         <td><%= liquidacion.fecha %></td>
         <td><%= liquidacion.neto %></td>
         <td><%= liquidacion.descuento %></td>
         <td><%= liquidacion.comision %></td>
         <td><%= liquidacion.total %></td>
-        <td><%= link_to 'Show', liquidacion %></td>
-        <td><%= link_to 'Edit', edit_liquidacion_path(liquidacion) %></td>
-        <td><%= link_to 'Destroy', liquidacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

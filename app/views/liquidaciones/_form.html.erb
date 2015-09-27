@@ -22,24 +22,27 @@
           </div>
           <!--<%= f.association :propietario, label_method: :nombre, :collection => Persona.where(:es_propietario => true) %> -->
           <%= f.input :fecha %>
-          <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh' %>
+          <%= f.input :liquidacion_refresh , as: :hidden %>
+          <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh', name: 'liquidacion_refresh' %>
+
         </div>
-        <% if false %>
+        <% if @liquidacion.contrato %>
           <div class="row">
-            <%= simple_form_for @liquidacion.contrato do |f| %>
+            <%= simple_fields_for @liquidacion.contrato do |f| %>
               <%= f.input :total, readonly: true %>
               <%= f.input :pagado, readonly: true %>
               <%= f.input :saldo, readonly: true %>
             <% end %>
           </div>
+          <div class="row">
+            <%= f.input :neto %>
+            <%= f.input :descuento %>
+            <%= f.input :comision %>
+            <%= f.input :total %>
+          </div>
         <% end %>
-        <div class="row">
-          <%= f.input :neto %>
-          <%= f.input :descuento %>
-          <%= f.input :comision %>
-          <%= f.input :total %>
-        </div>
       </div>
     </div>
   </div>
 <% end %>
+

@@ -14,17 +14,14 @@
   <tbody>
     <% @inmuebles.each do |inmueble| %>
       <tr>
-        <td><%= inmueble.codigo %></td>
+        <td><%= link_to inmueble.codigo, edit_inmueble_path(inmueble)  %></td>
         <td><%= inmueble.descripcion %></td>
         <td><%= inmueble.activo %></td>
-        <td><%= inmueble.inmueble_tipo %></td>
+        <td><%= inmueble.inmueble_tipo.nombre %></td>
         <td><%= inmueble.direccion %></td>
         <td><%= inmueble.piso %></td>
         <td><%= inmueble.depto %></td>
         <td><%= inmueble.localidad %></td>
-        <td><%= link_to 'Show', inmueble %></td>
-        <td><%= link_to 'Edit', edit_inmueble_path(inmueble) %></td>
-        <td><%= link_to 'Destroy', inmueble, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

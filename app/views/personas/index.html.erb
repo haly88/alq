@@ -1,4 +1,4 @@
-<table>
+<table class="display responsive no-wrap">
   <thead>
     <tr>
       <th>Codigo</th>
@@ -9,17 +9,13 @@
       <th>Es propietario</th>
       <th>Es garante</th>
       <th>Es otro</th>
-      <th>Telefono</th>
-      <th>Email</th>
-      <th>Direccion</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @personas.each do |persona| %>
       <tr>
-        <td><%= persona.codigo %></td>
+        <td><%= link_to persona.codigo, edit_persona_path(persona) %></td>
         <td><%= persona.nombre %></td>
         <td><%= persona.activo %></td>
         <td><%= persona.descripcion %></td>
@@ -27,12 +23,6 @@
         <td><%= persona.es_propietario %></td>
         <td><%= persona.es_garante %></td>
         <td><%= persona.es_otro %></td>
-        <td><%= persona.telefono %></td>
-        <td><%= persona.email %></td>
-        <td><%= persona.direccion %></td>
-        <td><%= link_to 'Show', persona %></td>
-        <td><%= link_to 'Edit', edit_persona_path(persona) %></td>
-        <td><%= link_to 'Destroy', persona, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
