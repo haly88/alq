@@ -1,12 +1,13 @@
 class Liquidacion < ActiveRecord::Base
 
-	attr_accessor :liquidacion_refresh, :total
+	attr_accessor :liquidacion_refresh
 
   belongs_to :contrato
   belongs_to :inquilino, class_name: "Persona"
   belongs_to :propietario, class_name: "Persona"
 
   validates :contrato, :presence => true, on: :create
+  validates :fecha, :presence => true
   validates :total, :numericality => {:greater_than => 0}
 
   validate :doble_persona, on: :create
@@ -16,4 +17,5 @@ class Liquidacion < ActiveRecord::Base
   	 		errors.add(:inquilino_id, "Debe liquidar solo 1 persona")
   	end
   end
+
 end

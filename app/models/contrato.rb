@@ -25,15 +25,16 @@ class Contrato < ActiveRecord::Base
 		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
 	end
 
-	def total
-		contratos_items.sum(:monto)
-	end
+	def calcularTotal
+    contratos_items.sum(:monto)
+  end
 
-	def pagado
-		liquidaciones.sum(:total)
-	end
+  def calcularPagado
+    liquidaciones.sum(:total)
+  end
 
-	def saldo
-		total - pagado
-	end
+  def calcularSaldo
+    calcularTotal - calcularPagado
+  end
+
 end

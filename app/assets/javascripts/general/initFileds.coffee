@@ -18,7 +18,7 @@ $.datepicker.setDefaults
   dateFormat: 'dd-mm-yy'
 
 $.fn.initDatepicker = () ->
-	$('input.date').datepicker()
+	$('input.date:not([readonly])').datepicker()
 		
 $.fn.initDateMask = () ->
 	$('input.date').inputmask('alias': 'date')

@@ -1,5 +1,6 @@
 class LiquidacionesController < ApplicationController
   before_action :set_liquidacion, only: [:show, :edit, :update, :destroy]
+  before_action :set_contratos, only: [:new, :edit, :update, :create]
 
   # GET /liquidaciones
   # GET /liquidaciones.json
@@ -20,6 +21,7 @@ class LiquidacionesController < ApplicationController
 
   # GET /liquidaciones/1/edit
   def edit
+    set_contrato
   end
 
   # POST /liquidaciones
@@ -27,11 +29,14 @@ class LiquidacionesController < ApplicationController
   def create
     @liquidacion = Liquidacion.new(liquidacion_params)
     if liquidacion_params[:liquidacion_refresh] == "1"
+      @liquidacion.liquidacion_refresh = 0
+      set_contrato
       render :new 
     else
       if @liquidacion.save
         redirect_to @liquidacion, notice: 'Guardado' 
       else
+        set_contrato
         render :new 
       end
     end
@@ -58,6 +63,18 @@ class LiquidacionesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_liquidacion
       @liquidacion = Liquidacion.find(params[:id])
+    end
+
+    def set_contratos
+      @contratos = Contrato.order(:nombre)
+    end
+
+    def set_contrato
+      @contrato = @liquidacion.contrato
+      @contratoCalcularTotal = @contrato.calcularTotal
+      @contratoCalcularPagado = @contrato.calcularPagado
+      @contratoCalcularSaldo = @contrato.calcularSaldo
+      @contrato_items = @contrato.contratos_items.where('fecha_desde <= ?', @liquidacion.fecha)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

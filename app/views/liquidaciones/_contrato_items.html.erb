@@ -1,0 +1,13 @@
+<% @contrato_items.each do |contrato_items| %>
+<div class="row">
+	<div class="columns medium-2">
+    <%= text_field_tag 'contrato_items_fecha_desde', contrato_items.fecha_desde, readonly: true, class: "date" %>
+	</div>
+	<div class="columns medium-2">
+    <%= text_field_tag 'contrato_items_monto', contrato_items.monto, readonly: true, class: "decimal" %>
+	</div>
+	<div class="columns medium-2 end">
+    <%= text_field_tag 'contrato_items_saldo', contrato_items.saldo, readonly: true, class: "decimal" %>
+	</div>
+</div>
+<% end %>

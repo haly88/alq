@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="columns medium-2">
+    <%= label_tag 'Contrato Total' %>
+    <%= text_field_tag 'contrato_calcular_total', @contratoCalcularTotal, readonly: true, class: "decimal" %>
+  </div>
+  <div class="columns medium-2">
+    <%= label_tag 'Contrato Pagado' %>
+    <%= text_field_tag 'contrato_calcular_pagado', @contratoCalcularPagado, readonly: true, class: "decimal" %>
+  </div>
+  <div class="columns medium-2 end">
+    <%= label_tag 'Contrato Saldo' %>
+    <%= text_field_tag 'contrato_calcular_saldo', @contratoCalcularSaldo, readonly: true, class: "decimal" %>
+  </div>
+</div>

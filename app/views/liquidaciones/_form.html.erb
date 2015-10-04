@@ -5,6 +5,7 @@
   <div class="form-inputs">
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+      <li class="tab-title"><a data-no-turbolink='true' href="#cuotas">Cuotas</a></li>
     </ul>
     <div class="tabs-content">
       <div class="content active" id="general">
@@ -14,11 +15,11 @@
           </div>
           <div class="columns medium-2">
             <%= f.label :inquilino_id %>
-            <%= f.grouped_collection_select :inquilino_id, Contrato.order(:nombre), :inquilinos, :selector_contratos, :id, :nombre, include_blank: true  %>
+            <%= f.grouped_collection_select :inquilino_id, @contratos, :inquilinos, :selector_contratos, :id, :nombre, include_blank: true  %>
           </div>
           <div class="columns medium-2">
             <%= f.label :propietario_id %>
-            <%= f.grouped_collection_select :propietario_id, Contrato.order(:nombre), :propietarios, :selector_contratos, :id, :nombre, include_blank: true  %>
+            <%= f.grouped_collection_select :propietario_id, @contratos, :propietarios, :selector_contratos, :id, :nombre, include_blank: true  %>
           </div>
           <!--<%= f.association :propietario, label_method: :nombre, :collection => Persona.where(:es_propietario => true) %> -->
           <%= f.input :fecha %>
@@ -27,13 +28,7 @@
 
         </div>
         <% if @liquidacion.contrato %>
-          <div class="row">
-            <%= simple_fields_for @liquidacion.contrato do |f| %>
-              <%= f.input :total, readonly: true %>
-              <%= f.input :pagado, readonly: true %>
-              <%= f.input :saldo, readonly: true %>
-            <% end %>
-          </div>
+          <%= render 'contrato_info' %>
           <div class="row">
             <%= f.input :neto %>
             <%= f.input :descuento %>
@@ -41,6 +36,9 @@
             <%= f.input :total %>
           </div>
         <% end %>
+      </div>
+      <div class="content" id="cuotas">
+        <%= render 'contrato_items' if @contrato_items %>
       </div>
     </div>
   </div>
