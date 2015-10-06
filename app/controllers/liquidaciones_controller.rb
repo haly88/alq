@@ -75,6 +75,7 @@ class LiquidacionesController < ApplicationController
       @contratoCalcularPagado = @contrato.calcularPagado
       @contratoCalcularSaldo = @contrato.calcularSaldo
       @contrato_items = @contrato.contratos_items.where('fecha_desde <= ?', @liquidacion.fecha)
+      @contratoCalcularTotalAPagar = @contrato.calcularTotalAPagar(@liquidacion.fecha)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

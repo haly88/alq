@@ -4,6 +4,7 @@ ready = () ->
 	$.fn.initChosen()
 	$.fn.initDatepicker()
 	$.fn.initDateMask()
+	$.fn.initDateDefault()
 	$.fn.initDecimalMask()
 	$.fn.initInputMask()
 	$.fn.initTables()
@@ -15,13 +16,18 @@ $.fn.initChosen = () ->
 		width: '100%'
 
 $.datepicker.setDefaults
-  dateFormat: 'dd-mm-yy'
+  dateFormat: 'dd/mm/yy'
 
 $.fn.initDatepicker = () ->
 	$('input.date:not([readonly])').datepicker()
 		
 $.fn.initDateMask = () ->
 	$('input.date').inputmask('alias': 'date')
+
+$.fn.initDateDefault = () ->
+	if $('input.date:not([readonly])').val() == ''
+		fechaHoy = $.datepicker.formatDate("dd/mm/yy", new Date())
+		$('input.date:not([readonly])').val(fechaHoy)
 
 $.fn.initDecimalMask = () ->
 	$('input.decimal').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true, "autoUnmask": true)

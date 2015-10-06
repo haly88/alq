@@ -5,6 +5,20 @@
 ready = ->
   action_name = $('#action_name').val()
 
+  $('#liquidacion_neto').change ->
+    $.fn.calcularTotalLiquidacion()
+  $('#liquidacion_comision').change ->
+    $.fn.calcularTotalLiquidacion()
+  $('#liquidacion_descuento').change ->
+    $.fn.calcularTotalLiquidacion()
+
+  $.fn.calcularTotalLiquidacion = () ->
+    neto = Number($('#liquidacion_neto').val())
+    descuento = Number($('#liquidacion_descuento').val())
+    comision = Number($('#liquidacion_comision').val())
+    total = neto - descuento + comision 
+    $('#liquidacion_total').val(total)
+
   if action_name == 'edit' or action_name == 'update'
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_propietario_id').prop('disabled', true).trigger('chosen:updated')

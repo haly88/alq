@@ -37,4 +37,8 @@ class Contrato < ActiveRecord::Base
     calcularTotal - calcularPagado
   end
 
+  def calcularTotalAPagar(fecha)
+  	contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcularPagado
+  end
+
 end

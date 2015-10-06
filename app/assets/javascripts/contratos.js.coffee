@@ -19,8 +19,8 @@ ready = ->
         time = new Date().getTime()
         regexp = new RegExp($('.content.active .add_fields').data('id'), 'g')
         $('.content.active .add_fields').before($('.content.active .add_fields').data('fields').replace(regexp, time))
-        fechaInicio = new Date(fechaInicio.setMonth(fechaInicio.getMonth()+1))
         $('.contratos_items_fecha_desde:last').val($.datepicker.formatDate("dd/mm/yy", fechaInicio))
+        fechaInicio = new Date(fechaInicio.setMonth(fechaInicio.getMonth()+1))
         $('.contratos_items_monto:last').val(montoInicio)
         if contador == cada
           contador = 0
