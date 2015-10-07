@@ -16,7 +16,7 @@ ready = ->
     neto = Number($('#liquidacion_neto').val())
     descuento = Number($('#liquidacion_descuento').val())
     comision = Number($('#liquidacion_comision').val())
-    total = neto - descuento + comision 
+    total = neto + descuento - comision 
     $('#liquidacion_total').val(total)
 
   if action_name == 'edit' or action_name == 'update'

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contratos_item_id: 
+  liquidacion_id: 
+  pendiente: 9.99
+
+two:
+  contratos_item_id: 
+  liquidacion_id: 
+  pendiente: 9.99

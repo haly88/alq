@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915000739) do
+ActiveRecord::Schema.define(version: 20151006232135) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 20150915000739) do
   end
 
   add_index "contratos_items", ["contrato_id"], name: "index_contratos_items_on_contrato_id"
+
+  create_table "contratos_items_liquidaciones", force: :cascade do |t|
+    t.integer  "contratos_item_id"
+    t.integer  "liquidacion_id"
+    t.decimal  "pendiente",         precision: 12, scale: 4
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "contratos_items_liquidaciones", ["contratos_item_id"], name: "index_contratos_items_liquidaciones_on_contratos_item_id"
+  add_index "contratos_items_liquidaciones", ["liquidacion_id"], name: "index_contratos_items_liquidaciones_on_liquidacion_id"
 
   create_table "contratos_personas_tipos", force: :cascade do |t|
     t.integer  "contrato_id"
