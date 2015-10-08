@@ -1,20 +1,20 @@
 <div class="row">
   <div class="columns medium-2">
     <%= label_tag 'Total Contrato' %>
-    <%= text_field_tag 'contrato_calcular_total', @contratoCalcularTotal, readonly: true, class: "decimal" %>
+    <%= text_field_tag 'contrato_total', @contrato_total, readonly: true, class: "decimal" %>
   </div>
   <div class="columns medium-2">
     <%= label_tag 'Pago Total' %>
-    <%= text_field_tag 'contrato_calcular_pagado', @contratoCalcularPagado, readonly: true, class: "decimal" %>
+    <%= text_field_tag 'contrato_pagado', @contrato_pagado, readonly: true, class: "decimal" %>
   </div>
   <div class="columns medium-2 end">
     <%= label_tag 'Saldo Total' %>
-    <%= text_field_tag 'contrato_calcular_saldo', @contratoCalcularSaldo, readonly: true, class: "decimal" %>
+    <%= text_field_tag 'contrato_saldo', @contrato_saldo, readonly: true, class: "decimal" %>
   </div>
 </div>
 <div class="row">
   <div class="columns medium-2 end">
-    <%= label_tag 'Monto a Pagar' %>
-    <%= text_field_tag 'contrato_monto_a_pagar', @contratoCalcularTotalAPagar, readonly: true, class: "decimal" %>
+    <%= label_tag 'Total a Pagar' %>
+    <%= text_field_tag 'contrato_total_a_pagar', @contrato_total_a_pagar, readonly: true, class: "decimal" %>
   </div>
 </div>

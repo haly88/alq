@@ -2,6 +2,9 @@ class Liquidacion < ActiveRecord::Base
 
 	attr_accessor :liquidacion_refresh
 
+  has_many :contratos_items_liquidaciones
+  has_many :contratos_items, :through => :contratos_items_liquidaciones
+
   belongs_to :contrato
   belongs_to :inquilino, class_name: "Persona"
   belongs_to :propietario, class_name: "Persona"
