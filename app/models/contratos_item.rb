@@ -1,5 +1,7 @@
 class ContratosItem < ActiveRecord::Base
 
+	attr_accessor :saldado
+
 	has_many :contratos_items_liquidaciones
 	has_many :liquidaciones, :through => :contratos_items_liquidaciones
 	
@@ -8,6 +10,4 @@ class ContratosItem < ActiveRecord::Base
   validates :monto, :fecha_desde, :presence => true 
   validates :monto, :numericality => {:greater_than => 0}
 
-  def calcularSaldoCuota
-  end
 end

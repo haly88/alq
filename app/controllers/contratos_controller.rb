@@ -17,7 +17,6 @@ class ContratosController < ApplicationController
     @contrato = Contrato.new
     1.times do
       contratos_item = @contrato.contratos_items.build
-      contratos_impuesto = @contrato.contratos_impuestos.build
     end
   end
 

@@ -41,4 +41,16 @@ class Contrato < ActiveRecord::Base
   	contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcularPagado
   end
 
+  def contratos_items_cuotas(fecha)
+  	contrato_items = contratos_items.where('fecha_desde <= ?', fecha)
+  	pago_total = calcularPagado
+    contrato_items.each do |contrato_items|
+      if contrato_items.monto <= pago_total
+      	contrato_items.saldado = contrato_items.monto
+      else
+      	contrato_items.saldado = pago_total
+      end
+    pago_total = pago_total - contrato_items.monto
+    end
+  end
 end

@@ -3,7 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
-  action_name = $('#action_name').val()
+    $.fn.colorearCuotas()
+
+  $.fn.colorearCuotas = () ->
+    saldo = Number($('#contrato_items_saldado').val())
+    if saldo == 0
+      $('#contrato_items_saldado').css('border-color', 'red');
+    else
+      $('#contrato_items_saldado').css('border-color', 'green');
 
   $('#liquidacion_neto').change ->
     $.fn.calcularTotalLiquidacion()
@@ -19,6 +26,8 @@ ready = ->
     total = neto + descuento - comision 
     $('#liquidacion_total').val(total)
 
+  action_name = $('#action_name').val()  
+  
   if action_name == 'edit' or action_name == 'update'
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_propietario_id').prop('disabled', true).trigger('chosen:updated')
