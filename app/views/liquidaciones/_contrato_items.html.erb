@@ -9,10 +9,10 @@
     <%= text_field_tag 'contrato_items_fecha_desde', contrato_items.fecha_desde, readonly: true, class: "date" %>
 	</div>
 	<div class="columns medium-2">
-    <%= text_field_tag 'contrato_items_monto', contrato_items.monto, readonly: true, class: "decimal" %>
+    <%= text_field_tag 'contrato_items_monto', contrato_items.monto, readonly: true, class: "decimal contrato_items_monto" %>
 	</div>
 	<div class="columns medium-2 end">
-    <%= text_field_tag 'contrato_items_saldado', contrato_items.saldado, readonly: true, class: "decimal" %>
+    <%= text_field_tag 'contrato_items_saldado', contrato_items.saldado, readonly: true, class: "decimal contrato_items_saldado" %>
 	</div>
 </div>
 <% end %>

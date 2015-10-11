@@ -3,28 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
-    $.fn.colorearCuotas()
-
-  $.fn.colorearCuotas = () ->
-    saldo = Number($('#contrato_items_saldado').val())
-    if saldo == 0
-      $('#contrato_items_saldado').css('border-color', 'red');
-    else
-      $('#contrato_items_saldado').css('border-color', 'green');
-
-  $('#liquidacion_neto').change ->
-    $.fn.calcularTotalLiquidacion()
-  $('#liquidacion_comision').change ->
-    $.fn.calcularTotalLiquidacion()
-  $('#liquidacion_descuento').change ->
-    $.fn.calcularTotalLiquidacion()
-
-  $.fn.calcularTotalLiquidacion = () ->
-    neto = Number($('#liquidacion_neto').val())
-    descuento = Number($('#liquidacion_descuento').val())
-    comision = Number($('#liquidacion_comision').val())
-    total = neto + descuento - comision 
-    $('#liquidacion_total').val(total)
+  $.fn.colorearCuotas()
 
   action_name = $('#action_name').val()  
   
@@ -71,6 +50,35 @@ ready = ->
   $('#liquidacion_refresh').click -> 
     $('#liquidacion_liquidacion_refresh').val(1)
     $('.simple_form').submit()
+
+$('#liquidacion_neto').change ->
+  $.fn.calcularTotalLiquidacion()
+$('#liquidacion_comision').change ->
+  $.fn.calcularTotalLiquidacion()
+$('#liquidacion_descuento').change ->
+  $.fn.calcularTotalLiquidacion()
+
+$.fn.calcularTotalLiquidacion = () ->
+  neto = Number($('#liquidacion_neto').val())
+  descuento = Number($('#liquidacion_descuento').val())
+  comision = Number($('#liquidacion_comision').val())
+  total = neto + descuento - comision 
+  $('#liquidacion_total').val(total)
+
+$.fn.colorearCuotas = () ->
+  $('.contrato_items_saldado').each (k,v) ->
+    saldo = Number($(v).val())
+    if saldo == 0
+      $(v).css('border-color', 'red');
+    else
+      $('.contrato_items_monto').each (k2,v2) ->
+        monto = Number($(v2).val())
+        if k == k2 
+          if saldo == monto
+            $(v).css('border-color', 'green');
+          else
+            $(v).css('border-color', 'yellow');
+
 
 $(document).on('page:load', ready)
 $(document).ready(ready)
