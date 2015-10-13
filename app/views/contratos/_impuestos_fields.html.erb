@@ -1,6 +1,25 @@
+<div class="row" >
+	<div class="columns medium-2">
+		<%= label_tag 'Fecha Inicio' %>
+		<%= text_field_tag 'impuestos_fecha_inicio', nil, class: 'date' %>
+	</div>
+	<div class="columns medium-2">
+		<%= label_tag 'Impuesto' %>
+		<%= select_tag "impuestos_impuesto_id", options_from_collection_for_select(@impuestos, "id", "nombre") %>
+	</div>
+	<div class="columns medium-2">
+		<%= label_tag 'Cuotas' %>
+		<%= text_field_tag 'impuestos_cantidad', nil, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 52" } %>
+	</div>
+	<div class="columns medium-2">
+		<%= label_tag 'Cada' %>
+		<%= text_field_tag 'impuestos_cada', nil, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12, 'autoUnmask' : true"} %>
+	</div>
+  <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'impuestos_refresh' %>
+</div>
 <div class="row">
+	<div class="columns medium-2"><%= f.label :fecha_pago %></div>
   <div class="columns medium-2"><%= f.label :impuesto %></div>
-  <div class="columns medium-2"><%= f.label :fecha_pago %></div>
   <div class="columns medium-2"><%= f.label :monto %></div>
   <div class="columns medium-2"><%= f.label :fecha_vencimiento %></div>
   <div class="columns medium-2 end"><%= f.label :pago %></div>

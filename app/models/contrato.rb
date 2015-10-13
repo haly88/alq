@@ -1,6 +1,7 @@
 class Contrato < ActiveRecord::Base
 
-	attr_accessor :fecha_inicio, :cuotas, :monto_inicio, :incremento, :cada
+	attr_accessor :fecha_inicio, :cuotas, :monto_inicio, :incremento, :cada, 
+  :fecha_pago_refresh, :impuesto_refresh, :cuotas_impuestos_refresh, :cada_impuestos_refresh
 
 	has_many :liquidaciones, :dependent => :destroy
 

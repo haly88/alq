@@ -27,7 +27,7 @@
           <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh', name: 'liquidacion_refresh' %>
 
         </div>
-        <% if @liquidacion.contrato %>
+        <% if @contrato %>
           <%= render 'contrato_info' %>
           <div class="row">
             <%= f.input :neto %>
@@ -38,7 +38,7 @@
         <% end %>
       </div>
       <div class="content" id="cuotas">
-        <%= render 'contrato_items', f: f if @contrato_items %>
+        <%= render 'contrato_items', f: f if @contrato %>
       </div>
     </div>
   </div>

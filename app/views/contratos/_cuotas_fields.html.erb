@@ -1,9 +1,24 @@
- <div class="row" >
-  <%= f.input :fecha_inicio, :as => 'date', required: true %>
-  <%= f.input :cuotas, required: true, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 52" }} %>
-  <%= f.input :monto_inicio, required: true, as: 'decimal' %>
-  <%= f.input :incremento, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999, 'autoUnmask' : true" }} %>
-  <%= f.input :cada, input_html: {data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12, 'autoUnmask' : true" }} %>
+<div class="row" >
+	<div class="columns medium-2">
+		<%= label_tag 'Fecha Inicio' %>
+		<%= text_field_tag 'cuotas_fecha_inicio', nil, class: 'date' %>
+	</div>
+	<div class="columns medium-2">
+		<%= label_tag 'Cuotas' %>
+		<%= text_field_tag 'cuotas_cantidad', nil, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 52" } %>
+	</div>
+	<div class="columns medium-2">
+		<%= label_tag 'Monto Inicio' %>
+		<%= text_field_tag 'cuotas_monto_inicio', nil, class: 'decimal' %>
+	</div>
+	<div class="columns medium-2">
+		<%= label_tag 'Incremento' %>
+		<%= text_field_tag 'cuotas_incremento', nil, data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999, 'autoUnmask' : true"} %>
+	</div>
+	<div class="columns medium-2">
+		<%= label_tag 'Cada' %>
+		<%= text_field_tag 'cuotas_cada', nil, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12, 'autoUnmask' : true"} %>
+	</div>
   <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'cuotas_refresh' %>
 </div>
 <div class="row">

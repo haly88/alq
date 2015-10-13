@@ -5,11 +5,12 @@
 ready = ->
 
   $('#cuotas_refresh').click ->
-    cuotas = Number($('#contrato_cuotas').val())
-    fechaInicio = $.datepicker.parseDate("dd/mm/yy", $('#contrato_fecha_inicio').val())
-    montoInicio = Number($('#contrato_monto_inicio').val())
-    incremento = (1 + (Number($('#contrato_incremento').val()) / 100))
-    cada = Number($('#contrato_cada').val())
+    cuotas = Number($('#cuotas_cantidad').val())
+    fechaInicio = $.datepicker.parseDate("dd/mm/yy", $('#cuotas_fecha_inicio').val())
+    fechaInicio = new Date(fechaInicio.setDate(1))
+    montoInicio = Number($('#cuotas_monto_inicio').val())
+    incremento = (1 + (Number($('#cuotas_incremento').val()) / 100))
+    cada = Number($('#cuotas_cada').val())
     $('.contratos_items_destroy').val('1')
     $('.contratos_items_row').hide()
     contador = 0
@@ -30,6 +31,20 @@ ready = ->
     $.fn.initInputMask()
     $.fn.initDateMask()
     $.fn.initDecimalMask()
+
+  $('#impuestos_refresh').click ->
+    impuesto = $('#impuestos_impuesto_id').val()
+    cuotas = Number($('#impuestos_cantidad').val())
+    fechaInicio = $.datepicker.parseDate("dd/mm/yy", $('#impuestos_fecha_inicio').val())
+    fechaInicio = new Date(fechaInicio.setDate(1))
+    cada = Number($('#impuestos_cada').val())
+    $('.contratos_impuestos_destroy').val('1')
+    $('.contratos_impuestos_row').hide()
+    contador = 0
+
+
+
+
 
 $(document).on('page:load', ready)
 $(document).ready(ready)
