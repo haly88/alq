@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
+  $.fn.colorearImpuestos()
 
   $('#cuotas_refresh').click ->
     cuotas = Number($('#cuotas_cantidad').val())
@@ -38,9 +39,10 @@ ready = ->
     fechaInicio = $.datepicker.parseDate("dd/mm/yy", $('#impuestos_fecha_inicio').val())
     fechaInicio = new Date(fechaInicio.setDate(1))
     cada = Number($('#impuestos_cada').val())
-    $('.contratos_impuestos_destroy').val('1')
-    $('.contratos_impuestos_row').hide()
-    console.log(impuesto)
+    $('.contratos_impuestos_impuesto').each (k,v) ->
+      if $(v).val() == impuesto
+        $(v).closest('.row').children('input[type=hidden]').val('1')
+        $(v).closest('.row').hide()
     contador = 0
     for [1..cuotas]
       contador = contador + 1
@@ -52,8 +54,21 @@ ready = ->
         $('.content.active .add_fields').before($('.content.active .add_fields').data('fields').replace(regexp, time))
         $('.contratos_impuestos_fecha_pago:last').val($.datepicker.formatDate("dd/mm/yy", fechaInicio))
         $('.contratos_impuestos_impuesto:last').val(impuesto)
+    $.fn.initChosen()
+    $.fn.initDatepicker()
+    $.fn.initInputMask()
+    $.fn.initDateMask()
+    $.fn.initDecimalMask()
 
-
+  $('form').on 'change', '.contratos_impuestos_pago', () ->
+    $.fn.colorearImpuestos()
 
 $(document).on('page:load', ready)
 $(document).ready(ready)
+
+$.fn.colorearImpuestos = () ->
+  $('.contratos_impuestos_pago').each (k,v) ->
+    if $(v).prop('checked') == true
+      $(v).closest('.row').children('.column').children(':input').css('border-color','green')
+    else
+      $(v).closest('.row').children('.column').children(':input').css('border-color','red')
