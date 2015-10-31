@@ -2,7 +2,7 @@
   <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path, :title => "Atras" %>
   <a href="<%= root_path + controller_path + '/new' %>" id="nuevo" title="Nuevo"><i class="fa fa-2x fa-file-o"></i></a>
 
-<% elsif action_name == 'new' or action_name == 'create' %>
+<% elsif action_name == 'new' or action_name == 'create' or action_name == 'refresh' %>
   <%= link_to '<i class="fa fa-2x fa-angle-double-left"></i>'.html_safe, root_path+controller_path, :title => "Atras" %>
   <a href="#" id="guardar" title="Guardar"><i class="fa fa-2x fa-floppy-o"></i></a>
 

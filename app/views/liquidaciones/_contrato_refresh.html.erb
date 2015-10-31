@@ -1,0 +1,20 @@
+<%= simple_form_for @liquidacion, url: refresh_liquidaciones_path, html: {id: 'form_refresh'} do |f| %>
+<%= f.error_notification %>
+<%= f.error :base %>
+<div class="row">
+  <div class="columns medium-4">
+    <%= f.association :contrato, label_method: :selector_contratos, wrapper: :inline_form %>
+  </div>
+  <div class="columns medium-2">
+    <%= f.label :inquilino_id %>
+    <%= f.grouped_collection_select :inquilino_id, @contratos, :inquilinos, :selector_contratos, :id, :nombre, include_blank: true  %>
+  </div>
+  <div class="columns medium-2">
+    <%= f.label :propietario_id %>
+    <%= f.grouped_collection_select :propietario_id, @contratos, :propietarios, :selector_contratos, :id, :nombre, include_blank: true  %>
+  </div>
+  <!--<%= f.association :propietario, label_method: :nombre, :collection => Persona.where(:es_propietario => true) %> -->
+  <%= f.input :fecha %>
+  <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh' %>
+</div>
+<% end %>

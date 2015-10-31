@@ -51,8 +51,7 @@ $.fn.calcularPersonas = (inquilinos, propietarios) ->
     $('#liquidacion_propietario_id').empty().trigger('chosen:updated')
 
   $('#liquidacion_refresh').click -> 
-    $('#liquidacion_liquidacion_refresh').val(1)
-    $('.simple_form').submit()
+    $('#form_refresh').submit()
 
   $('#liquidacion_neto').change ->
     $.fn.calcularTotalLiquidacion()

@@ -1,6 +1,6 @@
 class LiquidacionesController < ApplicationController
   before_action :set_liquidacion, only: [:show, :edit, :update, :destroy]
-  before_action :set_contratos, only: [:new, :edit, :update, :create]
+  before_action :set_contratos, only: [:new, :edit, :update, :create, :refresh]
 
   # GET /liquidaciones
   # GET /liquidaciones.json
@@ -19,6 +19,12 @@ class LiquidacionesController < ApplicationController
     @liquidacion.contrato_id = params[:contrato] if params[:contrato]
   end
 
+  def refresh
+    @liquidacion = Liquidacion.new(liquidacion_params)
+    set_contrato
+    render :new 
+  end
+
   # GET /liquidaciones/1/edit
   def edit
     set_contrato
@@ -28,17 +34,11 @@ class LiquidacionesController < ApplicationController
   # POST /liquidaciones.json
   def create
     @liquidacion = Liquidacion.new(liquidacion_params)
-    if liquidacion_params[:liquidacion_refresh] == "1"
-      @liquidacion.liquidacion_refresh = 0
+    if @liquidacion.save
+      redirect_to @liquidacion, notice: 'Guardado' 
+    else
       set_contrato
       render :new 
-    else
-      if @liquidacion.save
-        redirect_to @liquidacion, notice: 'Guardado' 
-      else
-        set_contrato
-        render :new 
-      end
     end
   end
 
@@ -70,12 +70,14 @@ class LiquidacionesController < ApplicationController
   end
 
   def set_contrato
-    @contrato = @liquidacion.contrato
-    @contrato_total = @contrato.calcularTotal
-    @contrato_pagado = @contrato.calcularPagado
-    @contrato_saldo = @contrato.calcularSaldo
-    @contrato_total_a_pagar = @contrato.calcularTotalAPagar(@liquidacion.fecha)
-    @contrato_items = @contrato.contratos_items_cuotas
+    if @liquidacion.contrato
+      @contrato = @liquidacion.contrato
+      @contrato_total = @contrato.calcularTotal
+      @contrato_pagado = @contrato.calcularPagado
+      @contrato_saldo = @contrato.calcularSaldo
+      @contrato_total_a_pagar = @contrato.calcularTotalAPagar(@liquidacion.fecha)
+      @contrato_items = @contrato.contratos_items_cuotas
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -48,17 +48,16 @@ class Contrato < ActiveRecord::Base
   end
 
   def contratos_items_cuotas
-  	contrato_items = contratos_items
   	pago_total = calcularPagado
-    contrato_items.each do |contrato_items|
-      if contrato_items.monto <= pago_total
-      	contrato_items.saldado = contrato_items.monto
+    contratos_items.each do |c|
+      if c.monto <= pago_total
+      	c.saldado = c.monto
       elsif pago_total >= 0
-      	contrato_items.saldado = pago_total
+      	c.saldado = pago_total
       else
-      	contrato_items.saldado = 0
+      	c.saldado = 0
       end
-    pago_total = pago_total - contrato_items.monto
+    pago_total = pago_total - c.monto
     end
   end
 end

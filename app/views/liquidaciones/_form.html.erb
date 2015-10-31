@@ -1,7 +1,7 @@
-<%= simple_form_for @liquidacion do |f| %>
+<%= render 'contrato_refresh' %>
+<%= simple_form_for @liquidacion, html: {id: 'form_principal'} do |f| %>
   <%= f.error_notification %>
   <%= f.error :base %>
-
   <div class="form-inputs">
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
@@ -9,24 +9,10 @@
     </ul>
     <div class="tabs-content">
       <div class="content active" id="general">
-        <div class="row">
-          <div class="columns medium-4">
-            <%= f.association :contrato, label_method: :selector_contratos, wrapper: :inline_form %>
-          </div>
-          <div class="columns medium-2">
-            <%= f.label :inquilino_id %>
-            <%= f.grouped_collection_select :inquilino_id, @contratos, :inquilinos, :selector_contratos, :id, :nombre, include_blank: true  %>
-          </div>
-          <div class="columns medium-2">
-            <%= f.label :propietario_id %>
-            <%= f.grouped_collection_select :propietario_id, @contratos, :propietarios, :selector_contratos, :id, :nombre, include_blank: true  %>
-          </div>
-          <!--<%= f.association :propietario, label_method: :nombre, :collection => Persona.where(:es_propietario => true) %> -->
-          <%= f.input :fecha %>
-          <%= f.input :liquidacion_refresh , as: :hidden %>
-          <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh', name: 'liquidacion_refresh' %>
-
-        </div>
+        <%= f.association :contrato, as: :hidden %>
+        <%= f.association :inquilino, as: :hidden %>
+        <%= f.association :propietario, as: :hidden %>
+        <%= f.input :fecha, as: :hidden %>
         <% if @contrato %>
           <%= render 'contrato_info' %>
           <div class="row">

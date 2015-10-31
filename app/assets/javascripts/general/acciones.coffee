@@ -1,7 +1,7 @@
 ready = ->	
 	$ ->	
 		$('#guardar').click ->
-			$('.simple_form').submit()
+			$('#form_principal').submit()
 
 $(document).on('page:load', ready)
 $(document).ready(ready)

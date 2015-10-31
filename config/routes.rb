@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :empresas, only: [:update, :edit]
-  resources :liquidaciones
+  resources :liquidaciones, shallow: true do
+    collection do
+      post 'refresh'
+    end
+  end
   resources :impuestos
   resources :inmuebles
   resources :contratos_items
