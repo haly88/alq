@@ -4,6 +4,7 @@
   <div class="columns medium-2"><%= label_tag "Monto" %></div>
   <div class="columns medium-2 end"><%= label_tag "Pago" %></div>
 </div>
+<!--
 <% @contrato_impuestos.each do |c| %>
 <div class="row">
 	<div class="columns medium-2">
@@ -19,4 +20,10 @@
     <%= check_box_tag 'contrato_impuestos_pago', c.pago, class: "contrato_impuestos_pago" %>
 	</div>
 </div>
+<% end %>
+-->
+<%= form_for @contrato do |f| %>
+<%= f.simple_fields_for :contratos_impuestos, @contrato_impuestos do |f| %>
+	<%= render "contratos_impuestos_fields", :f => f %>
+<% end %>
 <% end %>

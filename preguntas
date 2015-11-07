@@ -22,13 +22,17 @@
 
 -----------2.0
 
+* Guardar impuestos desde las liquidaciones
+
+* Error (Contrato(#69881209121500) expected, got ActionController::Parameters(#23106120)) :contrato en vez de :contrato_id
+
 * Barra de acciones
 
 * Diferencia entre or o ||, and y &&
 
 * diferencia entre render y redirect
 
-* Guardar impuestos desde las liquidaciones
+
 
 
 

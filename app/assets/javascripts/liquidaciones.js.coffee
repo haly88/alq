@@ -10,12 +10,14 @@ ready = ->
   if $('#liquidacion_contrato_id').val() != ''
     $.fn.calcularPersonas(inquilinos, propietarios)
 
+  $('.contratos_impuestos_impuesto').prop('disabled', true).trigger('chosen:updated')
   if action_name == 'edit' or action_name == 'update'
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_propietario_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_contrato_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_fecha').prop('disabled', true)
     $('#liquidacion_refresh').hide()
+
 
   $('#liquidacion_inquilino_id').change ->
     $('#liquidacion_propietario_id').val('').trigger('chosen:updated')

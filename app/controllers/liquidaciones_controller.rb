@@ -84,6 +84,6 @@ class LiquidacionesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def liquidacion_params
     params.require(:liquidacion).permit(:contrato_id, :inquilino_id, :propietario_id,
-    :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh)
+    :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh, contrato_id: [contratos_impuestos_attributes: [:id, :monto, :pago]])
   end
 end
