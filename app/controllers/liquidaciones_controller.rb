@@ -35,7 +35,7 @@ class LiquidacionesController < ApplicationController
   def create
     @liquidacion = Liquidacion.new(liquidacion_params)
     if @liquidacion.save
-      redirect_to @liquidacion, notice: 'Guardado' 
+      redirect_to @liquidacion, notice: t('action.save')
     else
       set_contrato
       render :new 
@@ -46,7 +46,7 @@ class LiquidacionesController < ApplicationController
   # PATCH/PUT /liquidaciones/1.json
   def update
     if @liquidacion.update(liquidacion_params)
-      redirect_to [:edit, @liquidacion], notice: 'Actualizado'
+      redirect_to [:edit, @liquidacion], notice: t('action.update')
     else
       render :edit 
     end
@@ -56,7 +56,7 @@ class LiquidacionesController < ApplicationController
   # DELETE /liquidaciones/1.json
   def destroy
     @liquidacion.destroy
-    redirect_to liquidaciones_url, notice: 'Borrado'
+    redirect_to liquidaciones_url, notice: t('action.delete')
   end
 
   private
@@ -72,11 +72,12 @@ class LiquidacionesController < ApplicationController
   def set_contrato
     if @liquidacion.contrato
       @contrato = @liquidacion.contrato
-      @contrato_total = @contrato.calcularTotal
-      @contrato_pagado = @contrato.calcularPagado
-      @contrato_saldo = @contrato.calcularSaldo
-      @contrato_total_a_pagar = @contrato.calcularTotalAPagar(@liquidacion.fecha)
+      @contrato_total = @contrato.calcular_total
+      @contrato_pagado = @contrato.calcular_pagado
+      @contrato_saldo = @contrato.calcular_saldo
+      @contrato_total_a_pagar = @contrato.calcular_total_a_pagar(@liquidacion.fecha)
       @contrato_items = @contrato.contratos_items_cuotas
+      @contrato_impuestos = @contrato.contratos_impuestos.where('fecha_pago <= ? AND pago = ?', @liquidacion.fecha, false)
     end
   end
 

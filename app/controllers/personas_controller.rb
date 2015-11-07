@@ -25,29 +25,20 @@ class PersonasController < ApplicationController
   # POST /personas.json
   def create
     @persona = Persona.new(persona_params)
-
-    respond_to do |format|
-      if @persona.save
-        format.html { redirect_to @persona, notice: 'Persona was successfully created.' }
-        format.json { render :show, status: :created, location: @persona }
-      else
-        format.html { render :new }
-        format.json { render json: @persona.errors, status: :unprocessable_entity }
-      end
+    if @persona.save
+      redirect_to @persona, notice: t('action.save')
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /personas/1
   # PATCH/PUT /personas/1.json
   def update
-    respond_to do |format|
-      if @persona.update(persona_params)
-        format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
-        format.json { render :show, status: :ok, location: @persona }
-      else
-        format.html { render :edit }
-        format.json { render json: @persona.errors, status: :unprocessable_entity }
-      end
+    if @persona.update(persona_params)
+      redirect_to @persona, notice: t('action.update')
+    else
+      render :edit
     end
   end
 
@@ -55,10 +46,7 @@ class PersonasController < ApplicationController
   # DELETE /personas/1.json
   def destroy
     @persona.destroy
-    respond_to do |format|
-      format.html { redirect_to personas_url, notice: 'Persona was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to personas_url, notice: t('action.delete')
   end
 
   private

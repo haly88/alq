@@ -3,16 +3,16 @@
   <div class="columns medium-2"><%= label_tag "monto" %></div>
   <div class="columns medium-2 end"><%= label_tag "saldo" %></div>
 </div>
-<% @contrato_items.each do |contrato_items| %>
+<% @contrato_items.each do |c| %>
 <div class="row">
 	<div class="columns medium-2">
-    <%= text_field_tag 'contrato_items_fecha_desde', contrato_items.fecha_desde, readonly: true, class: "date" %>
+    <%= text_field_tag 'contrato_items_fecha_desde', c.fecha_desde, readonly: true, class: "date" %>
 	</div>
 	<div class="columns medium-2">
-    <%= text_field_tag 'contrato_items_monto', contrato_items.monto, readonly: true, class: "decimal contrato_items_monto" %>
+    <%= text_field_tag 'contrato_items_monto', c.monto, readonly: true, class: "decimal contrato_items_monto" %>
 	</div>
 	<div class="columns medium-2 end">
-    <%= text_field_tag 'contrato_items_saldado', contrato_items.saldado, readonly: true, class: "decimal contrato_items_saldado" %>
+    <%= text_field_tag 'contrato_items_saldado', c.saldado, readonly: true, class: "decimal contrato_items_saldado" %>
 	</div>
 </div>
 <% end %>

@@ -1,7 +1,5 @@
 class Liquidacion < ActiveRecord::Base
 
-	attr_accessor :liquidacion_refresh
-
   has_many :contratos_items_liquidaciones
   has_many :contratos_items, :through => :contratos_items_liquidaciones
 

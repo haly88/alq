@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="columns medium-2"><%= label_tag "Fecha pago" %></div>
+  <div class="columns medium-2"><%= label_tag "Impuesto" %></div>
+  <div class="columns medium-2"><%= label_tag "Monto" %></div>
+  <div class="columns medium-2 end"><%= label_tag "Pago" %></div>
+</div>
+<% @contrato_impuestos.each do |c| %>
+<div class="row">
+	<div class="columns medium-2">
+    <%= text_field_tag 'contrato_impuestos_fecha_pago', c.fecha_pago, readonly: true, class: "date" %>
+	</div>
+	<div class="columns medium-2">
+    <%= text_field_tag 'contrato_impuestos_impuesto', c.impuesto.nombre, readonly: true, class: "contrato_impuestos_impuesto" %>
+	</div>
+	<div class="columns medium-2">
+    <%= text_field_tag 'contrato_impuestos_monto', c.monto, readonly: true, class: "decimal contrato_impuestos_monto" %>
+	</div>
+	<div class="columns medium-2 end">
+    <%= check_box_tag 'contrato_impuestos_pago', c.pago, class: "contrato_impuestos_pago" %>
+	</div>
+</div>
+<% end %>

@@ -10,7 +10,7 @@ class EmpresasController < ApplicationController
   # PATCH/PUT /empresas/1.json
   def update
     if @empresa.update(empresa_params)
-      redirect_to root_path, notice: 'Guardado'
+      redirect_to root_path, notice: t('action.save')
     else
       render :edit 
     end

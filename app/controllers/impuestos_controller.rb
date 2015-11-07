@@ -25,29 +25,20 @@ class ImpuestosController < ApplicationController
   # POST /impuestos.json
   def create
     @impuesto = Impuesto.new(impuesto_params)
-
-    respond_to do |format|
-      if @impuesto.save
-        format.html { redirect_to @impuesto, notice: 'Impuesto was successfully created.' }
-        format.json { render :show, status: :created, location: @impuesto }
-      else
-        format.html { render :new }
-        format.json { render json: @impuesto.errors, status: :unprocessable_entity }
-      end
+    if @impuesto.save
+      redirect_to @impuesto, notice: t('action.save')
+    else
+      render :new 
     end
   end
 
   # PATCH/PUT /impuestos/1
   # PATCH/PUT /impuestos/1.json
   def update
-    respond_to do |format|
-      if @impuesto.update(impuesto_params)
-        format.html { redirect_to @impuesto, notice: 'Impuesto was successfully updated.' }
-        format.json { render :show, status: :ok, location: @impuesto }
-      else
-        format.html { render :edit }
-        format.json { render json: @impuesto.errors, status: :unprocessable_entity }
-      end
+    if @impuesto.update(impuesto_params)
+      redirect_to @impuesto, notice: t('action.update')
+    else
+      render :edit
     end
   end
 
@@ -55,10 +46,7 @@ class ImpuestosController < ApplicationController
   # DELETE /impuestos/1.json
   def destroy
     @impuesto.destroy
-    respond_to do |format|
-      format.html { redirect_to impuestos_url, notice: 'Impuesto was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to impuestos_url, notice: t('action.delete')
   end
 
   private

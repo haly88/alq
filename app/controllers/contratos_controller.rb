@@ -30,7 +30,7 @@ class ContratosController < ApplicationController
   def create
     @contrato = Contrato.new(contrato_params)
     if @contrato.save
-      redirect_to @contrato, notice: 'Guardado.'
+      redirect_to @contrato, notice: t('action.save')
     else
       render :new 
     end
@@ -40,7 +40,7 @@ class ContratosController < ApplicationController
   # PATCH/PUT /contratos/1.json
   def update
     if @contrato.update(contrato_params)
-      redirect_to [:edit, @contrato], notice: 'Actualizado.' 
+      redirect_to [:edit, @contrato], notice: t('action.update')
     else
       render :edit 
     end
@@ -50,7 +50,7 @@ class ContratosController < ApplicationController
   # DELETE /contratos/1.json
   def destroy
     @contrato.destroy
-    redirect_to contratos_url, notice: 'Borrado.'
+    redirect_to contratos_url, notice: t('action.delete')
   end
 
   private

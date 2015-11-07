@@ -26,7 +26,7 @@ class InmueblesController < ApplicationController
   def create
     @inmueble = Inmueble.new(inmueble_params)
     if @inmueble.save
-      redirect_to [:edit, @inmueble], notice: 'Inmueble was successfully created.'
+      redirect_to [:edit, @inmueble], notice: t('action.save')
     else
       render :new
     end
@@ -36,7 +36,7 @@ class InmueblesController < ApplicationController
   # PATCH/PUT /inmuebles/1.json
   def update
     if @inmueble.update(inmueble_params)
-      redirect_to [:edit, @inmueble], notice: 'Inmueble was successfully updated.'
+      redirect_to [:edit, @inmueble], notice: t('action.update')
     else
       render :edit
     end
@@ -46,7 +46,7 @@ class InmueblesController < ApplicationController
   # DELETE /inmuebles/1.json
   def destroy
     if @inmueble.destroy
-      redirect_to inmuebles_url, notice: 'Inmueble was successfully destroyed.' 
+      redirect_to inmuebles_url, notice: t('action.delete')
     else
       render :edit 
     end

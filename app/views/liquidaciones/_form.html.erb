@@ -6,14 +6,15 @@
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
       <li class="tab-title"><a data-no-turbolink='true' href="#cuotas">Cuotas</a></li>
+      <li class="tab-title"><a data-no-turbolink='true' href="#impuestos">Impuestos</a></li>
     </ul>
-    <div class="tabs-content">
-      <div class="content active" id="general">
-        <%= f.association :contrato, as: :hidden %>
-        <%= f.association :inquilino, as: :hidden %>
-        <%= f.association :propietario, as: :hidden %>
-        <%= f.input :fecha, as: :hidden %>
-        <% if @contrato %>
+    <% if @contrato %>
+      <div class="tabs-content">
+        <div class="content active" id="general">
+          <%= f.hidden_field :contrato_id %>
+          <%= f.hidden_field :inquilino_id %>
+          <%= f.hidden_field :propietario_id %>
+          <%= f.hidden_field :fecha %>
           <%= render 'contrato_info' %>
           <div class="row">
             <%= f.input :neto %>
@@ -21,12 +22,15 @@
             <%= f.input :comision %>
             <%= f.input :total, readonly: true %>
           </div>
-        <% end %>
+        </div>
+        <div class="content" id="cuotas">
+          <%= render 'contrato_items' %>
+        </div>
+        <div class="content" id="impuestos">
+          <%= render 'contrato_impuestos' %>
+        </div>
       </div>
-      <div class="content" id="cuotas">
-        <%= render 'contrato_items', f: f if @contrato %>
-      </div>
-    </div>
+    <% end %>
   </div>
 <% end %>
 

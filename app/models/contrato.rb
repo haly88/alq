@@ -9,7 +9,7 @@ class Contrato < ActiveRecord::Base
 	accepts_nested_attributes_for :contratos_impuestos, :allow_destroy => true
 
 	belongs_to :inmueble
-	has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo" 
+	has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo"
  	has_many :contratos_propietarios, class_name: "ContratosPersonasTipo"
   has_many :contratos_garantes, class_name: "ContratosPersonasTipo"
 	has_many :inquilinos, through: :contratos_inquilinos
@@ -26,29 +26,29 @@ class Contrato < ActiveRecord::Base
 		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
 	end
 
-	def calcularTotal
+	def calcular_total
     contratos_items.sum(:monto)
   end
 
-  def calcularPagado
+  def calcular_pagado
     liquidaciones.sum(:total)
   end
 
-  def calcularSaldo
-    calcularTotal - calcularPagado
+  def calcular_saldo
+    calcular_total - calcular_pagado
   end
 
-  def calcularTotalAPagar(fecha)
-  	totalAPagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcularPagado
-  	if totalAPagar > 0
-  		totalAPagar
+  def calcular_total_a_pagar(fecha)
+  	total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado
+  	if total_a_pagar > 0
+  		total_a_pagar
   	else
   		0
   	end
   end
 
   def contratos_items_cuotas
-  	pago_total = calcularPagado
+  	pago_total = calcular_pagado
     contratos_items.each do |c|
       if c.monto <= pago_total
       	c.saldado = c.monto
