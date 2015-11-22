@@ -22,7 +22,7 @@
 </div>
 <% end %>
 -->
-<%= form_for @contrato do |f| %>
+<%= simple_form_for @contrato do |f| %>
 <%= f.simple_fields_for :contratos_impuestos, @contrato_impuestos do |f| %>
 	<%= render "contratos_impuestos_fields", :f => f %>
 <% end %>
