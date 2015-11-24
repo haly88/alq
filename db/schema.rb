@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006232135) do
+ActiveRecord::Schema.define(version: 20151124013628) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 20151006232135) do
     t.date     "fecha_desde"
     t.date     "fecha_hasta"
     t.decimal  "monto",       precision: 12, scale: 4
-    t.decimal  "saldo",       precision: 12, scale: 4
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.decimal  "saldo",       precision: 12, scale: 4, default: 0.0
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "contratos_items", ["contrato_id"], name: "index_contratos_items_on_contrato_id"
@@ -132,17 +132,19 @@ ActiveRecord::Schema.define(version: 20151006232135) do
   create_table "liquidaciones", force: :cascade do |t|
     t.integer  "contrato_id"
     t.date     "fecha"
-    t.decimal  "neto",           precision: 12, scale: 4
-    t.decimal  "descuento",      precision: 12, scale: 4
-    t.decimal  "comision",       precision: 12, scale: 4
-    t.decimal  "total",          precision: 12, scale: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.decimal  "neto",              precision: 12, scale: 4
+    t.decimal  "descuento",         precision: 12, scale: 4
+    t.decimal  "comision",          precision: 12, scale: 4
+    t.decimal  "total",             precision: 12, scale: 4
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "inquilino_id"
     t.integer  "propietario_id"
+    t.integer  "contratos_item_id"
   end
 
   add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id"
+  add_index "liquidaciones", ["contratos_item_id"], name: "index_liquidaciones_on_contratos_item_id"
 
   create_table "personas", force: :cascade do |t|
     t.string   "codigo"

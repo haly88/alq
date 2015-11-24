@@ -79,11 +79,14 @@ class LiquidacionesController < ApplicationController
       @contrato_items = @contrato.contratos_items_cuotas
       @contrato_impuestos = @contrato.contratos_impuestos.where('fecha_pago <= ? AND pago = ?', @liquidacion.fecha, false)
     end
+    unless @liquidacion.contratos_item
+      @liquidacion.contratos_item_id = @contrato.contratos_items.order('fecha_desde').find_by('fecha_desde <= ?', @liquidacion.fecha).id
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def liquidacion_params
-    params.require(:liquidacion).permit(:contrato_id, :inquilino_id, :propietario_id,
+    params.require(:liquidacion).permit(:contrato_id, :contratos_item_id, :inquilino_id, :propietario_id,
     :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh)#, contrato_id: [contratos_impuestos_attributes: [:id, :monto, :pago]])
   end
 end

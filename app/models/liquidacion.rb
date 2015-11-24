@@ -4,6 +4,7 @@ class Liquidacion < ActiveRecord::Base
   has_many :contratos_items, :through => :contratos_items_liquidaciones
 
   belongs_to :contrato
+  belongs_to :contratos_item
   belongs_to :inquilino, class_name: "Persona"
   belongs_to :propietario, class_name: "Persona"
 
@@ -13,10 +14,18 @@ class Liquidacion < ActiveRecord::Base
 
   validate :doble_persona, on: :create
 
+  after_save :guardar_saldo
+
   def doble_persona
   	if inquilino_id and propietario_id
   	 		errors.add(:inquilino_id, "Debe liquidar solo 1 persona")
   	end
+  end
+
+  private
+
+  def guardar_saldo
+    
   end
 
 end
