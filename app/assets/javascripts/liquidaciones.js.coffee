@@ -4,53 +4,30 @@
 
 ready = ->
   inquilinos = $('#liquidacion_inquilino_id').html()
-  propietarios = $('#liquidacion_propietario_id').html()
   action_name = $('#action_name').val() 
   $.fn.colorearCuotas()
+  $.fn.calcularCampos()
   if $('#liquidacion_contrato_id').val() != ''
-    $.fn.calcularPersonas(inquilinos, propietarios)
+    $.fn.calcularPersonas(inquilinos)
 
   $('.contratos_impuestos_impuesto').prop('disabled', true).trigger('chosen:updated')
   if action_name == 'edit' or action_name == 'update'
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
-    $('#liquidacion_propietario_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_contrato_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_fecha').prop('disabled', true)
     $('#liquidacion_refresh').hide()
 
-
-  $('#liquidacion_inquilino_id').change ->
-    $('#liquidacion_propietario_id').val('').trigger('chosen:updated')
-    contrato = $('#liquidacion_inquilino_id :selected').closest('optgroup').prop('label')
-    escaped_contrato = contrato.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
-    if contrato
-      contrato = $('#liquidacion_contrato_id option').filter(->
-        $(this).text() == contrato
-      ).prop('selected', true).trigger('chosen:updated')
-
-  $('#liquidacion_propietario_id').change ->
-    $('#liquidacion_inquilino_id').val('').trigger('chosen:updated')
-    contrato = $('#liquidacion_propietario_id :selected').closest('optgroup').prop('label')
-    escaped_contrato = contrato.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
-    if contrato
-      contrato = $('#liquidacion_contrato_id option').filter(->
-        $(this).text() == contrato
-      ).prop('selected', true).trigger('chosen:updated')
-
   $('#liquidacion_contrato_id').change ->
-    $.fn.calcularPersonas(inquilinos, propietarios)
+    $.fn.calcularPersonas(inquilinos)
     
-$.fn.calcularPersonas = (inquilinos, propietarios) ->
+$.fn.calcularPersonas = (inquilinos) ->
   contrato = $('#liquidacion_contrato_id :selected').text()
   escaped_contrato = contrato.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
   options = $(inquilinos).filter("optgroup[label='#{escaped_contrato}']").html()
-  options2 = $(propietarios).filter("optgroup[label='#{escaped_contrato}']").html()
-  if options or options2
+  if options
     $('#liquidacion_inquilino_id').html(options).trigger('chosen:updated')
-    $('#liquidacion_propietario_id').html(options2).val('').trigger('chosen:updated')
   else
     $('#liquidacion_inquilino_id').empty().trigger('chosen:updated')
-    $('#liquidacion_propietario_id').empty().trigger('chosen:updated')
 
   $('#liquidacion_refresh').click -> 
     $('#form_refresh').submit()
@@ -83,6 +60,10 @@ $.fn.colorearCuotas = () ->
           else
             $(v).css('border-color', 'yellow');
 
+$.fn.calcularCampos = () ->
+  totalAPagar = Number($('#contrato_total_a_pagar').val())
+  $('#liquidacion_neto').val(totalAPagar)
+  $('#liquidacion_total').val(totalAPagar)
 
 $(document).on('page:load', ready)
 $(document).ready(ready)

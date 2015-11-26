@@ -7,10 +7,6 @@
     <%= f.label :inquilino_id %>
     <%= f.grouped_collection_select :inquilino_id, @contratos, :inquilinos, :selector_contratos, :id, :nombre, include_blank: true  %>
   </div>
-  <div class="columns medium-2">
-    <%= f.label :propietario_id %>
-    <%= f.grouped_collection_select :propietario_id, @contratos, :propietarios, :selector_contratos, :id, :nombre, include_blank: true  %>
-  </div>
   <!--<%= f.association :propietario, label_method: :nombre, :collection => Persona.where(:es_propietario => true) %> -->
   <%= f.input :fecha %>
   <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh' %>

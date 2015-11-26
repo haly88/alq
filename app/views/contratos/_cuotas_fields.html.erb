@@ -23,7 +23,8 @@
 </div>
 <div class="row">
   <div class="columns medium-2"><%= f.label :fecha_desde %></div>
-  <div class="columns medium-2 end"><%= f.label :monto %></div>
+  <div class="columns medium-2"><%= f.label :monto %></div>
+  <div class="columns medium-2 end"><%= f.label :saldo %></div>
 </div>
 <%= f.simple_fields_for :contratos_items do |f| %>
   <%= render "contratos_items_fields", :f => f %>

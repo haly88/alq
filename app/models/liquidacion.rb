@@ -14,7 +14,7 @@ class Liquidacion < ActiveRecord::Base
 
   validate :doble_persona, on: :create
 
-  after_save :guardar_saldo
+  before_save :guardar_saldo
 
   def doble_persona
   	if inquilino_id and propietario_id
@@ -25,7 +25,8 @@ class Liquidacion < ActiveRecord::Base
   private
 
   def guardar_saldo
-    
+    contratos_item_saldo = self.contratos_item.saldo + self.total
+    self.contratos_item.update_attributes(saldo: contratos_item_saldo)
   end
 
 end
