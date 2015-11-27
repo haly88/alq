@@ -20,18 +20,17 @@
           <div class="row">
             <div class="columns medium-2 end">
               <%= label_tag 'Total a Pagar' %>
-              <%= text_field_tag 'contrato_total_a_pagar', @liquidacion.contratos_item.monto - @liquidacion.contratos_item.saldo, readonly: true, class: "decimal" %>
+              <%= text_field_tag 'contrato_total_a_pagar', @liquidacion.contratos_item.get_a_pagar, readonly: true, class: "decimal" %>
             </div>
           </div>
           <div class="row">
-            <%= f.input :neto, input_html: {value: @liquidacion.contratos_item.monto - @liquidacion.contratos_item.saldo} %>
+            <%= f.input :neto %>
             <%= f.input :descuento %>
             <%= f.input :comision %>
             <%= f.input :total, readonly: true %>
           </div>
         </div>
         <div class="content" id="cuotas">
-          <%= render 'contrato_info' %> 
           <%= render 'contrato_items' %>
         </div>
         <div class="content" id="impuestos">

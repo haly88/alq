@@ -75,7 +75,6 @@ class LiquidacionesController < ApplicationController
       @contrato_total = @contrato.calcular_total
       @contrato_pagado = @contrato.calcular_pagado
       @contrato_saldo = @contrato.calcular_saldo
-      @contrato_total_a_pagar = @contrato.calcular_total_a_pagar(@liquidacion.fecha)
       @contrato_items = @contrato.contratos_items_cuotas
       @contrato_impuestos = @contrato.contratos_impuestos.where('fecha_pago <= ? AND pago = ?', @liquidacion.fecha, false)
     end
@@ -87,6 +86,6 @@ class LiquidacionesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def liquidacion_params
     params.require(:liquidacion).permit(:contrato_id, :contratos_item_id, :inquilino_id, :propietario_id,
-    :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh)#, contrato_id: [contratos_impuestos_attributes: [:id, :monto, :pago]])
+    :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh)
   end
 end

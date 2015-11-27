@@ -2,12 +2,22 @@ class ContratosItem < ActiveRecord::Base
 
 	attr_accessor :saldado
 
-	has_many :contratos_items_liquidaciones
-	has_many :liquidaciones, :through => :contratos_items_liquidaciones
+	has_many :liquidaciones
+
+	#has_many :contratos_items_liquidaciones
+	#has_many :liquidaciones, :through => :contratos_items_liquidaciones
 	
   belongs_to :contrato
 
   validates :monto, :fecha_desde, :presence => true 
   validates :monto, :numericality => {:greater_than => 0}
+
+  def get_pagado
+  	liquidaciones.sum(:total)
+  end
+
+  def get_a_pagar
+  	monto - get_pagado
+  end
 
 end
