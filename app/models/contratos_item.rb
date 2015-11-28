@@ -19,5 +19,4 @@ class ContratosItem < ActiveRecord::Base
   def get_a_pagar
   	monto - get_pagado
   end
-
 end

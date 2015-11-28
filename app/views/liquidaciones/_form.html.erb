@@ -8,7 +8,7 @@
       <li class="tab-title"><a data-no-turbolink='true' href="#cuotas">Cuotas</a></li>
       <li class="tab-title"><a data-no-turbolink='true' href="#impuestos">Impuestos</a></li>
     </ul>
-    <% if @contrato %>
+    <% if @liquidacion.contratos_item_id %>
       <div class="tabs-content">
         <div class="content active" id="general">
           <%= f.hidden_field :contrato_id %>
@@ -31,6 +31,7 @@
           </div>
         </div>
         <div class="content" id="cuotas">
+          <%= render 'contrato_info' %>
           <%= render 'contrato_items' %>
         </div>
         <div class="content" id="impuestos">

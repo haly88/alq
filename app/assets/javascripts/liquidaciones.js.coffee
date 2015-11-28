@@ -6,7 +6,7 @@ ready = ->
   inquilinos = $('#liquidacion_inquilino_id').html()
   action_name = $('#action_name').val() 
   $.fn.colorearCuotas()
-  $.fn.calcularCampos()
+  $.fn.calcularCampos(action_name)
   if $('#liquidacion_contrato_id').val() != ''
     $.fn.calcularPersonas(inquilinos)
 
@@ -47,7 +47,7 @@ $.fn.calcularTotalLiquidacion = () ->
   $('#liquidacion_total').val(total)
 
 $.fn.colorearCuotas = () ->
-  $('.contrato_items_saldado').each (k,v) ->
+  $('.contrato_items_saldo').each (k,v) ->
     saldo = Number($(v).val())
     if saldo == 0
       $(v).css('border-color', 'red');
@@ -60,10 +60,11 @@ $.fn.colorearCuotas = () ->
           else
             $(v).css('border-color', 'yellow');
 
-$.fn.calcularCampos = () ->
-  totalAPagar = Number($('#contrato_total_a_pagar').val())
-  $('#liquidacion_neto').val(totalAPagar)
-  $('#liquidacion_total').val(totalAPagar)
+$.fn.calcularCampos = (action_name) ->
+  if action_name == 'refresh'
+    totalAPagar = Number($('#contrato_total_a_pagar').val())
+    $('#liquidacion_neto').val(totalAPagar)
+    $('#liquidacion_total').val(totalAPagar)
 
 $(document).on('page:load', ready)
 $(document).ready(ready)

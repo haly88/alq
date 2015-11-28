@@ -26,38 +26,38 @@ class Contrato < ActiveRecord::Base
 		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
 	end
 
-	def calcular_total
+	def get_total
     contratos_items.sum(:monto)
   end
 
-  def calcular_pagado
+  def get_pago_total
     liquidaciones.sum(:total)
   end
 
-  def calcular_saldo
-    calcular_total - calcular_pagado
+  def get_saldo_total
+    get_total - get_pago_total
   end
 
-  def calcular_total_a_pagar(fecha)
-  	total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado
-  	if total_a_pagar > 0
-  		total_a_pagar
-  	else
-  		0
-  	end
-  end
+  # def calcular_total_a_pagar(fecha)
+  #   total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado
+  #   if total_a_pagar > 0
+  #     total_a_pagar
+  # 	else
+  # 		0
+  # 	end
+  # end
 
-  def contratos_items_cuotas
-  	pago_total = calcular_pagado
-    contratos_items.each do |c|
-      if c.monto <= pago_total
-      	c.saldado = c.monto
-      elsif pago_total >= 0
-      	c.saldado = pago_total
-      else
-      	c.saldado = 0
-      end
-    pago_total = pago_total - c.monto
-    end
-  end
+  # def contratos_items_cuotas
+  # 	pago_total = calcular_pagado
+  #   contratos_items.each do |c|
+  #     if c.monto <= pago_total
+  #     	c.saldado = c.monto
+  #     elsif pago_total >= 0
+  #     	c.saldado = pago_total
+  #     else
+  #     	c.saldado = 0
+  #     end
+  #   pago_total = pago_total - c.monto
+  #   end
+  # end
 end

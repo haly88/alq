@@ -48,6 +48,7 @@ class LiquidacionesController < ApplicationController
     if @liquidacion.update(liquidacion_params)
       redirect_to [:edit, @liquidacion], notice: t('action.update')
     else
+      set_contrato
       render :edit 
     end
   end
@@ -72,14 +73,17 @@ class LiquidacionesController < ApplicationController
   def set_contrato
     if @liquidacion.contrato
       @contrato = @liquidacion.contrato
-      @contrato_total = @contrato.calcular_total
-      @contrato_pagado = @contrato.calcular_pagado
-      @contrato_saldo = @contrato.calcular_saldo
-      @contrato_items = @contrato.contratos_items_cuotas
+      @contrato_items = @contrato.contratos_items.where('fecha_desde <= ?', @liquidacion.fecha).order('fecha_desde')
       @contrato_impuestos = @contrato.contratos_impuestos.where('fecha_pago <= ? AND pago = ?', @liquidacion.fecha, false)
     end
     unless @liquidacion.contratos_item
-      @liquidacion.contratos_item_id = @contrato.contratos_items.order('fecha_desde').find_by('fecha_desde <= ?', @liquidacion.fecha).id
+      @contrato_items.each do |c|
+        if c.get_a_pagar > 0
+          @contrato_item = c
+          @liquidacion.contratos_item_id = c.id
+          break
+        end
+      end
     end
   end
 

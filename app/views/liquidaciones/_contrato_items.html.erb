@@ -12,7 +12,7 @@
     <%= text_field_tag 'contrato_items_monto', c.monto, readonly: true, class: "decimal contrato_items_monto" %>
 	</div>
 	<div class="columns medium-2 end">
-    <%= text_field_tag 'contrato_items_saldado', c.saldado, readonly: true, class: "decimal contrato_items_saldado" %>
+    <%= text_field_tag 'contrato_items_salddo', c.get_pagado, readonly: true, class: "decimal contrato_items_saldo" %>
 	</div>
 </div>
 <% end %>
