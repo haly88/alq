@@ -10,15 +10,23 @@ ready = ->
   if $('#liquidacion_contrato_id').val() != ''
     $.fn.calcularPersonas(inquilinos)
 
-  $('.contratos_impuestos_impuesto').prop('disabled', true).trigger('chosen:updated')
   if action_name == 'edit' or action_name == 'update'
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_contrato_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_fecha').prop('disabled', true)
     $('#liquidacion_refresh').hide()
+    $('#contrato_total_a_pagar').parent().hide()
 
   $('#liquidacion_contrato_id').change ->
     $.fn.calcularPersonas(inquilinos)
+
+  $('#liquidacion_refresh').click -> 
+    $('#form_refresh').submit()
+
+  $('#liquidacion_neto').change ->
+    $.fn.calcularTotalLiquidacion()
+  $('#liquidacion_descuento').change ->
+    $.fn.calcularTotalLiquidacion()   
     
 $.fn.calcularPersonas = (inquilinos) ->
   contrato = $('#liquidacion_contrato_id :selected').text()
@@ -28,23 +36,6 @@ $.fn.calcularPersonas = (inquilinos) ->
     $('#liquidacion_inquilino_id').html(options).trigger('chosen:updated')
   else
     $('#liquidacion_inquilino_id').empty().trigger('chosen:updated')
-
-  $('#liquidacion_refresh').click -> 
-    $('#form_refresh').submit()
-
-  $('#liquidacion_neto').change ->
-    $.fn.calcularTotalLiquidacion()
-  $('#liquidacion_comision').change ->
-    $.fn.calcularTotalLiquidacion()
-  $('#liquidacion_descuento').change ->
-    $.fn.calcularTotalLiquidacion()
-
-$.fn.calcularTotalLiquidacion = () ->
-  neto = Number($('#liquidacion_neto').val())
-  descuento = Number($('#liquidacion_descuento').val())
-  comision = Number($('#liquidacion_comision').val())
-  total = neto + descuento - comision 
-  $('#liquidacion_total').val(total)
 
 $.fn.colorearCuotas = () ->
   $('.contrato_items_saldo').each (k,v) ->
@@ -65,6 +56,12 @@ $.fn.calcularCampos = (action_name) ->
     totalAPagar = Number($('#contrato_total_a_pagar').val())
     $('#liquidacion_neto').val(totalAPagar)
     $('#liquidacion_total').val(totalAPagar)
+
+$.fn.calcularTotalLiquidacion = () ->
+  neto = Number($('#liquidacion_neto').val())
+  descuento = Number($('#liquidacion_descuento').val())
+  total = neto + descuento
+  $('#liquidacion_total').val(total)
 
 $(document).on('page:load', ready)
 $(document).ready(ready)

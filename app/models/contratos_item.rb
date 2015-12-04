@@ -12,6 +12,8 @@ class ContratosItem < ActiveRecord::Base
   validates :monto, :fecha_desde, :presence => true 
   validates :monto, :numericality => {:greater_than => 0}
 
+	default_scope { order('fecha_desde') }  
+
   def get_pagado
   	liquidaciones.sum(:total)
   end

@@ -14,8 +14,6 @@ class Liquidacion < ActiveRecord::Base
 
   validate :doble_persona, on: :create
 
-  
-
   def doble_persona
   	if inquilino_id and propietario_id
   	 		errors.add(:inquilino_id, "Debe liquidar solo 1 persona")

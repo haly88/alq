@@ -34,8 +34,8 @@ class LiquidacionesController < ApplicationController
   # POST /liquidaciones.json
   def create
     @liquidacion = Liquidacion.new(liquidacion_params)
-    if @liquidacion.save
-      redirect_to @liquidacion, notice: t('action.save')
+    if @liquidacion.save #and @contrato.update(contrato_params)
+      redirect_to [:edit, @liquidacion], notice: t('action.save')
     else
       set_contrato
       render :new 
@@ -45,7 +45,7 @@ class LiquidacionesController < ApplicationController
   # PATCH/PUT /liquidaciones/1
   # PATCH/PUT /liquidaciones/1.json
   def update
-    if @liquidacion.update(liquidacion_params)
+    if @liquidacion.update(liquidacion_params) #and @contrato.update(contrato_params)
       redirect_to [:edit, @liquidacion], notice: t('action.update')
     else
       set_contrato
@@ -64,6 +64,7 @@ class LiquidacionesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_liquidacion
     @liquidacion = Liquidacion.find(params[:id])
+    @contrato = @liquidacion.contrato
   end
 
   def set_contratos
@@ -73,17 +74,8 @@ class LiquidacionesController < ApplicationController
   def set_contrato
     if @liquidacion.contrato
       @contrato = @liquidacion.contrato
-      @contrato_items = @contrato.contratos_items.where('fecha_desde <= ?', @liquidacion.fecha).order('fecha_desde')
-      @contrato_impuestos = @contrato.contratos_impuestos.where('fecha_pago <= ? AND pago = ?', @liquidacion.fecha, false)
-    end
-    unless @liquidacion.contratos_item
-      @contrato_items.each do |c|
-        if c.get_a_pagar > 0
-          @contrato_item = c
-          @liquidacion.contratos_item_id = c.id
-          break
-        end
-      end
+      @contratos_item = @contrato.get_primer_cuota_impaga(@liquidacion.fecha)
+      @liquidacion.contratos_item_id = @contratos_item.id if @contratos_item
     end
   end
 
@@ -91,5 +83,9 @@ class LiquidacionesController < ApplicationController
   def liquidacion_params
     params.require(:liquidacion).permit(:contrato_id, :contratos_item_id, :inquilino_id, :propietario_id,
     :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh)
+  end
+
+  def contrato_params
+    params.require(:contrato).permit(contratos_impuestos_attributes: [:id, :pago])
   end
 end

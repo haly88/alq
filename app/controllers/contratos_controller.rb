@@ -30,7 +30,7 @@ class ContratosController < ApplicationController
   def create
     @contrato = Contrato.new(contrato_params)
     if @contrato.save
-      redirect_to @contrato, notice: t('action.save')
+      redirect_to [:edit, @contrato], notice: t('action.save')
     else
       render :new 
     end

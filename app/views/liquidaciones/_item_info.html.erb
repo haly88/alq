@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="columns medium-2"><h4>Cuota: </h4></div>
+</div>
+
+<table class="display responsive no-wrap">
+  <thead>
+    <tr>
+      <th>Fecha Desde</th>
+      <th>Monto</th>
+      <th>Saldo</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @liquidacion.contratos_item.fecha_desde %></td>
+        <td><%= @liquidacion.contratos_item.monto %></td>
+        <td><%= @liquidacion.contratos_item.get_pagado %></td>
+      </tr>
+  </tbody>
+</table>

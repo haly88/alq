@@ -5,8 +5,6 @@
   <div class="form-inputs">
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
-      <li class="tab-title"><a data-no-turbolink='true' href="#cuotas">Cuotas</a></li>
-      <li class="tab-title"><a data-no-turbolink='true' href="#impuestos">Impuestos</a></li>
     </ul>
     <% if @liquidacion.contratos_item_id %>
       <div class="tabs-content">
@@ -16,7 +14,7 @@
           <%= f.hidden_field :inquilino_id %>
           <%= f.hidden_field :propietario_id %>
           <%= f.hidden_field :fecha %>
-          <%= render 'contrato_item' %>
+          <%= render 'item_info' %>
           <div class="row">
             <div class="columns medium-2 end">
               <%= label_tag 'Total a Pagar' %>
@@ -26,18 +24,10 @@
           <div class="row">
             <%= f.input :neto %>
             <%= f.input :descuento %>
-            <%= f.input :comision %>
             <%= f.input :total, readonly: true %>
           </div>
-        </div>
-        <div class="content" id="cuotas">
-          <%= render 'contrato_info' %>
-          <%= render 'contrato_items' %>
-        </div>
-        <div class="content" id="impuestos">
         </div>
       </div>
     <% end %>
   </div>
 <% end %>
-

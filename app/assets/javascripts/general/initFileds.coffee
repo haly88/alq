@@ -8,6 +8,7 @@ ready = () ->
 	$.fn.initDecimalMask()
 	$.fn.initInputMask()
 	$.fn.initTables()
+	$("#data-alert").delay(2000).fadeOut()
 
 $.fn.initChosen = () ->
 	$('select').chosen
@@ -36,7 +37,7 @@ $.fn.initInputMask = () ->
 	$(":input").inputmask()
 
 $.fn.initTables = () ->
-	$("table").DataTable responsive: true
+	$(".dataTable").DataTable responsive: true
 
 $(document).ready(ready)
 $(document).on('page:load',ready)

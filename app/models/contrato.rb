@@ -22,6 +22,18 @@ class Contrato < ActiveRecord::Base
 	validates :codigo, :inmueble_id, :presence => true 
 	validates :inmueble_id, :uniqueness => true
 
+  def get_primer_cuota_impaga(fecha_desde)
+    contratos_items.find_by_sql([
+      "select contratos_items.*
+      from contratos_items
+      Left join (select contratos_item_id, sum(total) as suma from liquidaciones group by contratos_item_id) Liquidaciones
+      ON contratos_items.id = Liquidaciones.contratos_item_id
+      where contrato_id = ?
+      and fecha_desde <= ?
+      and monto > ifnull(Liquidaciones.suma,0) 
+      order by fecha_desde", self.id, fecha_desde]).first
+  end
+
 	def selector_contratos
 		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
 	end
@@ -37,6 +49,7 @@ class Contrato < ActiveRecord::Base
   def get_saldo_total
     get_total - get_pago_total
   end
+
 
   # def calcular_total_a_pagar(fecha)
   #   total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado
