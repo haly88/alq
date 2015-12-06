@@ -1,33 +1,35 @@
 <%= render 'contrato_refresh' %>
-<%= simple_form_for @liquidacion, html: {id: 'form_principal'} do |f| %>
-  <%= f.error_notification %>
-  <%= f.error :base %>
-  <div class="form-inputs">
-    <ul class="tabs" data-tab>
-      <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
-    </ul>
-    <% if @liquidacion.contratos_item_id %>
-      <div class="tabs-content">
-        <div class="content active" id="general">
-          <%= f.hidden_field :contrato_id %>
-          <%= f.hidden_field :contratos_item_id %>
-          <%= f.hidden_field :inquilino_id %>
-          <%= f.hidden_field :propietario_id %>
-          <%= f.hidden_field :fecha %>
-          <%= render 'item_info' %>
-          <div class="row">
-            <div class="columns medium-2 end">
-              <%= label_tag 'Total a Pagar' %>
-              <%= text_field_tag 'contrato_total_a_pagar', @liquidacion.contratos_item.get_a_pagar, readonly: true, class: "decimal" %>
+<div id="liquidacion_ajax_refresh">
+  <%= simple_form_for @liquidacion, html: {id: 'form_principal'}, remote: true do |f| %>
+    <%= f.error_notification %>
+    <%= f.error :base %>
+    <div class="form-inputs">
+      <ul class="tabs" data-tab>
+        <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+      </ul>
+      <% if @liquidacion.contratos_item_id %>
+        <div class="tabs-content">
+          <div class="content active" id="general">
+            <%= f.hidden_field :contrato_id %>
+            <%= f.hidden_field :contratos_item_id %>
+            <%= f.hidden_field :inquilino_id %>
+            <%= f.hidden_field :propietario_id %>
+            <%= f.hidden_field :fecha %>
+            <%= render 'item_info' %>
+            <div class="row">
+              <div class="columns medium-2 end">
+                <%= label_tag 'Total a Pagar' %>
+                <%= text_field_tag 'contrato_total_a_pagar', @liquidacion.contratos_item.get_a_pagar, readonly: true, class: "decimal" %>
+              </div>
+            </div>
+            <div class="row">
+              <%= f.input :neto %>
+              <%= f.input :descuento %>
+              <%= f.input :total, readonly: true %>
             </div>
           </div>
-          <div class="row">
-            <%= f.input :neto %>
-            <%= f.input :descuento %>
-            <%= f.input :total, readonly: true %>
-          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

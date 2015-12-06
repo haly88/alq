@@ -9,19 +9,32 @@ ready = ->
   $.fn.calcularCampos(action_name)
   if $('#liquidacion_contrato_id').val() != ''
     $.fn.calcularPersonas(inquilinos)
+  $('#guardar').hide()
 
   if action_name == 'edit' or action_name == 'update'
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_contrato_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_fecha').prop('disabled', true)
     $('#liquidacion_refresh').hide()
+    $('#guardar').show()
     $('#contrato_total_a_pagar').parent().hide()
 
   $('#liquidacion_contrato_id').change ->
     $.fn.calcularPersonas(inquilinos)
 
   $('#liquidacion_refresh').click -> 
-    $('#form_refresh').submit()
+    contrato = $('#liquidacion_contrato_id').val()
+    inquilino = $('#liquidacion_inquilino_id').val()
+    fecha = $('#liquidacion_fecha').val()
+    $.ajax({
+      type: "POST",
+      url: "/liquidaciones/refresh #form_principal",
+      data: { liquidacion: { contrato_id: contrato, inquilino_id: inquilino, fecha: fecha }},
+      success:(data) ->
+        console.log(data)
+      error:(data) ->
+        return false
+    })
 
   $('#liquidacion_neto').change ->
     $.fn.calcularTotalLiquidacion()
