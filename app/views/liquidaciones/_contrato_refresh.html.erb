@@ -1,4 +1,4 @@
-<%= simple_form_for @liquidacion, url: refresh_liquidaciones_path, html: {id: 'form_refresh'}, remote: true do |f| %>
+<%= simple_form_for @liquidacion, url: refresh_liquidaciones_path, html: {id: 'form_refresh'} do |f| %>
 <div class="row">
   <div class="columns medium-4">
     <%= f.association :contrato, label_method: :selector_contratos, wrapper: :inline_form %>

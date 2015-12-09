@@ -28,18 +28,36 @@ ready = ->
     fecha = $('#liquidacion_fecha').val()
     $.ajax({
       type: "POST",
-      url: "/liquidaciones/refresh #form_principal",
-      data: { liquidacion: { contrato_id: contrato, inquilino_id: inquilino, fecha: fecha }},
+      url: "/liquidaciones/refresh",
+      data: 
+        liquidacion: 
+          contrato_id: contrato
+          inquilino_id: inquilino 
+          fecha: fecha 
       success:(data) ->
-        console.log(data)
+        html = data
+        html = $(html).find("#liquidacion_ajax_refresh").html()
+        if $(html).is("#form_principal")
+          $("#liquidacion_ajax_refresh").html(html)
+          $.fn.initChosen()
+          $.fn.initDatepicker()
+          $.fn.initDateMask()
+          $.fn.initDateDefault()
+          $.fn.initDecimalMask()
+          $.fn.initInputMask()
+          $.fn.calcularCampos(action_name)
+          $('#guardar').show()
+        else
+          $("#liquidacion_ajax_refresh").html("<h2>No se Encontraron Cuotas</h2>")
+          $('#guardar').hide()
       error:(data) ->
         return false
     })
 
-  $('#liquidacion_neto').change ->
-    $.fn.calcularTotalLiquidacion()
-  $('#liquidacion_descuento').change ->
-    $.fn.calcularTotalLiquidacion()   
+$(document).on 'change', '#liquidacion_neto', () ->
+  $.fn.calcularTotalLiquidacion()
+$(document).on 'change', '#liquidacion_descuento', () ->
+  $.fn.calcularTotalLiquidacion()   
     
 $.fn.calcularPersonas = (inquilinos) ->
   contrato = $('#liquidacion_contrato_id :selected').text()
@@ -65,7 +83,7 @@ $.fn.colorearCuotas = () ->
             $(v).css('border-color', 'yellow');
 
 $.fn.calcularCampos = (action_name) ->
-  if action_name == 'refresh'
+  if action_name != 'edit'
     totalAPagar = Number($('#contrato_total_a_pagar').val())
     $('#liquidacion_neto').val(totalAPagar)
     $('#liquidacion_total').val(totalAPagar)
