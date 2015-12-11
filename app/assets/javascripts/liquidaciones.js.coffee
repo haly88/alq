@@ -15,7 +15,7 @@ ready = ->
     $('#liquidacion_fecha').prop('disabled', true)
     $('#liquidacion_refresh').hide()
     $('#guardar').show()
-    $('#contrato_total_a_pagar').parent().hide()
+    $('#liquidacion_totales').hide()
   if action_name == 'new'
     $('#guardar').hide()
 
@@ -54,10 +54,8 @@ ready = ->
           return false
     
 
-$(document).on 'change', '#liquidacion_neto', () ->
+$(document).on 'change', {'#liquidacion_neto', '#liquidacion_mora', '#liquidacion_descuento'}, () ->
   $.fn.calcularTotalLiquidacion()
-$(document).on 'change', '#liquidacion_descuento', () ->
-  $.fn.calcularTotalLiquidacion()   
     
 $.fn.calcularPersonas = (inquilinos) ->
   contrato = $('#liquidacion_contrato_id :selected').text()
@@ -83,14 +81,17 @@ $.fn.colorearCuotas = () ->
             $(v).css('border-color', 'yellow');
 
 $.fn.calcularCampos = () ->
-  totalAPagar = Number($('#contrato_total_a_pagar').val())
-  $('#liquidacion_neto').val(totalAPagar)
-  $('#liquidacion_total').val(totalAPagar)
+  netoAPagar = Number($('#liquidacion_totales_neto').val())
+  mora = Number($('#liquidacion_totales_mora').val())
+  descuento = Number($('#liquidacion_descuento').val())
+  $('#liquidacion_neto').val(netoAPagar)
+  $('#liquidacion_total').val(netoAPagar + mora + descuento)
 
 $.fn.calcularTotalLiquidacion = () ->
   neto = Number($('#liquidacion_neto').val())
+  mora = Number($('#liquidacion_mora').val())
   descuento = Number($('#liquidacion_descuento').val())
-  total = neto + descuento
+  total = neto + mora + descuento
   $('#liquidacion_total').val(total)
 
 $(document).on('page:load', ready)

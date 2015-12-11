@@ -30,7 +30,7 @@ class Liquidacion < ActiveRecord::Base
     return mora_total
   end
 
-  def get_a_pagar
+  def get_total_a_pagar
     contratos_item.get_a_pagar + get_mora
   end
 
