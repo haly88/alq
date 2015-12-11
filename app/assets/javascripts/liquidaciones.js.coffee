@@ -5,11 +5,9 @@
 ready = ->
   inquilinos = $('#liquidacion_inquilino_id').html()
   action_name = $('#action_name').val() 
-  $.fn.colorearCuotas()
-  $.fn.calcularCampos(action_name)
   if $('#liquidacion_contrato_id').val() != ''
     $.fn.calcularPersonas(inquilinos)
-  $('#guardar').hide()
+  
 
   if action_name == 'edit' or action_name == 'update'
     $('#liquidacion_inquilino_id').prop('disabled', true).trigger('chosen:updated')
@@ -18,6 +16,8 @@ ready = ->
     $('#liquidacion_refresh').hide()
     $('#guardar').show()
     $('#contrato_total_a_pagar').parent().hide()
+  if action_name == 'new'
+    $('#guardar').hide()
 
   $('#liquidacion_contrato_id').change ->
     $.fn.calcularPersonas(inquilinos)
@@ -26,33 +26,33 @@ ready = ->
     contrato = $('#liquidacion_contrato_id').val()
     inquilino = $('#liquidacion_inquilino_id').val()
     fecha = $('#liquidacion_fecha').val()
-    $.ajax({
-      type: "POST",
-      url: "/liquidaciones/refresh",
-      data: 
-        liquidacion: 
-          contrato_id: contrato
-          inquilino_id: inquilino 
-          fecha: fecha 
-      success:(data) ->
-        html = data
-        html = $(html).find("#liquidacion_ajax_refresh").html()
-        if $(html).is("#form_principal")
-          $("#liquidacion_ajax_refresh").html(html)
-          $.fn.initChosen()
-          $.fn.initDatepicker()
-          $.fn.initDateMask()
-          $.fn.initDateDefault()
-          $.fn.initDecimalMask()
-          $.fn.initInputMask()
-          $.fn.calcularCampos(action_name)
-          $('#guardar').show()
-        else
-          $("#liquidacion_ajax_refresh").html("<h2>No se Encontraron Cuotas</h2>")
-          $('#guardar').hide()
-      error:(data) ->
-        return false
-    })
+    $.ajax
+        type: "POST",
+        url: "/liquidaciones/refresh",
+        data: 
+          liquidacion: 
+            contrato_id: contrato
+            inquilino_id: inquilino 
+            fecha: fecha 
+        success:(data) ->
+          html = data
+          html = $(html).find("#liquidacion_ajax_refresh").html()
+          if $(html).is("#form_principal")
+            $("#liquidacion_ajax_refresh").html(html)
+            $.fn.initChosen()
+            $.fn.initDatepicker()
+            $.fn.initDateMask()
+            $.fn.initDateDefault()
+            $.fn.initDecimalMask()
+            $.fn.initInputMask()
+            $.fn.calcularCampos()
+            $('#guardar').show()
+          else
+            $("#liquidacion_ajax_refresh").html("<h2>No se Encontraron Cuotas</h2>")
+            $('#guardar').hide()
+        error:(data) ->
+          return false
+    
 
 $(document).on 'change', '#liquidacion_neto', () ->
   $.fn.calcularTotalLiquidacion()
@@ -82,11 +82,10 @@ $.fn.colorearCuotas = () ->
           else
             $(v).css('border-color', 'yellow');
 
-$.fn.calcularCampos = (action_name) ->
-  if action_name != 'edit'
-    totalAPagar = Number($('#contrato_total_a_pagar').val())
-    $('#liquidacion_neto').val(totalAPagar)
-    $('#liquidacion_total').val(totalAPagar)
+$.fn.calcularCampos = () ->
+  totalAPagar = Number($('#contrato_total_a_pagar').val())
+  $('#liquidacion_neto').val(totalAPagar)
+  $('#liquidacion_total').val(totalAPagar)
 
 $.fn.calcularTotalLiquidacion = () ->
   neto = Number($('#liquidacion_neto').val())

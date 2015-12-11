@@ -8,7 +8,6 @@
       <%= f.hidden_field :contrato_id %>
       <%= f.hidden_field :contratos_item_id %>
       <%= f.hidden_field :inquilino_id %>
-      <%= f.hidden_field :propietario_id %>
       <%= f.hidden_field :fecha %>
       <%= render 'item_info' %>
       <div class="row">
@@ -19,6 +18,7 @@
       </div>
       <div class="row">
         <%= f.input :neto %>
+        <%= f.input :mora %>
         <%= f.input :descuento %>
         <%= f.input :total, readonly: true %>
       </div>

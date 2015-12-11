@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124013628) do
+ActiveRecord::Schema.define(version: 20151209195648) do
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -83,8 +83,14 @@ ActiveRecord::Schema.define(version: 20151124013628) do
     t.string   "depto"
     t.string   "telefono"
     t.string   "email"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "mora_fija_dia"
+    t.decimal  "mora_fija_monto", precision: 12, scale: 4
+    t.decimal  "mora_fija_porc",  precision: 12, scale: 4
+    t.integer  "mora_var_dia"
+    t.decimal  "mora_var_monto",  precision: 12, scale: 4
+    t.decimal  "mora_var_porc",   precision: 12, scale: 4
   end
 
   create_table "impuestos", force: :cascade do |t|
@@ -134,13 +140,12 @@ ActiveRecord::Schema.define(version: 20151124013628) do
     t.date     "fecha"
     t.decimal  "neto",              precision: 12, scale: 4
     t.decimal  "descuento",         precision: 12, scale: 4
-    t.decimal  "comision",          precision: 12, scale: 4
     t.decimal  "total",             precision: 12, scale: 4
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.integer  "inquilino_id"
-    t.integer  "propietario_id"
     t.integer  "contratos_item_id"
+    t.decimal  "mora",              precision: 12, scale: 4
   end
 
   add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id"

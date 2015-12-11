@@ -34,7 +34,7 @@ class LiquidacionesController < ApplicationController
   # POST /liquidaciones.json
   def create
     @liquidacion = Liquidacion.new(liquidacion_params)
-    if @liquidacion.save #and @contrato.update(contrato_params)
+    if @liquidacion.save 
       redirect_to [:edit, @liquidacion], notice: t('action.save')
     else
       set_contrato
@@ -45,7 +45,7 @@ class LiquidacionesController < ApplicationController
   # PATCH/PUT /liquidaciones/1
   # PATCH/PUT /liquidaciones/1.json
   def update
-    if @liquidacion.update(liquidacion_params) #and @contrato.update(contrato_params)
+    if @liquidacion.update(liquidacion_params) 
       redirect_to [:edit, @liquidacion], notice: t('action.update')
     else
       set_contrato
@@ -76,16 +76,13 @@ class LiquidacionesController < ApplicationController
       @contrato = @liquidacion.contrato
       @contratos_item = @contrato.get_primer_cuota_impaga(@liquidacion.fecha)
       @liquidacion.contratos_item_id = @contratos_item.id if @contratos_item
+      @liquidacion.mora = @liquidacion.get_mora
     end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def liquidacion_params
-    params.require(:liquidacion).permit(:contrato_id, :contratos_item_id, :inquilino_id, :propietario_id,
-    :fecha, :neto, :descuento, :comision, :total, :liquidacion_refresh)
-  end
-
-  def contrato_params
-    params.require(:contrato).permit(contratos_impuestos_attributes: [:id, :pago])
+    params.require(:liquidacion).permit(:contrato_id, :contratos_item_id, :inquilino_id, :fecha, :neto, :descuento,
+    :mora, :total)
   end
 end

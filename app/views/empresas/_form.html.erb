@@ -5,6 +5,7 @@
   <div class="form-inputs">
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
+      <li class="tab-title"><a data-no-turbolink='true' href="#liquidacion">Liquidacion</a></li>
     </ul>
     <div class="tabs-content">
       <div class="content active" id="general">
@@ -20,6 +21,42 @@
         <div class="row">
           <%= f.input :telefono %>
           <%= f.input :email %>
+        </div>
+      </div>
+      <div class="content" id="liquidacion">
+        <div class="row">
+          <div class="column medium-12"><h3>Mora Fija</h3></div>
+        </div>
+        <div class="row">
+          <div class="column medium-2">
+            <%= label_tag "Dia Desde" %>
+            <%= f.text_field :mora_fija_dia, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 31"} %>
+          </div>
+          <div class="column medium-2">
+            <%= label_tag "Monto" %>
+            <%= f.text_field :mora_fija_monto, class: 'decimal' %>
+          </div>
+          <div class="column medium-2 end">
+            <%= label_tag "Porcentaje" %>
+            <%= f.text_field :mora_fija_porc, data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999, 'autoUnmask' : true"} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column medium-12"><h3>Mora Variable</h3></div>
+        </div>
+        <div class="row">
+          <div class="column medium-2">
+            <%= label_tag "Dia Desde" %>
+            <%= f.text_field :mora_var_dia, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'max': 31"} %>
+          </div>
+          <div class="column medium-2">
+            <%= label_tag "Monto" %>
+            <%= f.text_field :mora_var_monto, class: 'decimal' %>
+          </div>
+          <div class="column medium-2 end">
+            <%= label_tag "Porcentaje" %>
+            <%= f.text_field :mora_var_porc, data: {inputmask:"'alias': 'numeric', 'digits': 2, 'suffix': '%', 'max': 999, 'autoUnmask' : true"} %>
+          </div>
         </div>
       </div>
     </div>

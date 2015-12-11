@@ -1,23 +1,37 @@
 class Liquidacion < ActiveRecord::Base
 
-  has_many :contratos_items_liquidaciones
-  has_many :contratos_items, :through => :contratos_items_liquidaciones
-
   belongs_to :contrato
   belongs_to :contratos_item
   belongs_to :inquilino, class_name: "Persona"
-  belongs_to :propietario, class_name: "Persona"
 
   validates :contrato, :presence => true, on: :create
   validates :fecha, :presence => true
   validates :total, :numericality => {:greater_than => 0}
 
-  validate :doble_persona, on: :create
+  validate :pago_menor_a_total
 
-  def doble_persona
-  	if inquilino_id and propietario_id
-  	 		errors.add(:inquilino_id, "Debe liquidar solo 1 persona")
-  	end
+  def pago_menor_a_total
+    if total > contratos_item.get_a_pagar
+      errors.add(:total, "No puede superar el total a pagar")
+    end
+  end
+
+  def get_mora
+    empresa = Empresa.find(1)
+    get_a_pagar = contratos_item.get_a_pagar
+    if fecha.day > empresa.mora_fija_dia
+      mora_total = empresa.mora_fija_monto
+      mora_total += get_a_pagar * (empresa.mora_fija_porc / 100)
+    end
+    if fecha.day > empresa.mora_var_dia
+      mora_total += (fecha.day - empresa.mora_var_dia) * empresa.mora_var_monto
+      mora_total += (fecha.day - empresa.mora_var_dia) * (get_a_pagar * (empresa.mora_var_porc / 100))
+    end
+    return mora_total
+  end
+
+  def get_a_pagar
+    contratos_item.get_a_pagar + get_mora
   end
 
   # private
