@@ -15,7 +15,7 @@ class ContratosItem < ActiveRecord::Base
 	default_scope { order('fecha_desde') }  
 
   def get_pagado
-  	liquidaciones.sum(:total)
+  	liquidaciones.sum(:neto) + liquidaciones.sum(:descuento)
   end
 
   def get_a_pagar

@@ -11,7 +11,7 @@ class Liquidacion < ActiveRecord::Base
   validate :pago_menor_a_total
 
   def pago_menor_a_total
-    if total > contratos_item.get_a_pagar
+    if total > get_total_a_pagar
       errors.add(:total, "No puede superar el total a pagar")
     end
   end

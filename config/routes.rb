@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :empresas, only: [:update, :edit]
-  resources :liquidaciones, shallow: true do
+  resources :liquidaciones do
     collection do
-      post 'refresh'
+      post :refresh
     end
   end
   resources :impuestos

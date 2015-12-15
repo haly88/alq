@@ -76,7 +76,6 @@ class LiquidacionesController < ApplicationController
       @contrato = @liquidacion.contrato
       @contratos_item = @contrato.get_primer_cuota_impaga(@liquidacion.fecha)
       @liquidacion.contratos_item_id = @contratos_item.id if @contratos_item
-      @liquidacion.mora = @liquidacion.get_mora
     end
   end
 

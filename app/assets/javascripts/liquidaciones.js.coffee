@@ -14,7 +14,6 @@ ready = ->
     $('#liquidacion_contrato_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_fecha').prop('disabled', true)
     $('#liquidacion_refresh').hide()
-    $('#guardar').show()
     $('#liquidacion_totales').hide()
   if action_name == 'new'
     $('#guardar').hide()
