@@ -14,7 +14,6 @@ ready = ->
     $('#liquidacion_contrato_id').prop('disabled', true).trigger('chosen:updated')
     $('#liquidacion_fecha').prop('disabled', true)
     $('#liquidacion_refresh').hide()
-    $('#liquidacion_totales').hide()
   if action_name == 'new'
     $('#guardar').hide()
 
@@ -44,7 +43,7 @@ ready = ->
             $.fn.initDateDefault()
             $.fn.initDecimalMask()
             $.fn.initInputMask()
-            $.fn.calcularCampos()
+            $.fn.calcularTotalLiquidacion() 
             $('#guardar').show()
           else
             $("#liquidacion_ajax_refresh").html("<h2>No se Encontraron Cuotas</h2>")
@@ -79,18 +78,11 @@ $.fn.colorearCuotas = () ->
           else
             $(v).css('border-color', 'yellow');
 
-$.fn.calcularCampos = () ->
-  netoAPagar = Number($('#liquidacion_totales_neto').val())
-  mora = Number($('#liquidacion_totales_mora').val())
-  descuento = Number($('#liquidacion_descuento').val())
-  $('#liquidacion_neto').val(netoAPagar)
-  $('#liquidacion_total').val(netoAPagar + mora + descuento)
-
 $.fn.calcularTotalLiquidacion = () ->
   neto = Number($('#liquidacion_neto').val())
   mora = Number($('#liquidacion_mora').val())
   descuento = Number($('#liquidacion_descuento').val())
-  total = neto + mora + descuento
+  total = neto + mora - descuento
   $('#liquidacion_total').val(total)
 
 $(document).on('page:load', ready)

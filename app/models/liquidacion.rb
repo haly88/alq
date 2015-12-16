@@ -8,17 +8,25 @@ class Liquidacion < ActiveRecord::Base
   validates :fecha, :presence => true
   validates :total, :numericality => {:greater_than => 0}
 
-  validate :pago_menor_a_total
+  validate :valor_pago_create, on: :create
+  validate :valor_pago_update, on: :update
 
-  def pago_menor_a_total
-    if total > get_total_a_pagar
-      errors.add(:total, "No puede superar el total a pagar")
+  def valor_pago_create
+    if neto > contratos_item.get_a_pagar
+      errors.add(:neto, "No puede superar el pendiente de la cuota")
+    end
+  end
+
+  def valor_pago_update
+    if neto > contratos_item.get_a_pagar + neto
+      errors.add(:neto, "No puede superar el pendiente de la cuota")
     end
   end
 
   def get_mora
     empresa = Empresa.find(1)
     get_a_pagar = contratos_item.get_a_pagar
+    mora_total = 0
     if fecha.day > empresa.mora_fija_dia
       mora_total = empresa.mora_fija_monto
       mora_total += get_a_pagar * (empresa.mora_fija_porc / 100)
@@ -30,9 +38,6 @@ class Liquidacion < ActiveRecord::Base
     return mora_total
   end
 
-  def get_total_a_pagar
-    contratos_item.get_a_pagar + get_mora
-  end
 
   # private
 

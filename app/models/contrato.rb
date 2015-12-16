@@ -26,7 +26,7 @@ class Contrato < ActiveRecord::Base
     contratos_items.find_by_sql([
       "select contratos_items.*
       from contratos_items
-      Left join (select contratos_item_id, sum(total) as suma from liquidaciones group by contratos_item_id) Liquidaciones
+      Left join (select contratos_item_id, sum(neto) as suma from liquidaciones group by contratos_item_id) Liquidaciones
       ON contratos_items.id = Liquidaciones.contratos_item_id
       where contrato_id = ?
       and fecha_desde <= ?
@@ -38,17 +38,6 @@ class Contrato < ActiveRecord::Base
 		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
 	end
 
-	def get_total
-    contratos_items.sum(:monto)
-  end
-
-  def get_pago_total
-    liquidaciones.sum(:total)
-  end
-
-  def get_saldo_total
-    get_total - get_pago_total
-  end
 
 
   # def calcular_total_a_pagar(fecha)

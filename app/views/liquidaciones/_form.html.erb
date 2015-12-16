@@ -10,25 +10,11 @@
       <%= f.hidden_field :inquilino_id %>
       <%= f.hidden_field :fecha %>
       <%= render 'item_info' %>
-      <div class="row" id="liquidacion_totales">
-        <div class="columns medium-2">
-          <%= label_tag 'Neto a Pagar' %>
-          <%= text_field_tag 'liquidacion_totales_neto', @liquidacion.contratos_item.get_a_pagar, readonly: true, class: "decimal" %>
-        </div>
-        <div class="columns medium-2">
-          <%= label_tag 'Mora' %>
-          <%= text_field_tag 'liquidacion_totales_mora', @liquidacion.get_mora, readonly: true, class: "decimal" %>
-        </div>
-        <div class="columns medium-2 end">
-          <%= label_tag 'Total a Pagar' %>
-          <%= text_field_tag 'liquidacion_totales_total', @liquidacion.get_total_a_pagar, readonly: true, class: "decimal" %>
-        </div>
-      </div>
       <div class="row">
         <%= f.input :neto %>
         <%= f.input :mora %>
         <%= f.input :descuento %>
-        <%= f.input :total, readonly: true %>
+        <%= f.input :total, readonly: true, label: 'Total a Pagar' %>
       </div>
     </div>
   <% end %>

@@ -6,7 +6,8 @@
         <tr>
           <th>Fecha Desde</th>
           <th>Monto</th>
-          <th>Saldo</th>
+          <th>Pago</th>
+          <th>Pendiente</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +15,7 @@
             <td><%= @liquidacion.contratos_item.fecha_desde %></td>
             <td><%= @liquidacion.contratos_item.monto %></td>
             <td><%= @liquidacion.contratos_item.get_pagado %></td>
+            <td><%= @liquidacion.contratos_item.get_a_pagar %></td>
           </tr>
       </tbody>
     </table>

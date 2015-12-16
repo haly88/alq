@@ -27,7 +27,6 @@ class LiquidacionesController < ApplicationController
 
   # GET /liquidaciones/1/edit
   def edit
-    set_contrato
   end
 
   # POST /liquidaciones
@@ -37,7 +36,6 @@ class LiquidacionesController < ApplicationController
     if @liquidacion.save 
       redirect_to [:edit, @liquidacion], notice: t('action.save')
     else
-      set_contrato
       render :new 
     end
   end
@@ -48,7 +46,6 @@ class LiquidacionesController < ApplicationController
     if @liquidacion.update(liquidacion_params) 
       redirect_to [:edit, @liquidacion], notice: t('action.update')
     else
-      set_contrato
       render :edit 
     end
   end
@@ -75,7 +72,11 @@ class LiquidacionesController < ApplicationController
     if @liquidacion.contrato
       @contrato = @liquidacion.contrato
       @contratos_item = @contrato.get_primer_cuota_impaga(@liquidacion.fecha)
-      @liquidacion.contratos_item_id = @contratos_item.id if @contratos_item
+      if @contratos_item
+        @liquidacion.contratos_item_id = @contratos_item.id 
+        @liquidacion.neto = @contratos_item.get_a_pagar
+        @liquidacion.mora = @liquidacion.get_mora
+      end
     end
   end
 

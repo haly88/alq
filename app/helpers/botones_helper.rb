@@ -24,4 +24,8 @@ module BotonesHelper
 	def boton_cobrar
 		link_to '<i class="fa fa-2x fa-credit-card"></i>'.html_safe, new_liquidacion_path(contrato: @contrato), :title => "Cobrar"
 	end
+
+	def boton_impuestos
+		link_to '<i class="fa fa-2x fa-balance-scale"></i>'.html_safe, edit_contrato_path(contrato: @liquidacion.contrato), :title => "Impuestos"
+	end
 end
