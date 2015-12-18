@@ -18,7 +18,7 @@ ready = ->
     if cuotas and fechaInicio and montoInicio
       for [1..cuotas]
         contador = contador + 1
-        time = new Date().getTime()
+        time = new Date().getTime() + contador
         regexp = new RegExp($('.content.active .add_fields').data('id'), 'g')
         $('.content.active .add_fields').before($('.content.active .add_fields').data('fields').replace(regexp, time))
         $('.contratos_items_fecha_desde:last').val($.datepicker.formatDate("dd/mm/yy", fechaInicio))
@@ -49,7 +49,7 @@ ready = ->
       fechaInicio = new Date(fechaInicio.setMonth(fechaInicio.getMonth()+1))
       if contador == cada
         contador = 0
-        time = new Date().getTime()
+        time = new Date().getTime() + contador
         regexp = new RegExp($('.content.active .add_fields').data('id'), 'g')
         $('.content.active .add_fields').before($('.content.active .add_fields').data('fields').replace(regexp, time))
         $('.contratos_impuestos_fecha_pago:last').val($.datepicker.formatDate("dd/mm/yy", fechaInicio))

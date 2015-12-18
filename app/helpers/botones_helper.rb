@@ -26,6 +26,6 @@ module BotonesHelper
 	end
 
 	def boton_impuestos
-		link_to '<i class="fa fa-2x fa-balance-scale"></i>'.html_safe, edit_contrato_path(contrato: @liquidacion.contrato), :title => "Impuestos"
+		link_to '<i class="fa fa-2x fa-balance-scale"></i>'.html_safe, '#', :title => "Impuestos", :id => "impuestos", "data-reveal-id" => "impuestos_modal"
 	end
 end
