@@ -22,6 +22,8 @@ class Contrato < ActiveRecord::Base
 	validates :codigo, :inmueble_id, :presence => true 
 	validates :inmueble_id, :uniqueness => true
 
+  validate :cuotas_liquidadas
+
   def get_primer_cuota_impaga(fecha_desde)
     contratos_items.find_by_sql([
       "select contratos_items.*
@@ -38,7 +40,15 @@ class Contrato < ActiveRecord::Base
 		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
 	end
 
+  private
 
+  def cuotas_liquidadas
+    contratos_items.each do |c|
+      if c.liquidaciones.any?
+        errors.add(:base, "Las cuotas se encuentran liquidadas.")
+      end
+    end
+  end
 
   # def calcular_total_a_pagar(fecha)
   #   total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado

@@ -9,7 +9,8 @@ class ContratosItem < ActiveRecord::Base
   validates :monto, :fecha_desde, :presence => true 
   validates :monto, :numericality => {:greater_than => 0}
 
-  validate :sin_uso, on: :update
+  validate :liquidado, on: :update
+  before_destroy :liquidado
 
 	default_scope { order('fecha_desde') }  
 
@@ -21,9 +22,12 @@ class ContratosItem < ActiveRecord::Base
   	monto - get_pagado
   end
 
-  def sin_uso
+  private
+
+  def liquidado
     if liquidaciones.any?
       errors.add(:fecha_desde, "La cuota se encuentra liquidada.")
+      return false
     end
   end
 end
