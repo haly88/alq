@@ -1,6 +1,6 @@
 class LiquidacionesController < ApplicationController
   before_action :set_liquidacion, only: [:show, :edit, :update, :destroy]
-  before_action :set_contratos, only: [:new, :edit, :update, :create, :refresh]
+  before_action :set_globales
 
   # GET /liquidaciones
   # GET /liquidaciones.json
@@ -64,8 +64,9 @@ class LiquidacionesController < ApplicationController
     @contrato = @liquidacion.contrato
   end
 
-  def set_contratos
+  def set_globales
     @contratos = Contrato.order(:nombre)
+    @empresa = Empresa.find(1)
   end
 
   def set_contrato

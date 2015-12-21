@@ -1,0 +1,12 @@
+/*
+ *= require print
+ */
+
+@media print { 
+ /* All your print styles go here */
+  .footer, .top-bar, .panelAcciones {
+    display: none; }
+
+  #action_name {
+  	display: block; }
+}
