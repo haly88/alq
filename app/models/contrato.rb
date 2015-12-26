@@ -3,6 +3,8 @@ class Contrato < ActiveRecord::Base
 	attr_accessor :fecha_inicio, :cuotas, :monto_inicio, :incremento, :cada, 
   :fecha_pago_refresh, :impuesto_refresh, :cuotas_impuestos_refresh, :cada_impuestos_refresh
 
+  has_many :comentarios, as: :comentable
+
 	has_many :liquidaciones, :dependent => :destroy
 
 	has_many :contratos_impuestos, :dependent => :destroy
@@ -44,8 +46,9 @@ class Contrato < ActiveRecord::Base
 
   def cuotas_liquidadas
     contratos_items.each do |c|
-      if c.liquidaciones.any?
+      if c.errors.any?
         errors.add(:base, "Las cuotas se encuentran liquidadas.")
+        break
       end
     end
   end

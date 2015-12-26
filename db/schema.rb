@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209195648) do
+ActiveRecord::Schema.define(version: 20151223133020) do
+
+  create_table "comentarios", force: :cascade do |t|
+    t.text     "descripcion"
+    t.integer  "comentable_id"
+    t.string   "comentable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "comentarios", ["comentable_id", "comentable_type"], name: "index_comentarios_on_comentable_id_and_comentable_type"
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"

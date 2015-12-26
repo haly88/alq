@@ -1,5 +1,7 @@
 class Liquidacion < ActiveRecord::Base
 
+  has_many :comentarios, as: :comentable
+
   belongs_to :contrato
   belongs_to :contratos_item
   belongs_to :inquilino, class_name: "Persona"

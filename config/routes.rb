@@ -1,15 +1,26 @@
 Rails.application.routes.draw do
+  get 'comentarios/index'
+
+  get 'comentarios/new'
+
   resources :empresas, only: [:update, :edit]
   resources :liquidaciones do
     collection do
       post :refresh
     end
+    resources :comentarios
   end
   resources :impuestos
-  resources :inmuebles
+  resources :inmuebles do
+    resources :comentarios
+  end
   resources :contratos_items
-  resources :contratos
-  resources :personas
+  resources :contratos do
+    resources :comentarios
+  end
+  resources :personas do
+    resources :comentarios
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
