@@ -34,7 +34,7 @@ class Contrato < ActiveRecord::Base
       ON contratos_items.id = Liquidaciones.contratos_item_id
       where contrato_id = ?
       and fecha_desde <= ?
-      and monto > ifnull(Liquidaciones.suma,0) 
+      and monto > COALESCE(Liquidaciones.suma,0) 
       order by fecha_desde", self.id, fecha_desde]).first
   end
 
