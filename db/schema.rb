@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223133020) do
+ActiveRecord::Schema.define(version: 20151229201130) do
 
   create_table "comentarios", force: :cascade do |t|
     t.text     "descripcion"
@@ -93,14 +93,14 @@ ActiveRecord::Schema.define(version: 20151223133020) do
     t.string   "depto"
     t.string   "telefono"
     t.string   "email"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.integer  "mora_fija_dia"
-    t.decimal  "mora_fija_monto", precision: 12, scale: 4
-    t.decimal  "mora_fija_porc",  precision: 12, scale: 4
-    t.integer  "mora_var_dia"
-    t.decimal  "mora_var_monto",  precision: 12, scale: 4
-    t.decimal  "mora_var_porc",   precision: 12, scale: 4
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.integer  "mora_fija_dia",                            default: 0,   null: false
+    t.decimal  "mora_fija_monto", precision: 12, scale: 4, default: 0.0, null: false
+    t.decimal  "mora_fija_porc",  precision: 12, scale: 4, default: 0.0, null: false
+    t.integer  "mora_var_dia",                             default: 0,   null: false
+    t.decimal  "mora_var_monto",  precision: 12, scale: 4, default: 0.0, null: false
+    t.decimal  "mora_var_porc",   precision: 12, scale: 4, default: 0.0, null: false
   end
 
   create_table "impuestos", force: :cascade do |t|
