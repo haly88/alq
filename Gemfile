@@ -56,3 +56,10 @@ gem 'compass-rails', '~> 2.0.4'
 gem 'jquery-ui-rails'
 gem 'font-awesome-sass', '4.5.0.0'
 gem 'jquery-datatables-rails', '~> 3.3.0'
+
+#Gems para Heroku
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+  gem 'puma'
+end
