@@ -3,6 +3,7 @@ class ComentariosController < ApplicationController
 
   def index
   	@comentarios = @comentable.comentarios
+    @comentario = @comentable.comentarios.new
   end
 
    def new

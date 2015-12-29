@@ -1,5 +1,5 @@
-<div class="row">
-	<%= @comentarios.each do |c| %>
-		<%= c.descripcion %>
-	<% end %>
-</div>
+<% @comentarios.each do |comentario| %>
+	<%= comentario.descripcion %></br>
+<% end %>
+
+

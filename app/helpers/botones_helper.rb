@@ -32,4 +32,8 @@ module BotonesHelper
 	def boton_imprimir
 	 	link_to '<i class="fa fa-2x fa-print"></i>'.html_safe, '#', :onclick => 'window.print();return false;'
 	 end 
+
+	 def boton_comentarios
+		link_to '<i class="fa fa-2x fa-comment"></i>'.html_safe, '#', :title => "Comentarios", :id => "comentarios", "data-reveal-id" => "comentarios_modal"
+	end
 end
