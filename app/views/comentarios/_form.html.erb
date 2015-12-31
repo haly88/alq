@@ -1,4 +1,12 @@
-<%= form_for [@comentable, @comentario] do |f| %>
-	<%= f.text_area :descripcion %></br>
-	<%= f.submit %>
+<hr>
+<%= form_for [@comentable, @comentario], html: {id: 'form_comentarios'}, remote: true do |f| %>
+	<div class="row">
+		<div class="columns medium-11">
+			<%= f.label :descripcion, "Nuevo Comentario" %>
+			<%= f.text_area :descripcion %>
+		</div>
+		<div class="columns medium-1">
+			<%= link_to '<i class="fa fa-2x fa-floppy-o"></i>'.html_safe, '#', title: "Guardar", id: "comentarios_guardar" %>
+		</div>
+	</div>
 <% end %>

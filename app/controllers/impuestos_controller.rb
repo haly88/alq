@@ -26,7 +26,7 @@ class ImpuestosController < ApplicationController
   def create
     @impuesto = Impuesto.new(impuesto_params)
     if @impuesto.save
-      redirect_to @impuesto, notice: t('action.save')
+      redirect_to [:edit, @impuesto], notice: t('action.save')
     else
       render :new 
     end
@@ -36,7 +36,7 @@ class ImpuestosController < ApplicationController
   # PATCH/PUT /impuestos/1.json
   def update
     if @impuesto.update(impuesto_params)
-      redirect_to @impuesto, notice: t('action.update')
+      redirect_to [:edit, @impuesto], notice: t('action.update')
     else
       render :edit
     end

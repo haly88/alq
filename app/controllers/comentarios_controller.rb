@@ -3,10 +3,10 @@ class ComentariosController < ApplicationController
 
   def index
   	@comentarios = @comentable.comentarios
-    @comentario = @comentable.comentarios.new
+    @comentario = Comentario.new
   end
 
-   def new
+  def new
     @comentario = @comentable.comentarios.new
   end
 
@@ -14,10 +14,22 @@ class ComentariosController < ApplicationController
   # POST /locations.json
   def create
     @comentario = @comentable.comentarios.new(comentario_params)
-    if @comentario.save
-      redirect_to [@comentable, :comentarios], notice: t('action.save')
-    else
-      render :new 
+    respond_to do |format|
+      if @comentario.save
+        format.html { redirect_to [@comentable, :comentarios], notice: t('action.save') }
+        format.js
+      else
+        format.html { render :new }
+        format.js
+      end
+    end
+  end
+
+  def destroy
+    @comentario = @comentable.comentarios.find(params[:id])
+    @comentario.destroy
+    respond_to do |format|
+      format.js
     end
   end
 

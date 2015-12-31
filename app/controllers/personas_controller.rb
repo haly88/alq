@@ -26,7 +26,7 @@ class PersonasController < ApplicationController
   def create
     @persona = Persona.new(persona_params)
     if @persona.save
-      redirect_to @persona, notice: t('action.save')
+      redirect_to [:edit, @persona], notice: t('action.save')
     else
       render :new
     end
@@ -36,7 +36,7 @@ class PersonasController < ApplicationController
   # PATCH/PUT /personas/1.json
   def update
     if @persona.update(persona_params)
-      redirect_to @persona, notice: t('action.update')
+      redirect_to [:edit, @persona], notice: t('action.update')
     else
       render :edit
     end

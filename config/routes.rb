@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'comentarios/index'
-
-  get 'comentarios/new'
 
   resources :empresas, only: [:update, :edit]
   resources :liquidaciones do
