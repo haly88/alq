@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151229201130) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comentarios", force: :cascade do |t|
     t.text     "descripcion"
     t.integer  "comentable_id"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "comentarios", ["comentable_id", "comentable_type"], name: "index_comentarios_on_comentable_id_and_comentable_type"
+  add_index "comentarios", ["comentable_id", "comentable_type"], name: "index_comentarios_on_comentable_id_and_comentable_type", using: :btree
 
   create_table "contratos", force: :cascade do |t|
     t.string   "codigo"
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.integer  "inmueble_id"
   end
 
-  add_index "contratos", ["inmueble_id"], name: "index_contratos_on_inmueble_id"
+  add_index "contratos", ["inmueble_id"], name: "index_contratos_on_inmueble_id", using: :btree
 
   create_table "contratos_impuestos", force: :cascade do |t|
     t.integer  "contrato_id"
@@ -48,8 +51,8 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.datetime "updated_at",                                 null: false
   end
 
-  add_index "contratos_impuestos", ["contrato_id"], name: "index_contratos_impuestos_on_contrato_id"
-  add_index "contratos_impuestos", ["impuesto_id"], name: "index_contratos_impuestos_on_impuesto_id"
+  add_index "contratos_impuestos", ["contrato_id"], name: "index_contratos_impuestos_on_contrato_id", using: :btree
+  add_index "contratos_impuestos", ["impuesto_id"], name: "index_contratos_impuestos_on_impuesto_id", using: :btree
 
   create_table "contratos_items", force: :cascade do |t|
     t.integer  "contrato_id"
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.datetime "updated_at",                                         null: false
   end
 
-  add_index "contratos_items", ["contrato_id"], name: "index_contratos_items_on_contrato_id"
+  add_index "contratos_items", ["contrato_id"], name: "index_contratos_items_on_contrato_id", using: :btree
 
   create_table "contratos_items_liquidaciones", force: :cascade do |t|
     t.integer  "contratos_item_id"
@@ -71,8 +74,8 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.datetime "updated_at",                                 null: false
   end
 
-  add_index "contratos_items_liquidaciones", ["contratos_item_id"], name: "index_contratos_items_liquidaciones_on_contratos_item_id"
-  add_index "contratos_items_liquidaciones", ["liquidacion_id"], name: "index_contratos_items_liquidaciones_on_liquidacion_id"
+  add_index "contratos_items_liquidaciones", ["contratos_item_id"], name: "index_contratos_items_liquidaciones_on_contratos_item_id", using: :btree
+  add_index "contratos_items_liquidaciones", ["liquidacion_id"], name: "index_contratos_items_liquidaciones_on_liquidacion_id", using: :btree
 
   create_table "contratos_personas_tipos", force: :cascade do |t|
     t.integer  "contrato_id"
@@ -83,7 +86,7 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "contratos_personas_tipos", ["contrato_id"], name: "index_contratos_personas_tipos_on_contrato_id"
+  add_index "contratos_personas_tipos", ["contrato_id"], name: "index_contratos_personas_tipos_on_contrato_id", using: :btree
 
   create_table "empresas", force: :cascade do |t|
     t.string   "nombre"
@@ -143,7 +146,7 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "inmuebles", ["inmueble_tipo_id"], name: "index_inmuebles_on_inmueble_tipo_id"
+  add_index "inmuebles", ["inmueble_tipo_id"], name: "index_inmuebles_on_inmueble_tipo_id", using: :btree
 
   create_table "liquidaciones", force: :cascade do |t|
     t.integer  "contrato_id"
@@ -158,8 +161,8 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.decimal  "mora",              precision: 12, scale: 4
   end
 
-  add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id"
-  add_index "liquidaciones", ["contratos_item_id"], name: "index_liquidaciones_on_contratos_item_id"
+  add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id", using: :btree
+  add_index "liquidaciones", ["contratos_item_id"], name: "index_liquidaciones_on_contratos_item_id", using: :btree
 
   create_table "personas", force: :cascade do |t|
     t.string   "codigo"
@@ -177,4 +180,14 @@ ActiveRecord::Schema.define(version: 20151229201130) do
     t.datetime "updated_at",     null: false
   end
 
+  add_foreign_key "contratos", "inmuebles"
+  add_foreign_key "contratos_impuestos", "contratos"
+  add_foreign_key "contratos_impuestos", "impuestos"
+  add_foreign_key "contratos_items", "contratos"
+  add_foreign_key "contratos_items_liquidaciones", "contratos_items"
+  add_foreign_key "contratos_items_liquidaciones", "liquidaciones"
+  add_foreign_key "contratos_personas_tipos", "contratos"
+  add_foreign_key "inmuebles", "inmueble_tipos"
+  add_foreign_key "liquidaciones", "contratos"
+  add_foreign_key "liquidaciones", "contratos_items"
 end
