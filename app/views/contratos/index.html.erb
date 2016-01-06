@@ -1,9 +1,10 @@
 <div class="panelAcciones">
   <%= boton_atras_root %><%= boton_nuevo %>
 </div> 
-<table class="dataTable display responsive no-wrap">
+<table class="dataTable">
   <thead>
     <tr>
+      <th>Direccion</th>
       <th>Codigo</th>
       <th>Nombre</th>
       <th>Activo</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @contratos.each do |contrato| %>
       <tr>
+        <td><%= link_to contrato.inmueble.direccion_completa, edit_contrato_path(contrato)  %></td>
         <td><%= link_to contrato.codigo, edit_contrato_path(contrato)  %></td>
         <td><%= contrato.nombre %></td>
         <td><%= contrato.activo %></td>

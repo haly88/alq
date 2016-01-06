@@ -15,6 +15,6 @@ class Inmueble < ActiveRecord::Base
 
 
 	def direccion_completa
-			direccion + ' ' + piso + ' ' + depto
+		(direccion + ' ' + piso + ' ' + depto).strip
 	end 
 end

@@ -1,29 +1,25 @@
 <div class="panelAcciones">
   <%= boton_atras_root %><%= boton_nuevo %>
 </div> 
-<table class="dataTable display responsive no-wrap">
+<table class="dataTable">
   <thead>
     <tr>
+      <th>Direccion</th>
       <th>Codigo</th>
       <th>Descripcion</th>
       <th>Activo</th>
       <th>Inmueble tipo</th>
-      <th>Direccion</th>
-      <th>Piso</th>
-      <th>Depto</th>
     </tr>
   </thead>
 
   <tbody>
     <% @inmuebles.each do |inmueble| %>
       <tr>
-        <td><%= link_to inmueble.codigo, edit_inmueble_path(inmueble)  %></td>
+        <td><%= link_to inmueble.direccion_completa, edit_inmueble_path(inmueble) %></td>
+        <td><%= link_to inmueble.codigo, edit_inmueble_path(inmueble) %></td>
         <td><%= inmueble.descripcion %></td>
         <td><%= inmueble.activo %></td>
         <td><%= inmueble.inmueble_tipo.nombre %></td>
-        <td><%= inmueble.direccion %></td>
-        <td><%= inmueble.piso %></td>
-        <td><%= inmueble.depto %></td>
       </tr>
     <% end %>
   </tbody>
