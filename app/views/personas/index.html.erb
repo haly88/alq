@@ -22,10 +22,10 @@
         <td><%= persona.nombre %></td>
         <td><%= persona.activo %></td>
         <td><%= persona.descripcion %></td>
-        <td><%= persona.es_inquilino %></td>
-        <td><%= persona.es_propietario %></td>
-        <td><%= persona.es_garante %></td>
-        <td><%= persona.es_otro %></td>
+        <td><%= t persona.es_inquilino.class %></td>
+        <td><%= t persona.es_propietario.class %></td>
+        <td><%= t persona.es_garante.class %></td>
+        <td><%= t persona.es_otro.class %></td>
       </tr>
     <% end %>
   </tbody>

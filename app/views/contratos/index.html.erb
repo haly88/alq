@@ -19,7 +19,7 @@
         <td><%= link_to contrato.inmueble.direccion_completa, edit_contrato_path(contrato)  %></td>
         <td><%= link_to contrato.codigo, edit_contrato_path(contrato)  %></td>
         <td><%= contrato.nombre %></td>
-        <td><%= contrato.activo %></td>
+        <td><%= t contrato.activo.class %></td>
         <td><%= contrato.descripcion %></td>
         <td><%= contrato.carpeta %></td>
         <td><%= contrato.fecha %></td>
