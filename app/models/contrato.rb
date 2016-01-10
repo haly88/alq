@@ -22,7 +22,7 @@ class Contrato < ActiveRecord::Base
 	accepts_nested_attributes_for :contratos_items, :allow_destroy => true#, :reject_if => lambda { |a| a[:monto].to_d == 0 or a[:fecha_desde].blank? or a[:fecha_hasta].blank?}
 	#Validaciones
 	validates :nombre, :inmueble_id, :inquilino_ids, :propietario_ids, :presence => true 
-	validates :nombre, :inmueble_id, :uniqueness => true
+	validates :nombre, :inmueble_id, uniqueness: true
 
   validate :cuotas_liquidadas
 

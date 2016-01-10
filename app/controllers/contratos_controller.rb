@@ -62,13 +62,16 @@ class ContratosController < ApplicationController
     def set_selectores
       @impuestos = Impuesto.all
       @inmuebles = Inmueble.sin_usar
+      @inquilinos = Persona.inquilinos
+      @propietarios = Persona.propietarios
+      @garantes = Persona.garantes
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contrato_params
       params.require(:contrato).permit(:nombre, :descripcion, :carpeta, :fecha, :inmueble_id,
       :inquilino_ids => [], :propietario_ids => [], :garante_ids => [],
-      contratos_items_attributes: [:id, :monto, :fecha_desde, :fecha_hasta, :_destroy],
-      contratos_impuestos_attributes: [:id, :impuesto_id, :monto, :fecha_vencimiento, :fecha_pago, :pago, :_destroy])
+      contratos_items_attributes: [:id, :fecha_desde, :monto, :_destroy],
+      contratos_impuestos_attributes: [:id, :fecha_pago, :impuesto_id, :monto, :pago, :_destroy])
     end
 end

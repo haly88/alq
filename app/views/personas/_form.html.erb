@@ -8,14 +8,13 @@
     <div class="tabs-content">
       <div class="content active" id="general">
         <div class="row">
-          <%= f.input :codigo %>
-          <%= f.input :nombre %>
+          <div class="columns medium-2">
+            <%= f.label :tipo %>
+            <%= f.select :tipo, [['Inquilino', 'Inquilino'], ['Propietario', 'Propietario'], ['Garante', 'Garante'], ['Otro', 'Otro']] %>
+          </div>
         </div>
         <div class="row">
-          <%= f.input :es_inquilino %>
-          <%= f.input :es_propietario %>
-          <%= f.input :es_garante %>
-          <%= f.input :es_otro %>
+          <%= f.input :nombre %>
         </div>
         <div class="row">
           <%= f.input :telefono %>

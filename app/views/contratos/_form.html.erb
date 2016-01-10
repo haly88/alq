@@ -20,16 +20,25 @@
           </div>
         </div>
         <div class="row">
-          <%= f.association :inquilinos, :label_method => :nombre, :collection => Persona.where(:es_inquilino => true) %>
-          <%= f.association :propietarios, :label_method => :nombre, :collection => Persona.where(:es_propietario => true) %>
-          <%= f.association :garantes, :label_method => :nombre, :collection => Persona.where(:es_garante => true) %>
+          <div class="columns medium-2">
+            <%= f.label "* Inquilinos" %>
+            <%= f.collection_select :inquilino_ids, @inquilinos, :id, :nombre, {}, {multiple: true} %>        
+          </div>
+          <div class="columns medium-2">
+            <%= f.label "* Propietarios" %>
+            <%= f.collection_select :propietario_ids, @propietarios, :id, :nombre, {}, {multiple: true} %>        
+          </div>
+          <div class="columns medium-2 end">
+            <%= f.label "* Garantes" %>
+            <%= f.collection_select :garante_ids, @garantes, :id, :nombre, {}, {multiple: true} %>        
+          </div>
         </div>
         <div class="row">
           <%= f.input :fecha %>
         </div>
         <div class="row">
           <div class="columns medium-8">
-            <%= f.input :descripcion, as: :text, :wrapper => :inline_form %>
+            <%= f.text_area :descripcion%>
           </div>
         </div>
       </div>

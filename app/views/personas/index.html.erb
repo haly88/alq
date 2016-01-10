@@ -4,28 +4,24 @@
 <table class="dataTable display responsive no-wrap">
   <thead>
     <tr>
-      <th>Codigo</th>
       <th>Nombre</th>
-      <th>Activo</th>
+      <th>Tipo</th>
+      <th>Telfono</th>
+      <th>Email</th>
+      <th>Direccion</th>
       <th>Descripcion</th>
-      <th>Es inquilino</th>
-      <th>Es propietario</th>
-      <th>Es garante</th>
-      <th>Es otro</th>
     </tr>
   </thead>
 
   <tbody>
     <% @personas.each do |persona| %>
       <tr>
-        <td><%= link_to persona.codigo, edit_persona_path(persona) %></td>
-        <td><%= persona.nombre %></td>
-        <td><%= persona.activo %></td>
+        <td><%= link_to persona.nombre, edit_persona_path(persona) %></td>
+        <td><%= persona.tipo %></td>
+        <td><%= persona.telefono %></td>
+        <td><%= persona.email %></td>
+        <td><%= persona.direccion %></td>
         <td><%= persona.descripcion %></td>
-        <td><%= t persona.es_inquilino.class %></td>
-        <td><%= t persona.es_propietario.class %></td>
-        <td><%= t persona.es_garante.class %></td>
-        <td><%= t persona.es_otro.class %></td>
       </tr>
     <% end %>
   </tbody>
