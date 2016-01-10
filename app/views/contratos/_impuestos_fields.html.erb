@@ -21,7 +21,7 @@
 	<div class="columns medium-2"><%= f.label :fecha_pago %></div>
   <div class="columns medium-2"><%= f.label :impuesto %></div>
   <div class="columns medium-2"><%= f.label :monto %></div>
-  <div class="columns medium-2 end"><%= f.label :pago %></div>
+  <div class="columns medium-1 end"><%= f.label :pago %></div>
 </div>
 <%= f.simple_fields_for :contratos_impuestos do |f| %>
   <%= render "contratos_impuestos_fields", :f => f %>

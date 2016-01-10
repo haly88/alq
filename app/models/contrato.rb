@@ -21,8 +21,8 @@ class Contrato < ActiveRecord::Base
 	has_many :contratos_items, dependent: :destroy
 	accepts_nested_attributes_for :contratos_items, :allow_destroy => true#, :reject_if => lambda { |a| a[:monto].to_d == 0 or a[:fecha_desde].blank? or a[:fecha_hasta].blank?}
 	#Validaciones
-	validates :codigo, :inmueble_id, :presence => true 
-	validates :inmueble_id, :uniqueness => true
+	validates :nombre, :inmueble_id, :inquilino_ids, :propietario_ids, :presence => true 
+	validates :nombre, :inmueble_id, :uniqueness => true
 
   validate :cuotas_liquidadas
 
@@ -38,8 +38,8 @@ class Contrato < ActiveRecord::Base
       order by fecha_desde", self.id, fecha_desde]).first
   end
 
-	def selector_contratos
-		inmueble.direccion + " " + inmueble.piso + " " + inmueble.depto
+	def direccion_inmueble
+		inmueble.direccion_completa
 	end
 
   private

@@ -1,7 +1,7 @@
 <div class="row contratos_items_row">
 	<%= f.input :fecha_desde, label: false, input_html: {class: 'contratos_items_fecha_desde'} %>
 	<%= f.input :monto, label: false, input_html: {class: 'contratos_items_monto'} %>
-	<%= f.input :get_pagado, label: false, input_html: {class: 'contratos_items_pagado'} %>
+	<%= f.input :get_pagado, label: false, readonly: true, input_html: {class: 'decimal contratos_items_pago'} %>
 	<%= f.hidden_field :_destroy, class: 'contratos_items_destroy' %>
 	<%= link_to '<i class="fa fa-2x fa-trash-o"></i>'.html_safe, '#', :class => 'quitar_campos', remote:true %>
 </div>

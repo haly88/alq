@@ -17,16 +17,15 @@ module BotonesHelper
 	end
 
 	def boton_borrar
-		link_to '<i class="fa fa-2x fa-trash-o"></i>'.html_safe, root_path+controller_path+'/'+params[:id], 
-		method: :delete, data: { confirm: 'Esta seguro?' }
+		link_to '<i class="fa fa-2x fa-trash-o"></i>'.html_safe, root_path+controller_path+'/'+params[:id], title: "Borrar", method: :delete, data: { confirm: 'Esta seguro?' }
 	end
 
 	def boton_cobrar
-		link_to '<i class="fa fa-2x fa-credit-card"></i>'.html_safe, new_liquidacion_path(contrato: @contrato), :title => "Cobrar"
+		link_to '<i class="fa fa-2x fa-usd"></i>'.html_safe, new_liquidacion_path(contrato: @contrato), :title => "Cobrar"
 	end
 
 	def boton_impuestos
-		link_to '<i class="fa fa-2x fa-balance-scale"></i>'.html_safe, '#', :title => "Impuestos", :id => "impuestos", "data-reveal-id" => "impuestos_modal"
+		link_to '<i class="fa fa-2x fa-info"></i>'.html_safe, '#', :title => "Impuestos", :id => "impuestos", "data-reveal-id" => "impuestos_modal"
 	end
 
 	def boton_imprimir

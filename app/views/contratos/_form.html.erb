@@ -10,23 +10,19 @@
     <div class="tabs-content">
       <div class="content active" id="general">
         <div class="row">
-          <%= f.input :codigo %>
           <%= f.input :nombre %>
           <%= f.input :carpeta %>
-          <%= f.input :activo %>
         </div>
         <div class="row">
-          <%= f.association :inmueble, :label_method => :direccion_completa %>
-          <%= link_to '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, new_inmueble_path, :target => "_blank" %>
-        <!-- Inmueble.includes(:contrato).where(:contratos => {:inmueble_id => nil})
- (Todos los inmuebles no usados)-->
-        
+          <div class="columns medium-4">
+            <%= f.label "* Inmueble" %>
+            <%= f.collection_select :inmueble, @inmuebles, :id, :direccion_completa %>        
+          </div>
         </div>
         <div class="row">
           <%= f.association :inquilinos, :label_method => :nombre, :collection => Persona.where(:es_inquilino => true) %>
           <%= f.association :propietarios, :label_method => :nombre, :collection => Persona.where(:es_propietario => true) %>
           <%= f.association :garantes, :label_method => :nombre, :collection => Persona.where(:es_garante => true) %>
-          <%= link_to '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, new_persona_path, :target => "_blank" %>
         </div>
         <div class="row">
           <%= f.input :fecha %>

@@ -2,7 +2,9 @@
 	<%= f.input :fecha_pago, :label_method => :nombre, label: false, input_html: {class: 'contratos_impuestos_fecha_pago'} %>
 	<%= f.association :impuesto, :label_method => :nombre, label: false, input_html: {class: 'contratos_impuestos_impuesto'} %>	
 	<%= f.input :monto, label: false %>
-	<div class="columns medium-1"><%= f.input :pago, label: false, :wrapper => :inline_form, input_html: {class: 'contratos_impuestos_pago'} %></div>
+	<div class="columns medium-1 end">
+		<%= f.input :pago, label: false, :wrapper => :inline_form, input_html: {class: 'contratos_impuestos_pago'} %>
+	</div>
 	<%= f.hidden_field :_destroy, class: 'contratos_impuestos_destroy' %>
 	<%= link_to '<i class="fa fa-2x fa-trash-o"></i>'.html_safe, '#', :class => 'quitar_campos' %>
 </div>

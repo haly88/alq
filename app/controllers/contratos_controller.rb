@@ -1,6 +1,6 @@
 class ContratosController < ApplicationController
   before_action :set_contrato, only: [:show, :edit, :update, :destroy]
-  before_action :set_impuestos, only: [:new, :edit, :update, :create]
+  before_action :set_selectores, only: [:new, :edit, :update, :create]
 
   # GET /contratos
   # GET /contratos.json
@@ -59,13 +59,14 @@ class ContratosController < ApplicationController
       @contrato = Contrato.find(params[:id])
     end
 
-    def set_impuestos
+    def set_selectores
       @impuestos = Impuesto.all
+      @inmuebles = Inmueble.sin_usar
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contrato_params
-      params.require(:contrato).permit(:codigo, :nombre, :activo, :descripcion, :carpeta, :fecha, :inmueble_id,
+      params.require(:contrato).permit(:nombre, :descripcion, :carpeta, :fecha, :inmueble_id,
       :inquilino_ids => [], :propietario_ids => [], :garante_ids => [],
       contratos_items_attributes: [:id, :monto, :fecha_desde, :fecha_hasta, :_destroy],
       contratos_impuestos_attributes: [:id, :impuesto_id, :monto, :fecha_vencimiento, :fecha_pago, :pago, :_destroy])

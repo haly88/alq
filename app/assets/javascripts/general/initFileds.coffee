@@ -37,9 +37,8 @@ $.fn.initInputMask = () ->
 	$(":input").inputmask()
 
 $.fn.initTables = () ->
-	$(".dataTable").DataTable 
-		responsive: false
-		autoWidth: true
+	$(".dataTable").dataTable 
+		responsive: true
 		scrollX: true
     
 
