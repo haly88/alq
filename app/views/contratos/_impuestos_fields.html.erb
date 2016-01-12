@@ -18,10 +18,10 @@
   <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'impuestos_refresh' %>
 </div>
 <div class="row">
-	<div class="columns medium-2"><%= f.label :fecha_pago %></div>
-  <div class="columns medium-2"><%= f.label :impuesto %></div>
-  <div class="columns medium-2"><%= f.label :monto %></div>
-  <div class="columns medium-1 end"><%= f.label :pago %></div>
+	<div class="columns medium-2"><%= label_tag 'Fecha_pago' %></div>
+  <div class="columns medium-2"><%= label_tag 'Impuesto' %></div>
+  <div class="columns medium-2"><%= label_tag 'Monto' %></div>
+  <div class="columns medium-1 end"><%= label_tag 'Pago' %></div>
 </div>
 <%= f.simple_fields_for :contratos_impuestos do |f| %>
   <%= render "contratos_impuestos_fields", :f => f %>

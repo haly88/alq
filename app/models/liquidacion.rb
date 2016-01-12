@@ -1,6 +1,6 @@
 class Liquidacion < ActiveRecord::Base
 
-  has_many :comentarios, as: :comentable
+  has_many :comentarios, as: :comentable, :dependent => :destroy
 
   belongs_to :contrato
   belongs_to :contratos_item

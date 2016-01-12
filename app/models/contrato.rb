@@ -3,28 +3,28 @@ class Contrato < ActiveRecord::Base
 	attr_accessor :fecha_inicio, :cuotas, :monto_inicio, :incremento, :cada, 
   :fecha_pago_refresh, :impuesto_refresh, :cuotas_impuestos_refresh, :cada_impuestos_refresh
 
-  has_many :comentarios, as: :comentable
-
-	has_many :liquidaciones, :dependent => :destroy
-
-	has_many :contratos_impuestos, :dependent => :destroy
+  has_many :comentarios, as: :comentable, :dependent => :destroy
+	
+  has_many :liquidaciones
+	
+  has_many :contratos_impuestos, :dependent => :destroy
 	accepts_nested_attributes_for :contratos_impuestos, :allow_destroy => true
-
-	belongs_to :inmueble
-	has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo"
+	
+  belongs_to :inmueble
+	
+  has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo"
  	has_many :contratos_propietarios, class_name: "ContratosPersonasTipo"
   has_many :contratos_garantes, class_name: "ContratosPersonasTipo"
-	has_many :inquilinos, through: :contratos_inquilinos
-  has_many :propietarios, through: :contratos_propietarios
-	has_many :garantes, through: :contratos_garantes
-
-	has_many :contratos_items, dependent: :destroy
+	has_many :inquilinos, through: :contratos_inquilinos, :dependent => :destroy
+  has_many :propietarios, through: :contratos_propietarios, :dependent => :destroy
+	has_many :garantes, through: :contratos_garantes, :dependent => :destroy
+	
+  has_many :contratos_items, dependent: :destroy
 	accepts_nested_attributes_for :contratos_items, :allow_destroy => true#, :reject_if => lambda { |a| a[:monto].to_d == 0 or a[:fecha_desde].blank? or a[:fecha_hasta].blank?}
-	#Validaciones
-	validates :nombre, :inmueble_id, :inquilino_ids, :propietario_ids, :presence => true 
+	
+  #Validaciones
+	validates :nombre, :inmueble_id, :inquilino_ids, :propietario_ids, :presence => true, on: :create
 	validates :nombre, :inmueble_id, uniqueness: true
-
-  validate :cuotas_liquidadas
 
   def get_primer_cuota_impaga(fecha_desde)
     contratos_items.find_by_sql([
@@ -43,15 +43,6 @@ class Contrato < ActiveRecord::Base
 	end
 
   private
-
-  def cuotas_liquidadas
-    contratos_items.each do |c|
-      if c.errors.any?
-        errors.add(:base, "Las cuotas se encuentran liquidadas.")
-        break
-      end
-    end
-  end
 
   # def calcular_total_a_pagar(fecha)
   #   total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado

@@ -1,6 +1,6 @@
 class Inmueble < ActiveRecord::Base
 
-	has_many :comentarios, as: :comentable
+	has_many :comentarios, as: :comentable, :dependent => :destroy
 	
 	has_one :contrato, :dependent => :restrict_with_error
 	belongs_to :inmueble_tipo

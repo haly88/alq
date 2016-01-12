@@ -3,8 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
-  $.fn.colorearImpuestos()
-  $.fn.colorearCuotas()
+  action_name = $('#action_name').val()
+  $.fn.funcionesImpuestos()
+  $.fn.funcionesCuotas()
+
+  if action_name == 'edit' or action_name == 'update'
+    $('#contrato_nombre').prop('readonly', true)
+    $('#contrato_inmueble_id').prop('disabled', true).trigger('chosen:updated')
+    $('#contrato_inquilino_ids').prop('disabled', true).trigger('chosen:updated')
+    $('#contrato_propietario_ids').prop('disabled', true).trigger('chosen:updated')
 
   $('#cuotas_refresh').click ->
     $('.spinner').show()
@@ -36,7 +43,7 @@ ready = ->
       $.fn.initInputMask()
       $.fn.initDateMask()
       $.fn.initDecimalMask()
-      $.fn.colorearCuotas()
+      $.fn.funcionesCuotas()
       $('.spinner').hide()
       $('#cuotas_refresh').show()
     ), 1000
@@ -70,29 +77,33 @@ ready = ->
       $.fn.initInputMask()
       $.fn.initDateMask()
       $.fn.initDecimalMask()
-      $.fn.colorearImpuestos()
+      $.fn.funcionesImpuestos()
       $('.spinner').hide()
       $('#impuestos_refresh').show()
     ), 1000
 
   $('form').on 'change', '.contratos_impuestos_pago', () ->
-    $.fn.colorearImpuestos()
+    $.fn.funcionesImpuestos()
 
 $(document).on('page:load', ready)
 $(document).ready(ready)
 
-$.fn.colorearImpuestos = () ->
+$.fn.funcionesImpuestos = () ->
   $('.contratos_impuestos_pago').each (k,v) ->
     if $(v).prop('checked') == true
       $(v).closest('.row').children().children('.contratos_impuestos_fecha_pago').css('border-color','green')
     else
       $(v).closest('.row').children().children('.contratos_impuestos_fecha_pago').css('border-color','red')
 
-$.fn.colorearCuotas = () ->
+$.fn.funcionesCuotas = () ->
   $('.contratos_items_pago').each (k,v) ->
     if Number($(v).val()) == 0
       $(v).css('border-color','red')
     else if Number($(v).val()) < Number($(v).closest('.row').children().children('.contratos_items_monto').val())
       $(v).css('border-color','yellow')
+      $(v).closest('.row').children().children().prop('readonly', true)
+      $(v).closest('.row').children('.quitar_campos').hide()
     else
       $(v).css('border-color','green')
+      $(v).closest('.row').children().children().prop('readonly', true)
+      $(v).closest('.row').children('.quitar_campos').hide()

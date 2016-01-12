@@ -1,6 +1,6 @@
 class Persona < ActiveRecord::Base
 
-  has_many :comentarios, as: :comentable
+  has_many :comentarios, as: :comentable, :dependent => :destroy
 	#aca es el unico lugar donde debemos especificar que campo.. porque iria a buscar persona_id a la tabla y no la encontraria
 	has_many :contratos_inquilinos, class_name: "ContratosPersonasTipo", foreign_key: "inquilino_id", :dependent => :restrict_with_error
   has_many :contratos_propietarios, class_name: "ContratosPersonasTipo", foreign_key: "propietario_id", :dependent => :restrict_with_error

@@ -1,16 +1,13 @@
 class ContratosItem < ActiveRecord::Base
 
-	attr_accessor :saldado
-
-	has_many :liquidaciones
+	has_many :liquidaciones, :dependent => :restrict_with_error
   
   belongs_to :contrato
 
   validates :monto, :fecha_desde, :presence => true 
   validates :monto, :numericality => {:greater_than => 0}
 
-  validate :liquidado?, on: :update
-  before_destroy :liquidado?
+  validate :validar_liquidado?, on: :update
 
 	default_scope { order('fecha_desde') }  
 
@@ -22,11 +19,15 @@ class ContratosItem < ActiveRecord::Base
   	monto - get_pagado
   end
 
+  def liquidado?
+    liquidaciones.any?
+  end
+
   private
 
-  def liquidado?
+  def validar_liquidado?
     if liquidaciones.any?
-      errors.add(:fecha_desde, "La cuota se encuentra liquidada.")
+      errors.add(:base, "Las cuotas se encuentran liquidadas.")
       return false
     end
   end
