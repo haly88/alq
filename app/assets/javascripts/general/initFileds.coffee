@@ -20,10 +20,10 @@ $.datepicker.setDefaults
   dateFormat: 'dd/mm/yy'
 
 $.fn.initDatepicker = () ->
-	$('input.date:not([readonly])').datepicker()
+	$('.datepicker:not([readonly])').datepicker()
 		
 $.fn.initDateMask = () ->
-	$('input.date').inputmask('alias': 'date')
+	$('.datepicker').inputmask('alias': 'date')
 
 $.fn.initDateDefault = () ->
 	if $('input.date:not([readonly])').val() == ''
@@ -31,7 +31,7 @@ $.fn.initDateDefault = () ->
 		$('input.date:not([readonly])').val(fechaHoy)
 
 $.fn.initDecimalMask = () ->
-	$('input.decimal').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true, "autoUnmask": true)
+	$('.currency').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true, "autoUnmask": true)
 
 $.fn.initInputMask = () ->
 	$(":input").inputmask()

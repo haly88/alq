@@ -1,6 +1,5 @@
-<%= simple_form_for @inmueble, html: {id: 'form_principal'} do |f| %>
-  <%= f.error_notification %>
-  <%= f.error :base %>
+<%= custom_form_for @inmueble, html: {id: 'form_principal'} do |f| %>
+  <%= f.error_messages %>
   <div class="form-inputs">
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
@@ -10,43 +9,76 @@
     <div class="tabs-content">
       <div class="content active" id="general">
         <div class="row">
-          <%= f.association :inmueble_tipo, :label_method => :nombre %>
-          <%= f.input :codigo %>
-          <%= f.input :activo %>
+          <div class="columns medium-2">
+            <%= f.collection_select :inmueble_tipo, @inmueble_tipo, :id, :nombre %>
+          </div>
+          <div class="columns medium-2 end">
+            <%= f.text_field :codigo %>
+          </div>
         </div>
         <div class="row">
-          <%= f.input :direccion, :label => 'Direccion (google maps)', :placeholder => 'Ej: Arenales 2500, CABA'%>
-          <%= f.input :piso %>
-          <%= f.input :depto %>
-          <%= f.input :localidad, disabled: true %>
-          <%= f.input :codigo_postal, disabled: true %>
+          <div class="columns medium-2">
+            <%= f.text_field :direccion, :label => 'Direccion (google maps)', :placeholder => 'Ej: Arenales 2500, CABA'%>
+          </div>
+          <div class="columns medium-2">
+            <%= f.text_field :piso %>
+          </div>
+          <div class="columns medium-2">
+            <%= f.text_field :depto %>
+          </div>
+          <div class="columns medium-2">
+            <%= f.text_field :localidad, disabled: true %>
+          </div>
+          <div class="columns medium-2 end">
+            <%= f.text_field :codigo_postal, disabled: true %>
+          </div>
         </div>
         <div class="row">
-          <div class="columns medium-8">
-            <%= f.input :descripcion, as: :text, wrapper: :inline_form %>
+          <div class="columns medium-6">
+            <%= f.text_area :descripcion %>
           </div>
         </div>
       </div>
       <div class="content" id="administracion">
         <div class="row">
-          <%= f.input :administracion %>
+          <div class="columns medium-2">
+            <%= f.text_field :administracion %>
+          </div>
         </div> 
         <div class="row">
-          <%= f.input :adm_email, :label => 'Email' %>
-          <%= f.input :adm_tel1, :label => 'Telefono 1' %>
-          <%= f.input :adm_tel2, :label => 'Telefono 2' %>
-          <%= f.input :adm_tel3, :label => 'Telefono 3' %>
+          <div class="columns medium-2">
+            <%= f.text_field :adm_email, label: 'Email' %>
+          </div>
+          <div class="columns medium-2">
+            <%= f.text_field :adm_tel1, label: 'Telefono 1' %>
+          </div>
+          <div class="columns medium-2">
+            <%= f.text_field :adm_tel2, label: 'Telefono 2' %>
+          </div>
+          <div class="columns medium-2 end">
+            <%= f.text_field :adm_tel3, label: 'Telefono 3' %>
+          </div>
         </div>
       </div>
       <div class="content" id="encargado">
       <div class="row">
-        <%= f.input :encargado %>
+        <div class="columns medium-2">
+          <%= f.text_field :encargado %>
+        </div>
       </div>
       <div class="row">
-        <%= f.input :enc_email, :label => 'Email' %>
-        <%= f.input :enc_tel1, :label => 'Telefono 1' %>
-        <%= f.input :enc_tel2, :label => 'Telefono 2' %>
-        <%= f.input :enc_tel3, :label => 'Telefono 3' %>
+        <div class="columns medium-2">
+          <%= f.text_field :enc_email, label: 'Email' %>
+        </div>
+        <div class="columns medium-2">
+          <%= f.text_field :enc_tel1, label: 'Telefono 1' %>
+        </div>
+        <div class="columns medium-2">
+          <%= f.text_field :enc_tel2, label: 'Telefono 2' %>
+        </div>
+        <div class="columns medium-2 end">
+          <%= f.text_field :enc_tel3, label: 'Telefono 3' %>
+        </div>
       </div>
       </div>
     </div>

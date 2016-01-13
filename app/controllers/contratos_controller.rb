@@ -82,7 +82,7 @@ class ContratosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contrato_params
       params.require(:contrato).permit(:nombre, :descripcion, :carpeta, :fecha, :inmueble_id,
-      :inquilino_ids, :propietario_ids, :garante_ids,
+      :inquilino_ids => [], :propietario_ids => [], :garante_ids => [],
       contratos_items_attributes: [:id, :fecha_desde, :monto, :_destroy],
       contratos_impuestos_attributes: [:id, :fecha_pago, :impuesto_id, :monto, :pago, :_destroy])
     end

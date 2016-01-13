@@ -1,21 +1,19 @@
-<%= simple_form_for @impuesto, html: {id: 'form_principal'} do |f| %>
-  <%= f.error_notification %>
-  <%= f.error :base %>
-  <div class="form-inputs">
-    <ul class="tabs" data-tab>
-      <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
-    </ul>
-    <div class="tabs-content">
-      <div class="content active" id="general">
-        <div class="row">
-          <%= f.input :codigo %>
-          <%= f.input :nombre %>
-          <%= f.input :cantidad_meses_defecto %>
-        </div>
-        <div class="row">
-          <div class="columns medium-8"><%= f.input :descripcion, as: :text, :wrapper => :inline_form %></div>
-        </div>
-      </div>
+<%= custom_form_for @impuesto, html: {id: 'form_principal'} do |f| %>
+  <%= f.error_messages %>
+  <div class="row">
+    <div class="columns medium-2">
+      <%= f.text_field :codigo %>
+    </div>
+    <div class="columns medium-2">
+      <%= f.text_field :nombre %>
+    </div>
+    <div class="columns medium-2 end">
+      <%= f.number_field :cantidad_meses_defecto %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns medium-6">
+      <%= f.text_area :descripcion %>
     </div>
   </div>
 <% end %>

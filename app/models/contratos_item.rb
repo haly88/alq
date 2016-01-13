@@ -11,12 +11,12 @@ class ContratosItem < ActiveRecord::Base
 
 	default_scope { order('fecha_desde') }  
 
-  def get_pagado
+  def get_cobrado
   	liquidaciones.sum(:neto)
   end
 
-  def get_a_pagar
-  	monto - get_pagado
+  def get_a_cobrar
+  	monto - get_cobrado
   end
 
   def liquidado?

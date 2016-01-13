@@ -8,5 +8,8 @@ module ApplicationHelper
 	    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")}, remote:true)
 	end
 
-	
+	def custom_form_for(object, options = {}, &block)
+    options[:builder] = CustomFormBuilder
+    form_for(object, options, &block)
+  end
 end

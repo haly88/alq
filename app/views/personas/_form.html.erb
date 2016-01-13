@@ -1,32 +1,27 @@
-<%= simple_form_for @persona, html: {id: 'form_principal'} do |f| %>
-  <%= f.error_notification %>
-  <%= f.error :base %>
-  <div class="form-inputs">
-    <ul class="tabs" data-tab>
-      <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
-    </ul>
-    <div class="tabs-content">
-      <div class="content active" id="general">
-        <div class="row">
-          <div class="columns medium-2">
-            <%= f.label :tipo %>
-            <%= f.select :tipo, [['Inquilino', 'Inquilino'], ['Propietario', 'Propietario'], ['Garante', 'Garante'], ['Otro', 'Otro']] %>
-          </div>
-        </div>
-        <div class="row">
-          <%= f.input :nombre %>
-        </div>
-        <div class="row">
-          <%= f.input :telefono %>
-          <%= f.input :email %>
-          <%= f.input :direccion %>
-        </div>
-        <div class="row">
-          <div class="columns medium-4">
-            <%= f.input :descripcion, :wrapper => :inline_form %>
-          </div>
-        </div>
-      </div>
+<%= custom_form_for @persona, html: {id: 'form_principal'} do |f| %>
+  <%= f.error_messages %>
+  <div class="row">
+    <div class="columns medium-2">
+      <%= f.select :tipo, [['Inquilino', 'Inquilino'], ['Propietario', 'Propietario'], ['Garante', 'Garante'], ['Otro', 'Otro']] %>
+    </div>
+    <div class="columns medium-2 end">
+      <%= f.text_field :nombre %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns medium-2">
+      <%= f.text_field :telefono %>
+    </div>
+    <div class="columns medium-2">
+      <%= f.text_field :email %>
+    </div>
+    <div class="columns medium-2 end">
+      <%= f.text_field :direccion %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns medium-6">
+      <%= f.text_area :descripcion %>
     </div>
   </div>
 <% end %>

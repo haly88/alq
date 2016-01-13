@@ -1,7 +1,7 @@
 <div class="row" >
 	<div class="columns medium-2">
 		<%= label_tag 'Fecha Inicio' %>
-		<%= text_field_tag 'cuotas_fecha_inicio', nil, class: 'date' %>
+		<%= text_field_tag 'cuotas_fecha_inicio', nil, :class => 'date' %>
 	</div>
 	<div class="columns medium-2">
 		<%= label_tag 'Cuotas' %>
@@ -9,7 +9,7 @@
 	</div>
 	<div class="columns medium-2">
 		<%= label_tag 'Monto Inicio' %>
-		<%= text_field_tag 'cuotas_monto_inicio', nil, class: 'decimal' %>
+		<%= text_field_tag 'cuotas_monto_inicio', nil, :class => 'decimal' %>
 	</div>
 	<div class="columns medium-2">
 		<%= label_tag 'Incremento' %>
@@ -19,14 +19,22 @@
 		<%= label_tag 'Cada' %>
 		<%= text_field_tag 'cuotas_cada', nil, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12, 'autoUnmask' : true"} %>
 	</div>
-  <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'cuotas_refresh' %>
+	<div class="columns medium-1 end">
+  	<%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'cuotas_refresh' %>
+  </div>
 </div>
 <div class="row">
-  <div class="columns medium-2"><%= label_tag 'Fecha_desde' %></div>
-  <div class="columns medium-2"><%= label_tag 'Monto' %></div>
-  <div class="columns medium-2 end"><%= label_tag 'Cobrado' %></div>
+  <div class="columns medium-2">
+  	<%= label_tag 'Fecha_desde' %>
+  </div>
+  <div class="columns medium-2">
+  	<%= label_tag 'Monto' %>
+  </div>
+  <div class="columns medium-2 end">
+  	<%= label_tag 'Cobrado' %>
+  </div>
 </div>
-<%= f.simple_fields_for :contratos_items do |f| %>
+<%= f.fields_for :contratos_items do |f| %>
   <%= render "contratos_items_fields", :f => f %>
 <% end %>
 <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_items %>

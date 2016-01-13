@@ -15,15 +15,25 @@
 		<%= label_tag 'Cada' %>
 		<%= text_field_tag 'impuestos_cada', nil, data: {inputmask:"'alias': 'numeric', 'digits': 0, 'suffix': ' Meses', 'max': 12, 'autoUnmask' : true"} %>
 	</div>
-  <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'impuestos_refresh' %>
+	<div class="columns medium-1 end">
+  	<%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'impuestos_refresh' %>
+  </div>
 </div>
 <div class="row">
-	<div class="columns medium-2"><%= label_tag 'Fecha_pago' %></div>
-  <div class="columns medium-2"><%= label_tag 'Impuesto' %></div>
-  <div class="columns medium-2"><%= label_tag 'Monto' %></div>
-  <div class="columns medium-1 end"><%= label_tag 'Pago' %></div>
+	<div class="columns medium-2">
+		<%= label_tag 'Fecha_pago' %>
+	</div>
+  <div class="columns medium-2">
+  	<%= label_tag 'Impuesto' %>
+  </div>
+  <div class="columns medium-2">
+  	<%= label_tag 'Monto' %>
+  </div>
+  <div class="columns medium-1 end">
+  	<%= label_tag 'Pago' %>
+  </div>
 </div>
-<%= f.simple_fields_for :contratos_impuestos do |f| %>
+<%= f.fields_for :contratos_impuestos do |f| %>
   <%= render "contratos_impuestos_fields", :f => f %>
 <% end %>
 <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_impuestos %>

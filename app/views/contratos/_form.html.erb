@@ -1,6 +1,5 @@
-<%= simple_form_for @contrato, html: {id: 'form_principal'} do |f| %>
-  <%= f.error_notification %>
-  <%= f.error :base %>
+<%= custom_form_for @contrato, html: {id: 'form_principal'} do |f| %>
+  <%= f.error_messages %>
   <div class="form-inputs">
     <ul class="tabs" data-tab>
       <li class="tab-title active"><a data-no-turbolink='true' href="#general">General</a></li>
@@ -11,45 +10,41 @@
       <div class="content active" id="general">
         <div class="row">
           <div class="columns medium-2">
-            <%= f.label :nombre %>
             <%= f.text_field :nombre %>
           </div>
           <div class="columns medium-2 end">
-            <%= f.label :carpeta %>
             <%= f.text_field :carpeta %>
           </div>
         </div>
         <div class="row">
           <div class="columns medium-4">
-            <%= f.label "* Inmueble" %>
             <%= f.collection_select :inmueble_id, @inmuebles, :id, :direccion_completa %>        
           </div>
         </div>
         <div class="row">
           <div class="columns medium-2">
-            <%= f.label "* Inquilinos" %>
             <%= f.collection_select :inquilino_ids, @inquilinos, :id, :nombre, {}, {multiple: true} %>        
           </div>
           <div class="columns medium-2">
-            <%= f.label "* Propietarios" %>
             <%= f.collection_select :propietario_ids, @propietarios, :id, :nombre, {}, {multiple: true} %>        
           </div>
           <div class="columns medium-2 end">
-            <%= f.label "Garantes" %>
             <%= f.collection_select :garante_ids, @garantes, :id, :nombre, {}, {multiple: true} %>        
           </div>
         </div>
         <div class="row">
-          <%= f.input :fecha %>
+          <div class="columns medium-2">
+            <%= f.text_field :fecha, class: "datepicker" %>
+          </div>
         </div>
         <div class="row">
-          <div class="columns medium-8">
-            <%= f.text_area :descripcion%>
+          <div class="columns medium-6">
+            <%= f.text_area :descripcion %>
           </div>
         </div>
       </div>
       <div class="content" id="cuotas">
-        <%= render "cuotas_fields", :f => f %>
+        <%= render "items_fields", :f => f %>
       <div class="content" id="impuestos">
         <%= render "impuestos_fields", :f => f %>
       </div>
