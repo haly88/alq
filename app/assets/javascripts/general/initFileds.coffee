@@ -6,6 +6,7 @@ ready = () ->
 	$.fn.initDateMask()
 	$.fn.initDateDefault()
 	$.fn.initDecimalMask()
+	$.fn.initPorcentajeMask()
 	$.fn.initInputMask()
 	$.fn.initTables()
 	$("#data-alert").delay(2000).fadeOut()
@@ -32,6 +33,9 @@ $.fn.initDateDefault = () ->
 
 $.fn.initDecimalMask = () ->
 	$('.currency').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true, "autoUnmask": true)
+
+$.fn.initPorcentajeMask = () ->
+	$('.porcentaje').inputmask('alias': 'numeric', 'digits': 2, 'suffix': ' %', 'max': 999, 'autoUnmask' : true)
 
 $.fn.initInputMask = () ->
 	$(":input").inputmask()

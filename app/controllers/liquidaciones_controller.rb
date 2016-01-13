@@ -67,6 +67,7 @@ class LiquidacionesController < ApplicationController
   def set_globales
     @contratos = Contrato.order(:nombre)
     @empresa = Empresa.find(1)
+    @impuestos = Impuesto.all
   end
 
   def set_contrato

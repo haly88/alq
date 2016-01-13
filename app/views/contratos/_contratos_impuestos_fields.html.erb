@@ -3,7 +3,7 @@
 		<%= f.text_field :fecha_pago, label: "", :class => 'datepicker contratos_impuestos_fecha_pago' %>
 	</div>
 	<div class="columns medium-2">
-		<%= f.collection_select :impuesto, @impuestos, :id, :nombre, {}, {:class => 'contratos_impuestos_impuesto'} %>	
+		<%= f.collection_select :impuesto_id, @impuestos, :id, :nombre, {}, {:class => 'contratos_impuestos_impuesto', label: ""} %>	
 	</div>
 	<div class="columns medium-2">
 		<%= f.text_field :monto, label: "", :class => "currency" %>

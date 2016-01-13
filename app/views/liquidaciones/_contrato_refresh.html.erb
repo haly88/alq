@@ -1,13 +1,16 @@
-<%= simple_form_for @liquidacion, url: refresh_liquidaciones_path, html: {id: 'form_refresh'} do |f| %>
+<%= custom_form_for @liquidacion, url: refresh_liquidaciones_path, html: {id: 'form_refresh'} do |f| %>
 <div class="row">
   <div class="columns medium-4">
-    <%= f.association :contrato, label_method: :direccion_inmueble, wrapper: :inline_form %>
+    <%= f.collection_select :contrato_id, @contratos, :id, :direccion_inmueble %>
   </div>
   <div class="columns medium-2">
-    <%= f.label :inquilino_id %>
     <%= f.grouped_collection_select :inquilino_id, @contratos, :inquilinos, :direccion_inmueble, :id, :nombre, include_blank: true  %>
   </div>
-  <%= f.input :fecha %>
-  <%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh' %>
+  <div class="columns medium-2">
+  	<%= f.text_field :fecha, :class => 'datepicker' %>
+ 	</div>
+  <div class="columns medium-1 end">
+  	<%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'liquidacion_refresh' %>
+  </div>
 </div>
 <% end %>

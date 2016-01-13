@@ -2,9 +2,8 @@
 <%= render 'contrato_refresh' %>
 <div id="liquidacion_ajax_refresh">
 <% if @liquidacion.contratos_item_id %>
-  <%= simple_form_for @liquidacion, html: {id: 'form_principal'} do |f| %>
-    <%= f.error_notification %>
-    <%= f.error :base %>
+  <%= custom_form_for @liquidacion, html: {id: 'form_principal'} do |f| %>
+    <%= f.error_messages %>
     <div class="form-inputs">
       <%= f.hidden_field :contrato_id %>
       <%= f.hidden_field :contratos_item_id %>
@@ -12,10 +11,18 @@
       <%= f.hidden_field :fecha %>
       <%= render 'item_info' %>
       <div class="row">
-        <%= f.input :neto %>
-        <%= f.input :mora %>
-        <%= f.input :descuento %>
-        <%= f.input :total, readonly: true, label: 'Total a Pagar' %>
+        <div class="columns medium-2">
+          <%= f.text_field :neto, :class => 'currency' %>
+        </div>
+        <div class="columns medium-2">
+          <%= f.text_field :mora, :class => 'currency' %>
+        </div>
+        <div class="columns medium-2">
+          <%= f.text_field :descuento, :class => 'currency' %>
+        </div>
+        <div class="columns medium-2 end">
+          <%= f.text_field :total, readonly: true, label: 'Total a Cobrar', :class => 'currency' %>
+        </div>
       </div>
     </div>
   <% end %>

@@ -1,7 +1,7 @@
 class CustomFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, :tag, to: :@template
   
-  %w[text_field text_area password_field collection_select select check_box number_field].each do |method_name|
+  %w[text_field text_area password_field collection_select select check_box number_field grouped_collection_select].each do |method_name|
     define_method(method_name) do |name, *args|
       if field_label(name, *args).nil?
         super(name, *args)
@@ -21,7 +21,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   def error_messages
     if object.errors.full_messages.any?
       content_tag(:div, :class => "error_messages") do
-        content_tag(:h3, "Verifique los datos cargados") +
+        content_tag(:div, "Verifique los datos cargados", :class => "alert-box alert", id: "data-alert", :data => {:alert =>  nil} ) +
         content_tag(:ul) do
           object.errors.full_messages.map do |msg|
             content_tag(:li, msg)

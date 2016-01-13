@@ -20,10 +20,12 @@ ready = ->
       $('.contratos_items_destroy').val('1')
       $('.contratos_items_row').hide()
       contador = 0
+      i = 0
       if cuotas and fechaInicio and montoInicio
         for [1..cuotas]
+          i++
           contador = contador + 1
-          time = new Date().getTime() + contador
+          time = new Date().getTime() + i
           regexp = new RegExp($('.content.active .add_fields').data('id'), 'g')
           $('.content.active .add_fields').before($('.content.active .add_fields').data('fields').replace(regexp, time))
           $('.contratos_items_fecha_desde:last').val($.datepicker.formatDate("dd/mm/yy", fechaInicio))
@@ -56,12 +58,14 @@ ready = ->
           $(v).closest('.row').children('input[type=hidden]').val('1')
           $(v).closest('.row').hide()
       contador = 0
+      i = 0
       for [1..cuotas]
+        i++
         contador = contador + 1
         fechaInicio = new Date(fechaInicio.setMonth(fechaInicio.getMonth()+1))
         if contador == cada
           contador = 0
-          time = new Date().getTime() + contador
+          time = new Date().getTime() + i
           regexp = new RegExp($('.content.active .add_fields').data('id'), 'g')
           $('.content.active .add_fields').before($('.content.active .add_fields').data('fields').replace(regexp, time))
           $('.contratos_impuestos_fecha_pago:last').val($.datepicker.formatDate("dd/mm/yy", fechaInicio))
