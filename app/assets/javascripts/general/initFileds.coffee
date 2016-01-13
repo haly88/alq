@@ -27,9 +27,9 @@ $.fn.initDateMask = () ->
 	$('.datepicker').inputmask('alias': 'date')
 
 $.fn.initDateDefault = () ->
-	if $('input.date:not([readonly])').val() == ''
+	if $('.datepicker:not([readonly])').val() == ''
 		fechaHoy = $.datepicker.formatDate("dd/mm/yy", new Date())
-		$('input.date:not([readonly])').val(fechaHoy)
+		$('.datepicker:not([readonly])').val(fechaHoy)
 
 $.fn.initDecimalMask = () ->
 	$('.currency').inputmask('alias': 'currency', "digits": 4, "removeMaskOnSubmit": true, "autoUnmask": true)

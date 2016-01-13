@@ -50,7 +50,6 @@ group :development, :test do
 end
 
 gem 'foundation-rails'
-gem 'simple_form'
 gem 'chosen-rails'
 gem 'compass-rails', '~> 2.0.4'
 gem 'jquery-ui-rails'

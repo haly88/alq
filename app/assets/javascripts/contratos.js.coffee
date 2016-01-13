@@ -100,8 +100,8 @@ $.fn.funcionesCuotas = () ->
     else if Number($(v).val()) < Number($(v).closest('.row').children().children('.contratos_items_monto').val())
       $(v).css('border-color','yellow')
       $(v).closest('.row').children().children().prop('readonly', true)
-      $(v).closest('.row').children('.quitar_campos').hide()
+      $(v).closest('.row').children().children('.quitar_campos').hide()
     else
       $(v).css('border-color','green')
       $(v).closest('.row').children().children().prop('readonly', true)
-      $(v).closest('.row').children('.quitar_campos').hide()
+      $(v).closest('.row').children().children('.quitar_campos').hide()
