@@ -1,7 +1,7 @@
 class ContratosController < ApplicationController
   before_action :set_contrato, only: [:show, :edit, :update, :destroy]
-  before_action :set_selectores, only: [:new, :edit, :update, :create]
-  before_action :set_inmuebles, only: [:edit, :update]
+  before_action :set_selectores, only: [:new, :edit, :update, :create, :destroy]
+  before_action :set_inmuebles, only: [:edit, :update, :destroy]
   before_action :set_inmuebles_sin_usar, only: [:new, :create]
 
   # GET /contratos

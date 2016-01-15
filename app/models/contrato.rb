@@ -1,11 +1,8 @@
 class Contrato < ActiveRecord::Base
 
-	attr_accessor :fecha_inicio, :cuotas, :monto_inicio, :incremento, :cada, 
-  :fecha_pago_refresh, :impuesto_refresh, :cuotas_impuestos_refresh, :cada_impuestos_refresh
-
   has_many :comentarios, as: :comentable, :dependent => :destroy
 	
-  has_many :liquidaciones
+  has_many :liquidaciones, :dependent => :restrict_with_error
 	
   has_many :contratos_impuestos, :dependent => :destroy
 	accepts_nested_attributes_for :contratos_impuestos, :allow_destroy => true
@@ -26,6 +23,7 @@ class Contrato < ActiveRecord::Base
 	validates :nombre, :inmueble_id, :inquilino_ids, :propietario_ids, presence: true
 	validates :inmueble_id, uniqueness: true
   validates :nombre, :uniqueness => {:case_sensitive => false}
+  validate :liquidado?, :on => :update
 
   def get_primer_cuota_impaga(fecha_desde)
     contratos_items.find_by_sql([
@@ -44,6 +42,12 @@ class Contrato < ActiveRecord::Base
 	end
 
   private
+
+  def liquidado?
+    if liquidaciones.any?
+      errors.add(:base, "El contrato se encuentra liquidado.")
+    end
+  end
 
   # def calcular_total_a_pagar(fecha)
   #   total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado

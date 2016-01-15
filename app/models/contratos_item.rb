@@ -1,6 +1,6 @@
 class ContratosItem < ActiveRecord::Base
 
-	has_many :liquidaciones, :dependent => :restrict_with_error
+	has_many :liquidaciones
   
   belongs_to :contrato
 
