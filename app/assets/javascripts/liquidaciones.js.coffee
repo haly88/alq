@@ -7,7 +7,7 @@ ready = ->
   action_name = $('#action_name').val() 
   controller_name = $('#controller_name').val() 
   if $('#liquidacion_contrato_id').val() != ''
-    $.fn.calcularPersonas(inquilinos)
+    $.fn.calcularInquilino(inquilinos)
   
   if controller_name == 'liquidaciones'
     if action_name == 'edit' or action_name == 'update'
@@ -19,7 +19,7 @@ ready = ->
       $('#guardar').hide()
 
   $('#liquidacion_contrato_id').change ->
-    $.fn.calcularPersonas(inquilinos)
+    $.fn.calcularInquilino(inquilinos)
 
   $('#liquidacion_refresh').click -> 
     contrato = $('#liquidacion_contrato_id').val()
@@ -47,7 +47,7 @@ ready = ->
             $.fn.calcularTotalLiquidacion() 
             $('#guardar').show()
           else
-            $("#liquidacion_ajax_refresh").html("<h2>No se Encontraron Cuotas</h2>")
+            $("#liquidacion_ajax_refresh").html("<h3>No se Encontraron Cuotas</h3>")
             $('#guardar').hide()
         error:(data) ->
           return false
@@ -58,7 +58,7 @@ ready = ->
 $(document).on 'change', {'#liquidacion_neto', '#liquidacion_mora', '#liquidacion_descuento'}, () ->
   $.fn.calcularTotalLiquidacion()
     
-$.fn.calcularPersonas = (inquilinos) ->
+$.fn.calcularInquilino = (inquilinos) ->
   contrato = $('#liquidacion_contrato_id :selected').text()
   escaped_contrato = contrato.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
   options = $(inquilinos).filter("optgroup[label='#{escaped_contrato}']").html()

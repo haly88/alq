@@ -1,0 +1,33 @@
+<div class="panelAcciones">
+  <%= boton_atras_root %><%= boton_nuevo %>
+</div> 
+<table class="dataTable">
+  <thead>
+    <tr>
+      <th>Direccion</th>
+      <th>Contrato</th>
+      <th>Fecha</th>
+      <th>Propietario</th>
+      <th>Neto</th>
+      <th>Descuento</th>
+      <th>Comision</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pagos.each do |pago| %>
+      <tr>
+        <td><%= link_to pago.contrato.inmueble.direccion_completa, edit_pago_path(pago) %></td>
+        <td><%= link_to pago.contrato.nombre, edit_pago_path(pago) %></td>
+        <td><%= pago.fecha %></td>
+        <td><%= pago.propietario.nombre %></td>
+        <td><%= pago.neto %></td>
+        <td><%= pago.descuento %></td>
+        <td><%= pago.comision %></td>
+        <td><%= pago.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

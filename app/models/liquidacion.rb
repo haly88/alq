@@ -6,21 +6,13 @@ class Liquidacion < ActiveRecord::Base
   belongs_to :contratos_item
   belongs_to :inquilino, class_name: "Persona"
 
-  validates :contrato, :presence => true, on: :create
-  validates :fecha, :presence => true
+  validates :contrato, :fecha, :inquilino_id, :presence => true
   validates :total, :numericality => {:greater_than => 0}
 
-  validate :valor_pago_create, on: :create
-  validate :valor_pago_update, on: :update
+  validate :valor_cobro
 
-  def valor_pago_create
-    if neto > contratos_item.get_a_cobrar
-      errors.add(:neto, "No puede superar el pendiente de la cuota")
-    end
-  end
-
-  def valor_pago_update
-    if neto > contratos_item.get_a_cobrar + neto
+  def valor_cobro
+    if neto - (neto_was.nil? ? 0 : neto_was) > contratos_item.get_a_cobrar
       errors.add(:neto, "No puede superar el pendiente de la cuota")
     end
   end

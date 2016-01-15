@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="columns medium-12">
+    <%= label_tag 'Cuota: ' %>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha Desde</th>
+          <th>Monto</th>
+          <th>Cobros</th>
+          <th>Pendiente</th>
+          <th>Pagos</th>
+          <th>Pendiente</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td><%= @pago.contratos_item.fecha_desde %></td>
+            <td><%= @pago.contratos_item.monto %></td>
+            <td><%= @pago.contratos_item.get_cobrado %></td>
+            <td><%= @pago.contratos_item.get_a_cobrar %></td>
+            <td><%= @pago.contratos_item.get_pagado %></td>
+            <td><%= @pago.contratos_item.get_a_pagar %></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

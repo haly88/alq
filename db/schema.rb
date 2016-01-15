@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110220128) do
+ActiveRecord::Schema.define(version: 20160115195030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,24 @@ ActiveRecord::Schema.define(version: 20160110220128) do
   add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id", using: :btree
   add_index "liquidaciones", ["contratos_item_id"], name: "index_liquidaciones_on_contratos_item_id", using: :btree
 
+  create_table "pagos", force: :cascade do |t|
+    t.integer  "contrato_id"
+    t.integer  "contratos_item_id"
+    t.integer  "liquidacion_id"
+    t.date     "fecha"
+    t.decimal  "neto",              precision: 12, scale: 4, default: 0.0, null: false
+    t.decimal  "comision",          precision: 12, scale: 4, default: 0.0, null: false
+    t.decimal  "descuento",         precision: 12, scale: 4, default: 0.0, null: false
+    t.decimal  "total",             precision: 12, scale: 4, default: 0.0, null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.integer  "propietario_id"
+  end
+
+  add_index "pagos", ["contrato_id"], name: "index_pagos_on_contrato_id", using: :btree
+  add_index "pagos", ["contratos_item_id"], name: "index_pagos_on_contratos_item_id", using: :btree
+  add_index "pagos", ["liquidacion_id"], name: "index_pagos_on_liquidacion_id", using: :btree
+
   create_table "personas", force: :cascade do |t|
     t.string   "codigo"
     t.string   "nombre"
@@ -175,6 +193,8 @@ ActiveRecord::Schema.define(version: 20160110220128) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "tipo"
+    t.string   "piso"
+    t.string   "depto"
   end
 
   add_foreign_key "contratos", "inmuebles"
@@ -187,4 +207,7 @@ ActiveRecord::Schema.define(version: 20160110220128) do
   add_foreign_key "inmuebles", "inmueble_tipos"
   add_foreign_key "liquidaciones", "contratos"
   add_foreign_key "liquidaciones", "contratos_items"
+  add_foreign_key "pagos", "contratos"
+  add_foreign_key "pagos", "contratos_items"
+  add_foreign_key "pagos", "liquidaciones"
 end

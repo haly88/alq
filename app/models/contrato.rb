@@ -37,6 +37,21 @@ class Contrato < ActiveRecord::Base
       order by fecha_desde", self.id, fecha_desde]).first
   end
 
+  def get_primer_cuota_cobrada(fecha_desde)
+    contratos_items.find_by_sql([
+      "select contratos_items.*
+      from contratos_items
+      Left join (select contratos_item_id, sum(neto) as suma from liquidaciones group by contratos_item_id) Liquidaciones
+      ON contratos_items.id = Liquidaciones.contratos_item_id
+      Left join (select contratos_item_id, sum(neto) as suma from pagos group by contratos_item_id) pagos
+      ON contratos_items.id = pagos.contratos_item_id
+      where contrato_id = ?
+      and fecha_desde <= ?
+      and coalesce(Liquidaciones.suma,0) > 0
+      and coalesce(pagos.suma,0) < coalesce(Liquidaciones.suma,0) 
+      order by fecha_desde", self.id, fecha_desde]).first
+  end
+
 	def direccion_inmueble
 		inmueble.direccion_completa
 	end

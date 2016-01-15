@@ -1,6 +1,7 @@
 class ContratosItem < ActiveRecord::Base
 
 	has_many :liquidaciones
+  has_many :pagos
   
   belongs_to :contrato
 
@@ -17,6 +18,14 @@ class ContratosItem < ActiveRecord::Base
 
   def get_a_cobrar
   	monto - get_cobrado
+  end
+
+  def get_pagado
+    pagos.sum(:neto)
+  end
+
+  def get_a_pagar
+    monto - get_pagado
   end
 
   def liquidado?

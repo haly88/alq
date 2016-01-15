@@ -7,6 +7,7 @@
       <th>Direccion</th>
       <th>Contrato</th>
       <th>Fecha</th>
+      <th>Inquilino</th>
       <th>Neto</th>
       <th>Descuento</th>
       <th>Mora</th>
@@ -20,6 +21,7 @@
         <td><%= link_to liquidacion.contrato.inmueble.direccion_completa, edit_liquidacion_path(liquidacion) %></td>
         <td><%= link_to liquidacion.contrato.nombre, edit_liquidacion_path(liquidacion) %></td>
         <td><%= liquidacion.fecha %></td>
+        <td><%= liquidacion.inquilino.nombre %></td>
         <td><%= liquidacion.neto %></td>
         <td><%= liquidacion.descuento %></td>
         <td><%= liquidacion.mora %></td>

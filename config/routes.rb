@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   resources :cuenta_corriente, only: :index
 
   resources :empresas, only: [:update, :edit]
+  resources :pagos do
+    collection do
+      post :refresh
+    end
+    resources :comentarios
+  end
   resources :liquidaciones do
     collection do
       post :refresh
