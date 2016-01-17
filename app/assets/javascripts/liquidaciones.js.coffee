@@ -22,40 +22,19 @@ ready = ->
     $.fn.calcularInquilino(inquilinos)
 
   $('#liquidacion_refresh').click -> 
-    contrato = $('#liquidacion_contrato_id').val()
-    inquilino = $('#liquidacion_inquilino_id').val()
-    fecha = $('#liquidacion_fecha').val()
-    $.ajax
-        type: "POST",
-        url: "/liquidaciones/refresh",
-        data: 
-          liquidacion: 
-            contrato_id: contrato
-            inquilino_id: inquilino 
-            fecha: fecha 
-        success:(data) ->
-          html = data
-          html = $(html).find("#liquidacion_ajax_refresh").html()
-          if $(html).is("#form_principal")
-            $("#liquidacion_ajax_refresh").html(html)
-            $.fn.initChosen()
-            $.fn.initDatepicker()
-            $.fn.initDateMask()
-            $.fn.initDateDefault()
-            $.fn.initDecimalMask()
-            $.fn.initInputMask()
-            $.fn.calcularTotalLiquidacion() 
-            $('#guardar').show()
-          else
-            $("#liquidacion_ajax_refresh").html("<h3>No se Encontraron Cuotas</h3>")
-            $('#guardar').hide()
-        error:(data) ->
-          return false
+    $('#form_refresh').submit()
 
   $('#impuestos_guardar').click ->
     $('#form_impuestos').submit()
 
-$(document).on 'change', {'#liquidacion_neto', '#liquidacion_mora', '#liquidacion_descuento'}, () ->
+$(document).on('page:load', ready)
+$(document).ready(ready)
+
+$(document).on 'change', {'#liquidacion_mora', '#liquidacion_descuento'}, () ->
+  $.fn.calcularTotalLiquidacion()
+
+$(document).on 'change', '#liquidacion_neto', () ->
+  $.fn.calcularMora()
   $.fn.calcularTotalLiquidacion()
     
 $.fn.calcularInquilino = (inquilinos) ->
@@ -74,5 +53,21 @@ $.fn.calcularTotalLiquidacion = () ->
   total = neto + mora - descuento
   $('#liquidacion_total').val(total)
 
-$(document).on('page:load', ready)
-$(document).ready(ready)
+$.fn.calcularMora = () ->
+  fecha = Number($('#liquidacion_fecha_day').val())
+  neto = Number($('#liquidacion_neto').val())
+  mora_fija_dia = Number($('#mora_fija_dia').val())
+  mora_fija_monto = Number($('#mora_fija_monto').val())
+  mora_fija_porc = Number($('#mora_fija_porc').val())
+  mora_var_dia = Number($('#mora_var_dia').val())
+  mora_var_monto = Number($('#mora_var_monto').val())
+  mora_var_porc = Number($('#mora_var_porc').val())
+  mora_total = 0
+  if fecha > mora_fija_dia
+      mora_total = mora_fija_monto
+      mora_total += neto * (mora_fija_porc / 100)
+    if fecha > mora_var_dia
+      mora_total += (fecha - mora_var_dia) * mora_var_monto
+      mora_total += (fecha - mora_var_dia) * (neto * (mora_var_porc / 100))
+  $('#liquidacion_mora').val(mora_total)
+  

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115195030) do
+ActiveRecord::Schema.define(version: 20160116034137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20160115195030) do
     t.integer  "mora_var_dia",                             default: 0,   null: false
     t.decimal  "mora_var_monto",  precision: 12, scale: 4, default: 0.0, null: false
     t.decimal  "mora_var_porc",   precision: 12, scale: 4, default: 0.0, null: false
+    t.decimal  "comision_monto",  precision: 12, scale: 4, default: 0.0, null: false
+    t.decimal  "comision_porc",   precision: 12, scale: 4, default: 0.0, null: false
   end
 
   create_table "impuestos", force: :cascade do |t|

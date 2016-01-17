@@ -22,7 +22,10 @@ class PagosController < ApplicationController
   def refresh
     @pago = Pago.new(pago_params)
     set_contrato
-    render :new 
+    respond_to do |format|
+      format.html { render :new }
+      format.js
+    end
   end
 
   # GET /pagos/1/edit

@@ -17,20 +17,19 @@ class Liquidacion < ActiveRecord::Base
     end
   end
 
-  def get_mora
-    empresa = Empresa.find(1)
-    get_a_cobrar = contratos_item.get_a_cobrar
-    mora_total = 0
-    if fecha.day > empresa.mora_fija_dia
-      mora_total = empresa.mora_fija_monto
-      mora_total += get_a_cobrar * (empresa.mora_fija_porc / 100)
-    end
-    if fecha.day > empresa.mora_var_dia
-      mora_total += (fecha.day - empresa.mora_var_dia) * empresa.mora_var_monto
-      mora_total += (fecha.day - empresa.mora_var_dia) * (get_a_cobrar * (empresa.mora_var_porc / 100))
-    end
-    return mora_total
-  end
+  # def get_mora(neto)
+  #   empresa = Empresa.find(1)
+  #   mora_total = 0
+  #   if fecha.day > empresa.mora_fija_dia
+  #     mora_total = empresa.mora_fija_monto
+  #     mora_total += neto * (empresa.mora_fija_porc / 100)
+  #   end
+  #   if fecha.day > empresa.mora_var_dia
+  #     mora_total += (fecha.day - empresa.mora_var_dia) * empresa.mora_var_monto
+  #     mora_total += (fecha.day - empresa.mora_var_dia) * (neto * (empresa.mora_var_porc / 100))
+  #   end
+  #   return mora_total
+  # end
 
 
   # private

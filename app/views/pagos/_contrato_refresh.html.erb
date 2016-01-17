@@ -1,4 +1,4 @@
-<%= custom_form_for @pago, url: refresh_pagos_path, html: {id: 'form_refresh'} do |f| %>
+<%= custom_form_for @pago, url: refresh_pagos_path, html: {id: 'form_refresh'}, :remote => :true do |f| %>
 <div class="row">
   <div class="columns medium-4">
     <%= f.collection_select :contrato_id, @contratos, :id, :direccion_inmueble %>

@@ -22,7 +22,10 @@ class LiquidacionesController < ApplicationController
   def refresh
     @liquidacion = Liquidacion.new(liquidacion_params)
     set_contrato
-    render :new 
+    respond_to do |format|
+      format.html { render :new }
+      format.js
+    end
   end
 
   # GET /liquidaciones/1/edit
@@ -77,7 +80,6 @@ class LiquidacionesController < ApplicationController
       if @contratos_item
         @liquidacion.contratos_item_id = @contratos_item.id 
         @liquidacion.neto = @contratos_item.get_a_cobrar
-        @liquidacion.mora = @liquidacion.get_mora
       end
     end
   end

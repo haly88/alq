@@ -68,7 +68,7 @@ $.fn.calcularTotalPago = () ->
   neto = Number($('#pago_neto').val())
   comision = Number($('#pago_comision').val())
   descuento = Number($('#pago_descuento').val())
-  total = neto + comision - descuento
+  total = neto - comision - descuento
   $('#pago_total').val(total)
 
 $(document).on('page:load', ready)

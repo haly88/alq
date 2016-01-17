@@ -1,0 +1,33 @@
+<% if @liquidacion.contratos_item_id %>
+  <%= custom_form_for @liquidacion, html: {id: 'form_principal'} do |f| %>
+    <%= f.error_messages %>
+    <div class="form-inputs">
+      <%= f.hidden_field :contrato_id %>
+      <%= f.hidden_field :contratos_item_id %>
+      <%= f.hidden_field :inquilino_id %>
+      <%= f.hidden_field :fecha %>
+      <%= hidden_field_tag 'liquidacion_fecha_day', @liquidacion.fecha.day %>
+      <%= hidden_field_tag 'mora_fija_dia', @empresa.mora_fija_dia %>
+      <%= hidden_field_tag 'mora_fija_monto', @empresa.mora_fija_monto %>
+      <%= hidden_field_tag 'mora_fija_porc', @empresa.mora_fija_porc %>
+      <%= hidden_field_tag 'mora_var_dia', @empresa.mora_var_dia %>
+      <%= hidden_field_tag 'mora_var_monto', @empresa.mora_var_monto %>
+      <%= hidden_field_tag 'mora_var_porc', @empresa.mora_var_porc %>
+      <%= render 'item_info' %>
+      <div class="row">
+        <div class="columns medium-2">
+          <%= f.text_field :neto, :class => 'currency' %>
+        </div>
+        <div class="columns medium-2">
+          <%= f.text_field :mora, :class => 'currency' %>
+        </div>
+        <div class="columns medium-2">
+          <%= f.text_field :descuento, :class => 'currency' %>
+        </div>
+        <div class="columns medium-2 end">
+          <%= f.text_field :total, readonly: true, label: 'Total a Cobrar', :class => 'currency' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

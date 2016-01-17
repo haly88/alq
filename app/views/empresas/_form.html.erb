@@ -68,6 +68,19 @@
             <%= f.text_field :mora_var_porc, :label => 'Porcentaje', :class => 'porcentaje' %>
           </div>
         </div>
+        <div class="row">
+          <div class="column medium-12">
+            <%= label_tag "Comision" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column medium-2">
+            <%= f.text_field :comision_monto, :label => 'Monto', :class => 'currency' %>
+          </div>
+          <div class="column medium-2 end">
+            <%= f.text_field :comision_porc, :label => 'Porcentaje', :class => 'porcentaje' %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
