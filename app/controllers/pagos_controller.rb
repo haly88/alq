@@ -79,7 +79,7 @@ class PagosController < ApplicationController
       @contratos_item = @contrato.get_primer_cuota_cobrada(@pago.fecha)
       if @contratos_item
         @pago.contratos_item_id = @contratos_item.id 
-        @pago.neto = @contratos_item.get_a_pagar
+        @pago.neto = @contratos_item.get_cobrado
       end
     end
   end
@@ -87,6 +87,6 @@ class PagosController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def pago_params
     params.require(:pago).permit(:contrato_id, :contratos_item_id, :propietario_id, :fecha, :neto, :descuento,
-    :comision, :total)
+    :comision, :total, :descripcion)
   end
 end

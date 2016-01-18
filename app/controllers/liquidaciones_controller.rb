@@ -56,8 +56,11 @@ class LiquidacionesController < ApplicationController
   # DELETE /liquidaciones/1
   # DELETE /liquidaciones/1.json
   def destroy
-    @liquidacion.destroy
-    redirect_to liquidaciones_url, notice: t('action.delete')
+    if @liquidacion.destroy
+      redirect_to liquidaciones_url, notice: t('action.delete')
+    else
+      render :edit
+    end
   end
 
   private
@@ -87,6 +90,6 @@ class LiquidacionesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def liquidacion_params
     params.require(:liquidacion).permit(:contrato_id, :contratos_item_id, :inquilino_id, :fecha, :neto, :descuento,
-    :mora, :total)
+    :mora, :total, :descripcion)
   end
 end

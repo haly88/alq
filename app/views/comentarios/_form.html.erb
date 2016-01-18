@@ -1,12 +1,16 @@
 <hr>
 <%= form_for [@comentable, @comentario], html: {id: 'form_comentarios'}, remote: true do |f| %>
 	<div class="row">
-		<div class="columns medium-11">
+		<div class="columns medium-10">
 			<%= f.label :descripcion, "Nuevo Comentario" %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns medium-10">
 			<%= f.text_area :descripcion %>
 		</div>
-		<div class="columns medium-1">
-			<%= link_to '<i class="fa fa-2x fa-floppy-o"></i>'.html_safe, '#', title: "Guardar", id: "comentarios_guardar" %>
+		<div class="columns medium-1 end">
+			<%= link_to 'Enviar', '#', title: "Guardar", id: "comentarios_guardar", :class => 'button success' %>
 		</div>
 	</div>
 <% end %>

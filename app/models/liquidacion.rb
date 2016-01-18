@@ -11,11 +11,23 @@ class Liquidacion < ActiveRecord::Base
 
   validate :valor_cobro
 
+  before_destroy :cuota_pagada?
+
+  private
+
   def valor_cobro
     if neto - (neto_was.nil? ? 0 : neto_was) > contratos_item.get_a_cobrar
       errors.add(:neto, "No puede superar el pendiente de la cuota")
     end
   end
+
+  def cuota_pagada?
+    if contratos_item.get_pagado > 0
+      errors.add(:base, "No puede borrar, la cuota se encuentra pagada")
+      return false
+    end
+  end
+
 
   # def get_mora(neto)
   #   empresa = Empresa.find(1)

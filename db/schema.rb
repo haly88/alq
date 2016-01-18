@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116034137) do
+ActiveRecord::Schema.define(version: 20160118140408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 20160116034137) do
     t.integer  "inquilino_id"
     t.integer  "contratos_item_id"
     t.decimal  "mora",              precision: 12, scale: 4
+    t.text     "descripcion"
   end
 
   add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id", using: :btree
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 20160116034137) do
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
     t.integer  "propietario_id"
+    t.text     "descripcion"
   end
 
   add_index "pagos", ["contrato_id"], name: "index_pagos_on_contrato_id", using: :btree

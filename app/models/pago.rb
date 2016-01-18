@@ -11,8 +11,10 @@ class Pago < ActiveRecord::Base
 
   validate :valor_pago
 
+  private
+
   def valor_pago
-    if neto - (neto_was.nil? ? 0 : neto_was) > contratos_item.get_a_pagar
+    if neto - (neto_was.nil? ? 0 : neto_was) > contratos_item.get_cobrado
       errors.add(:neto, "No puede superar el pendiente de la cuota")
     end
   end

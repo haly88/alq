@@ -22,16 +22,37 @@ ready = ->
     $.fn.calcularPropietario(propietarios)
 
   $('#pago_refresh').click -> 
-    $('#form_refresh').submit()
+    contrato = $('#pago_contrato_id').val()
+    propietario = $('#pago_propietario_id').val()
+    fecha = $('#pago_fecha').val()
+    $.ajax
+        type: "POST",
+        url: "/pagos/refresh",
+        data: 
+          pago: 
+            contrato_id: contrato
+            propietario_id: propietario 
+            fecha: fecha 
+        success:(data) ->
+          html = data
+          html = $(html).find("#pago_ajax_refresh").html()
+          if $(html).is("#form_principal")
+            $("#pago_ajax_refresh").html(html)
+            $.fn.initChosen()
+            $.fn.initDatepicker()
+            $.fn.initDateMask()
+            $.fn.initDateDefault()
+            $.fn.initDecimalMask()
+            $.fn.initInputMask()
+            $.fn.calcularTotalPago() 
+            $('#guardar').show()
+          else
+            $("#pago_ajax_refresh").html("<h3>No se Encontraron Cuotas</h3>")
+            $('#guardar').hide()
+        error:(data) ->
+          return false
 
-$(document).on('page:load', ready)
-$(document).ready(ready)
-
-$(document).on 'change', {'#pago_comision', '#pago_descuento'}, () ->
-  $.fn.calcularTotalPago()
-
-$(document).on 'change', '#pago_neto', () ->
-  $.fn.calcularComision()
+$(document).on 'change', {'#pago_neto', '#pago_descuento'}, () ->
   $.fn.calcularTotalPago()
     
 $.fn.calcularPropietario = (propietarios) ->
@@ -50,11 +71,5 @@ $.fn.calcularTotalPago = () ->
   total = neto - comision - descuento
   $('#pago_total').val(total)
 
-$.fn.calcularComision = () ->
-  neto = Number($('#pago_neto').val())
-  comision_monto = Number($('#comision_monto').val())
-  comision_porc = Number($('#comision_porc').val())
-  mora_total = 0
-  mora_total = comision_monto
-  mora_total += neto * (comision_porc / 100)
-  $('#pago_comision').val(mora_total)
+$(document).on('page:load', ready)
+$(document).ready(ready)
