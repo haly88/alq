@@ -15,6 +15,7 @@
  *= require foundation_and_overrides
  *= require datatables/dataTables.foundation.min.css
  *= require datatables/colReorder.foundation.min.css
+ *= require datatables/buttons.foundation.min.css
  *= require scaffolds
  *= require app
  *= require print

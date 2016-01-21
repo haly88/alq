@@ -41,16 +41,20 @@ $.fn.initInputMask = () ->
 	$(":input").inputmask()
 
 $.fn.initTables = () ->
-	$(".dataTable").DataTable
-    responsive: true
-    colReorder: true
-    scrollY: "400px"
-    scrollCollapse: true
-    paging: false
-    stateSave: true
-    language:
-    	decimal: ","
+	$(".dataTable").DataTable({
+    responsive: true,
+    colReorder: true,
+    scrollY: "400px",
+    scrollCollapse: true,
+    paging: false,
+    stateSave: true,
+    language: {
+    	decimal: ",",
     	thousands: "." 
+    },
+    dom: 'fBrtip',
+    buttons: ['excel', 'print']
+  })
 
 $(document).ready(ready)
 $(document).on('page:load',ready)

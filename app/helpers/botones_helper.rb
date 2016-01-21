@@ -29,7 +29,7 @@ module BotonesHelper
 	end
 
 	def boton_imprimir
-	 	link_to '<i class="fa fa-2x fa-print"></i>'.html_safe, '#', :onclick => 'window.print();return false;'
+	 	link_to '<i class="fa fa-2x fa-print"></i>'.html_safe, '#', :onclick => 'window.print();return false;', :title => "Imprimir"
 	 end 
 
 	 def boton_comentarios
