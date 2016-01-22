@@ -1,5 +1,24 @@
 @media print { 
  /* All your print styles go here */
+  .impresion-letra{
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    border: solid 1px #888;
+    line-height: 25px;
+  }
+
+  .impresion-firma{
+    bottom: 50px;
+    right: 100px;
+    position: fixed;
+  }
+
+  .panel_forms{
+    height: 100%;
+  }
+
   .footer, .top-bar, .panelAcciones, abbr {
     display: none; }
 

@@ -29,14 +29,20 @@ td {
 }
 
 #data-alert {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    opacity: 0.9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  opacity: 0.9;
 }
 
 .error_messages ul li{
 	color: #ff0000;
 }
+
+#map_canvas{
+	height: 300px;
+	width: 405px;
+}
+

@@ -1,5 +1,13 @@
 <div class="datos_impresion">
 <div class="row">
+	<div class="columns medium-5">
+		<h3>Recibo</h3>
+	</div>
+	<div class="columns medium-1 end">
+		<h2 class="impresion-letra">R</h2>
+	</div>
+</div>
+<div class="row">
 	<div class="columns medium-2">
 		<%= label_tag 'Razon Social' %>
 		<%= text_field_tag 'empresa_razon_social', @empresa.razon_social %>
@@ -17,4 +25,9 @@
 		<%= text_field_tag 'empresa_email', @empresa.email %>
 	</div>
 </div>
+	<div class="row">
+		<div class="columns medium-2">
+			<h4 class="impresion-firma">Firma..............</h4>
+		</div>
+	</div>
 </div>

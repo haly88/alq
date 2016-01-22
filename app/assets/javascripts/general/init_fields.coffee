@@ -53,7 +53,7 @@ $.fn.initTables = () ->
     	thousands: "." 
     },
     dom: 'fBrtip',
-    buttons: ['excel', 'print']
+    buttons: [{text: 'Filtros', className: 'buttons-filtro'}, 'excel', 'print']
   })
 
 $(document).ready(ready)

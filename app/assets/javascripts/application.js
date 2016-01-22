@@ -33,6 +33,7 @@
 //= require contratos
 //= require liquidaciones
 //= require pagos
+//= require inmuebles
 
 
 
