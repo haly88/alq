@@ -11,7 +11,7 @@
       <div class="content active" id="general">
         <div class="row">
           <div class="columns medium-2">
-            <%= f.collection_select :inmueble_tipo, @inmueble_tipo, :id, :nombre %>
+            <%= f.collection_select :inmueble_tipo_id, @inmueble_tipo, :id, :nombre %>
           </div>
           <div class="columns medium-2 end">
             <%= f.text_field :codigo %>
