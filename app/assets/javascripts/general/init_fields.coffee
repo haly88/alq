@@ -41,20 +41,23 @@ $.fn.initInputMask = () ->
 	$(":input").inputmask()
 
 $.fn.initTables = () ->
-	$(".dataTable").DataTable({
-    responsive: true,
-    colReorder: true,
-    scrollY: "400px",
-    scrollCollapse: true,
-    paging: false,
-    stateSave: true,
-    language: {
+	$(".dataTable").DataTable
+    responsive: true
+    colReorder: true
+    scrollY: "400px"
+    scrollCollapse: true
+    paging: false
+    stateSave: true
+    language: 
     	decimal: ",",
     	thousands: "." 
-    },
-    dom: 'fBrtip',
-    buttons: [{text: 'Filtros', className: 'buttons-filtro'}, 'excel', 'print']
-  })
+    dom: 'fBrtip'
+    buttons: [{text: 'Filtros', className: 'buttons-filtros'}, 'excel', 'print']  
+		$('.buttons-filtros').attr('data-reveal-id', 'filtros_modal')
+		$('.buttons-filtros').hide()
+  if $('.informe')[0]
+ 		$('.buttons-filtros').show()
+
 
 $(document).ready(ready)
 $(document).on('page:load',ready)

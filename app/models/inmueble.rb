@@ -5,6 +5,7 @@ class Inmueble < ActiveRecord::Base
 	has_one :contrato, :dependent => :restrict_with_error
 	belongs_to :inmueble_tipo
 
+	validates :inmueble_tipo, :presence => true
 	validates :codigo, :uniqueness => {:case_sensitive => false}, :presence => true
 	#Validacion compuesta
 	validates :direccion, :presence => true, :uniqueness => {:case_sensitive => false, :scope => [:piso, :depto]}

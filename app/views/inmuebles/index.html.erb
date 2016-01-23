@@ -7,7 +7,6 @@
       <th>Direccion</th>
       <th>Codigo</th>
       <th>Descripcion</th>
-      <th>Activo</th>
       <th>Inmueble tipo</th>
     </tr>
   </thead>
@@ -18,7 +17,6 @@
         <td><%= link_to inmueble.direccion_completa, edit_inmueble_path(inmueble) %></td>
         <td><%= link_to inmueble.codigo, edit_inmueble_path(inmueble) %></td>
         <td><%= inmueble.descripcion %></td>
-        <td><%= inmueble.activo %></td>
         <td><%= inmueble.inmueble_tipo.nombre %></td>
       </tr>
     <% end %>

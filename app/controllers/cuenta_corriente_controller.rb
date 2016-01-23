@@ -1,8 +1,12 @@
 class CuentaCorrienteController < ApplicationController
 
 	def index
-		sql = 
-"Select 
+		persona_id = ActiveRecord::Base.connection.quote(params[:persona_id])
+		
+sql = 
+"
+
+Select 
 personas.nombre as Persona,
 inmuebles.direccion || ' ' || inmuebles.piso || ' ' || inmuebles.depto as Direccion,
 contratos.nombre as Contrato,
@@ -21,7 +25,11 @@ Inner Join contratos_personas_tipos ON contratos_items.contrato_id = contratos_p
 Inner Join personas ON contratos_personas_tipos.inquilino_id = personas.id
 Inner Join contratos ON contratos_items.contrato_id = contratos.id
 Inner Join inmuebles ON inmuebles.id = contratos.inmueble_id
-Order By personas.nombre, contratos_items.fecha_desde"
+Where
+(#{persona_id} is NULL OR personas.nombre = #{persona_id})
+Order By personas.nombre, contratos_items.fecha_desde
+
+"
 
     @resultado = ActiveRecord::Base.connection.exec_query(sql)
     render 'informes/index'

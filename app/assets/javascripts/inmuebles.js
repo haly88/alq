@@ -20,8 +20,6 @@ function geocodeAddress(geocoder, marker, map) {
       marker.setMap(map);
       marker.setPosition(results[0].geometry.location);
       document.getElementById('inmueble_localidad').value = results[0].formatted_address;
-    } else {
-      alert('Se encontro el siguiente problema: ' + status);
     }
   });
 }
