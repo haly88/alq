@@ -27,7 +27,7 @@ $.fn.initDateMask = () ->
 	$('.datepicker').inputmask('alias': 'date')
 
 $.fn.initDateDefault = () ->
-	if $('.datepicker:not([readonly])').val() == ''
+	if $('.dia_hoy').val() == ''
 		fechaHoy = $.datepicker.formatDate("dd/mm/yy", new Date())
 		$('.datepicker:not([readonly])').val(fechaHoy)
 

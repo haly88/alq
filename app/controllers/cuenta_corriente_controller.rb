@@ -70,7 +70,11 @@ class CuentaCorrienteController < ApplicationController
 		end
 
     @resultado = ActiveRecord::Base.connection.exec_query(sql)
-    render 'informes/index'
+
+    respond_to do |format|
+    	format.html {render 'informes/index'}
+    	format.js {render 'informes/index'}
+    end
   end
 
   private

@@ -1,18 +1,3 @@
-<table class="dataTable informe">
-  <thead>
-    <tr>
-    	<% @resultado.columns.each do |c| %>
-      	<th><%= c %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @resultado.rows.each do |c| %>
-      <tr>
-      <% c.each do |c| %>
-        <td><%= c %></td>
-      <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row" id="informe_form">
+	<%= render 'informes/form' %>
+</div>

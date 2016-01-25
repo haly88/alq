@@ -7,7 +7,7 @@
     <%= f.grouped_collection_select :propietario_id, @contratos, :propietarios, :direccion_inmueble, :id, :nombre, include_blank: true  %>
   </div>
   <div class="columns medium-2">
-  	<%= f.text_field :fecha, :class => 'datepicker' %>
+  	<%= f.text_field :fecha, :class => 'datepicker dia_hoy' %>
  	</div>
   <div class="columns medium-1 end">
   	<%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'pago_refresh' %>
