@@ -35,10 +35,4 @@
 //= require pagos
 //= require inmuebles
 
-//= depend_on_asset "sort_asc.png"
-//= depend_on_asset "sort_asc_disabled.png"
-//= depend_on_asset "sort_both.png"
-//= depend_on_asset "sort_desc.png"
-//= depend_on_asset "sort_desc_disabled.png"
-
 
