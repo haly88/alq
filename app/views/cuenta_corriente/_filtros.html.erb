@@ -18,6 +18,10 @@
 			<%= label_tag 'Tipo' %>
 			<%= select_tag 'tipo', options_for_select([['Ambos', 0], ['Inquilino', 1], ['Propietario', 2]]) %>
 		</div>
+		<div class="columns medium-3 end">
+			<%= label_tag 'Totalizado' %>
+			<%= select_tag 'totalizado', options_for_select([['Sin Totalizar', 0], ['Por Persona', 1]]) %>
+		</div>
 	</div>
 	<div class="row">
 		<div class="columns medium-2">
