@@ -1,38 +1,57 @@
 class CuentaCorrienteController < ApplicationController
+	before_action :set_globales
 
 	def index
+		params.reject!{|k,v| v.empty?} if params
 		persona_id = ActiveRecord::Base.connection.quote(params[:persona_id])
-		
-sql = 
+		fecha_desde = ActiveRecord::Base.connection.quote(params[:fecha_desde])
+		fecha_hasta = ActiveRecord::Base.connection.quote(params[:fecha_hasta])
+		tipo = ActiveRecord::Base.connection.quote(params[:tipo]) # 0 Ambos, 1 Inquilinos, 2 Propietarios
+		sql = 
 "
 
-Select 
+select 
+personas.tipo as Tipo,
 personas.nombre as Persona,
-inmuebles.direccion || ' ' || inmuebles.piso || ' ' || inmuebles.depto as Direccion,
 contratos.nombre as Contrato,
-contratos_items.fecha_desde as Cuota,
-contratos_items.monto as Monto,
-coalesce(Liquidaciones.suma,0) as Cobrado,
-contratos_items.monto - coalesce(Liquidaciones.suma,0) as PendienteDeCobro,
-coalesce(Liquidaciones.suma,0) as Pagado,
-contratos_items.monto - coalesce(Liquidaciones.suma,0) as PendienteDePago
-From contratos_items
+inmuebles.direccion || ' ' || inmuebles.piso || ' ' || inmuebles.depto as Direccion,
+contratos_items.fecha_desde as CuotaFecha,
+contratos_items.monto as CuotaMonto,
+Case When personas.tipo = 'Inquilino' Then coalesce(Liquidaciones.suma,0) Else 0 End as Cobrado,
+Case When personas.tipo = 'Inquilino' Then coalesce(contratos_items.monto - coalesce(Liquidaciones.suma,0),0) Else 0 End as PendienteDeCobro,
+Case When personas.tipo = 'Propietario' Then coalesce(Pagos.suma,0) Else 0 End as Pagado,
+Case When personas.tipo = 'Propietario' Then coalesce(contratos_items.monto - coalesce(Pagos.suma,0),0) Else 0 End as PendienteDePago
+from personas
+Left Join contratos_personas_tipos ON (contratos_personas_tipos.inquilino_id = personas.id OR contratos_personas_tipos.propietario_id = personas.id) 
+Left Join contratos ON contratos.id = contratos_personas_tipos.contrato_id
+Left Join contratos_items ON contratos_items.contrato_id = contratos.id
+Left Join inmuebles ON inmuebles.id = contratos.inmueble_id
 Left join (select contratos_item_id, sum(neto) as suma from liquidaciones group by contratos_item_id) Liquidaciones
-ON contratos_items.id = Liquidaciones.contratos_item_id
+ON Liquidaciones.contratos_item_id = contratos_items.id 
 Left join (select contratos_item_id, sum(neto) as suma from pagos group by contratos_item_id) pagos
 ON contratos_items.id = pagos.contratos_item_id
-Inner Join contratos_personas_tipos ON contratos_items.contrato_id = contratos_personas_tipos.contrato_id and inquilino_id is not null
-Inner Join personas ON contratos_personas_tipos.inquilino_id = personas.id
-Inner Join contratos ON contratos_items.contrato_id = contratos.id
-Inner Join inmuebles ON inmuebles.id = contratos.inmueble_id
-Where
-(#{persona_id} is NULL OR personas.nombre = #{persona_id})
-Order By personas.nombre, contratos_items.fecha_desde
+where 
+		 	(#{persona_id} is NULL OR personas.id = #{persona_id})
+and		(#{fecha_desde} is NULL OR contratos_items.fecha_desde >= #{fecha_desde})
+and		(#{fecha_hasta} is NULL OR contratos_items.fecha_desde <= #{fecha_hasta})
+and		((coalesce(#{tipo},0) = '0' and personas.tipo in ('Inquilino', 'Propietario')) OR
+			(coalesce(#{tipo},0) = '1' and personas.tipo = 'Inquilino') OR
+			(coalesce(#{tipo},0) = '2' and personas.tipo = 'Propietario'))
+order by personas.tipo,
+	personas.nombre,
+	contratos.nombre,
+	contratos_items.fecha_desde
 
 "
 
     @resultado = ActiveRecord::Base.connection.exec_query(sql)
     render 'informes/index'
+  end
+
+  private
+
+  def set_globales
+  	@personas = Persona.all
   end
 
 end

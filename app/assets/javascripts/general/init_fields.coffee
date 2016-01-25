@@ -58,7 +58,6 @@ $.fn.initTables = () ->
   if $('.informe')[0]
  		$('.buttons-filtros').show()
 
-
 $(document).ready(ready)
 $(document).on('page:load',ready)
  

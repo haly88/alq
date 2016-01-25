@@ -1,0 +1,27 @@
+<%= form_tag cuenta_corriente_index_path, :method => 'get' do %>
+	<div class="row">
+		<div class="columns medium-3">
+			<%= label_tag 'Fecha_desde' %>
+			<%= text_field_tag 'fecha_desde', nil, :class => 'datepicker' %>
+		</div>
+		<div class="columns medium-3">
+			<%= label_tag 'Fecha_hasta' %>
+			<%= text_field_tag 'fecha_hasta', nil, :class => 'datepicker' %>
+		</div>
+		<div class="columns medium-4 end">
+			<%= label_tag 'Persona' %>
+			<%= select_tag 'persona_id', options_from_collection_for_select(@personas, :id, :nombre), include_blank: true %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns medium-3">
+			<%= label_tag 'Tipo' %>
+			<%= select_tag 'tipo', options_for_select([['Ambos', 0], ['Inquilino', 1], ['Propietario', 2]]) %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns medium-2">
+			<%= submit_tag 'Aceptar', :class => 'button tiny' %>
+		</div>
+	</div>	
+<% end %>
