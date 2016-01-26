@@ -44,6 +44,7 @@ $.fn.initTables = () ->
 	$(".dataTable").DataTable
     responsive: true
     colReorder: true
+    scrollX: true
     scrollY: "400px"
     scrollCollapse: true
     paging: false
