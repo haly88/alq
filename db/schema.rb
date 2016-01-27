@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126153830) do
+ActiveRecord::Schema.define(version: 20160127183518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cajas", force: :cascade do |t|
+    t.string   "codigo"
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "cajas_conceptos", force: :cascade do |t|
+    t.string   "codigo"
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "interno",     default: false
+  end
 
   create_table "comentarios", force: :cascade do |t|
     t.text     "descripcion"

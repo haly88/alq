@@ -1,0 +1,22 @@
+<div class="panelAcciones">
+  <%= boton_atras_root %><%= boton_nuevo %>
+</div> 
+<table class="dataTable display responsive no-wrap">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cajas.each do |caja| %>
+      <tr>
+        <td><%= link_to caja.codigo, edit_caja_path(caja) %></td>
+        <td><%= caja.nombre %></td>
+        <td><%= caja.descripcion %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

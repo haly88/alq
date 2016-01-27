@@ -22,3 +22,13 @@ end
 unless Empresa.any?
 	Empresa.create!(:id => 1)
 end
+
+unless Caja.any?
+	Caja.create!(:id => 1, :codigo => "cajachica", :nombre => "Caja Chica")
+end
+
+unless CajasConcepto.any?
+	CajasConcepto.create!(:id => 1, :codigo => "cobroinquilino", :nombre => "Cobro a Inquilino", :interno => true)
+	CajasConcepto.create!(:id => 2, :codigo => "pagopropietarios", :nombre => "Pago a Propietarios", :interno => true)
+	CajasConcepto.create!(:id => 3, :codigo => "varios", :nombre => "Varios", :interno => false)
+end

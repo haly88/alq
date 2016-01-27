@@ -1,0 +1,16 @@
+<%= custom_form_for @caja, html: {id: 'form_principal'} do |f| %>
+  <%= f.error_messages %>
+  <div class="row">
+    <div class="columns medium-2">
+      <%= f.text_field :codigo %>
+    </div>
+    <div class="columns medium-2 end">
+      <%= f.text_field :nombre %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns medium-6">
+      <%= f.text_area :descripcion %>
+    </div>
+  </div>
+<% end %>

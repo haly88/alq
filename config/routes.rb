@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :cajas_conceptos
+  resources :cajas
+
   resources :sesiones
 
   resources :cuenta_corriente, only: :index

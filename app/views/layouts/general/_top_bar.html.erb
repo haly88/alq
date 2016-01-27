@@ -19,10 +19,27 @@
 	          <li><a href="<%= cuenta_corriente_index_path %>">Cuenta Corriente</a></li>
 	        </ul>
 	      </li>
-	      <li><a href="<%= inmuebles_path %>"><i class="fa fa-building-o fa-fw"></i>&nbsp; Inmuebles</a></li>
-	      <li><a href="<%= impuestos_path %>"><i class="fa fa-info fa-fw"></i>&nbsp; Impuestos</a></li>
-	      <li><a href="<%= liquidaciones_path %>"><i class="fa fa-usd fa-fw"></i>&nbsp; Cobros</a></li>
-	      <li><a href="<%= pagos_path %>"><i class="fa fa-usd fa-fw"></i>&nbsp; Pagos</a></li>
+	      <li class="has-dropdown">
+	        <a href="<%= inmuebles_path %>"><i class="fa fa-building-o fa-fw"></i>&nbsp; Inmuebles</a>
+	        <ul class="dropdown">
+	          <li><a href="<%= inmuebles_path %>">Inmuebles</a></li>
+	          <li><a href="<%= impuestos_path %>">Impuestos</a></li>
+	        </ul>
+	      </li>
+	      <li class="has-dropdown">
+	        <a href="<%= liquidaciones_path %>"><i class="fa fa-usd fa-fw"></i>&nbsp; Liquidaciones</a>
+	        <ul class="dropdown">
+	          <li><a href="<%= liquidaciones_path %>">Cobros</a></li>
+	          <li><a href="<%= pagos_path %>">Pagos</a></li>
+	        </ul>
+	      </li>
+	      <li class="has-dropdown">
+	        <a href="<%= cajas_path %>"><i class="fa fa-archive fa-fw"></i>&nbsp; Cajas</a>
+	        <ul class="dropdown">
+	          <li><a href="<%= cajas_path %>">Cajas</a></li>
+	          <li><a href="<%= cajas_conceptos_path %>">Conceptos</a></li>
+	        </ul>
+	      </li>
 	    </ul>
 	    <ul class="right">
 	    	<li class="has-dropdown">
