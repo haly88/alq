@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :sesiones
+
   resources :cuenta_corriente, only: :index
 
   resources :empresas, only: [:update, :edit]

@@ -1,0 +1,27 @@
+<div class="login_fondo">
+<div class="medium-3 medium-centered columns">
+<div class="login-box">
+<div class="row">
+<div class="medium-12 columns">
+		<%= form_tag sesiones_path do %>
+			<div class="row">
+				<div class="columns medium-12">
+		    	<%= text_field_tag :email, params[:email], placeholder: "Email" %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns medium-12">
+		    	<%= password_field_tag :password, "", placeholder: "Password" %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns medium-centered medium-12">
+					<%= submit_tag "Ingresar", :class => 'button expand' %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+</div>
+</div>
+</div>

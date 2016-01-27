@@ -22,24 +22,29 @@
   </head>
 
   <body>
-    <%= render "layouts/general/spinner" %>
-    <%= render "layouts/general/globales" %>
-    <%= render "layouts/general/top_bar" %>
-    <%= render "layouts/general/comentarios_modal" %>
-    <%= render "layouts/general/filtros_modal" %>
-
+  
     <% if notice %>
       <div data-alert id="data-alert" class="alert-box success">
         <%= notice %>
       </div>
     <% end %>
-    <div class="row">
-      <div class="panel panel_forms">
-        <%= yield %>
-      </div> 
-    </div>
-    <div class="row footer">
-      <%= controller_path + '-' + action_name %>
-    </div>
+
+    <% if current_user %>
+      <%= render "layouts/general/spinner" %>
+      <%= render "layouts/general/globales" %>
+      <%= render "layouts/general/top_bar" %>
+      <%= render "layouts/general/comentarios_modal" %>
+      <%= render "layouts/general/filtros_modal" %>
+      <div class="row">
+        <div class="panel panel_forms">
+          <%= yield %>
+        </div> 
+      </div>
+      <div class="row footer">
+        <%= controller_path + '-' + action_name %>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>
