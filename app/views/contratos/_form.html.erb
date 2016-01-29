@@ -23,10 +23,10 @@
         </div>
         <div class="row">
           <div class="columns medium-2">
-            <%= f.collection_select :inquilino_ids, @inquilinos, :id, :nombre, {}, {multiple: true} %>        
+            <%= f.collection_select :inquilino_ids, @inquilinos, :id, :nombre, {:include_hidden => false}, {multiple: true} %>        
           </div>
           <div class="columns medium-2">
-            <%= f.collection_select :propietario_ids, @propietarios, :id, :nombre, {}, {multiple: true} %>        
+            <%= f.collection_select :propietario_ids, @propietarios, :id, :nombre, {:include_hidden => false}, {multiple: true} %>        
           </div>
           <div class="columns medium-2 end">
             <%= f.collection_select :garante_ids, @garantes, :id, :nombre, {}, {multiple: true} %>        
@@ -36,6 +36,9 @@
           <div class="columns medium-2">
             <%= f.text_field :fecha, :class => "datepicker dia_hoy" %>
           </div>
+          <div class="columns medium-2 end">
+            <%= f.collection_select :caja_id, @cajas, :id, :nombre %>
+          </div>
         </div>
         <div class="row">
           <div class="columns medium-6">
@@ -44,9 +47,43 @@
         </div>
       </div>
       <div class="content" id="cuotas">
-        <%= render "items_fields", :f => f %>
+        <%= render "cuotas_refresh" %>
+        <div class="row">
+          <div class="columns medium-2">
+            <%= label_tag 'Fecha_desde' %>
+          </div>
+          <div class="columns medium-2">
+            <%= label_tag 'Monto' %>
+          </div>
+          <div class="columns medium-2 end">
+            <%= label_tag 'Cobrado' %>
+          </div>
+        </div>
+        <%= f.fields_for :contratos_items do |f| %>
+          <%= render "contratos_items_fields", :f => f %>
+        <% end %>
+        <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_items %>
+        </div>
       <div class="content" id="impuestos">
-        <%= render "impuestos_fields", :f => f %>
+        <%= render "impuestos_refresh" %>
+        <div class="row">
+          <div class="columns medium-2">
+            <%= label_tag 'Fecha_pago' %>
+          </div>
+          <div class="columns medium-2">
+            <%= label_tag 'Impuesto' %>
+          </div>
+          <div class="columns medium-2">
+            <%= label_tag 'Monto' %>
+          </div>
+          <div class="columns medium-1 end">
+            <%= label_tag 'Pago' %>
+          </div>
+        </div>
+        <%= f.fields_for :contratos_impuestos do |f| %>
+          <%= render "contratos_impuestos_fields", :f => f %>
+        <% end %>
+        <%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_impuestos %>
       </div>
     </div>
   </div>

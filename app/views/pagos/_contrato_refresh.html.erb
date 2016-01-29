@@ -1,10 +1,10 @@
 <%= custom_form_for @pago, url: refresh_pagos_path, html: {id: 'form_refresh'}, :remote => :true do |f| %>
 <div class="row">
   <div class="columns medium-4">
-    <%= f.collection_select :contrato_id, @contratos, :id, :direccion_inmueble %>
+    <%= f.collection_select :contrato_id, @contratos, :id, :contrato_selector %>
   </div>
   <div class="columns medium-2">
-    <%= f.grouped_collection_select :propietario_id, @contratos, :propietarios, :direccion_inmueble, :id, :nombre, include_blank: true  %>
+    <%= f.grouped_collection_select :propietario_id, @contratos, :propietarios, :contrato_selector, :id, :nombre, include_blank: true  %>
   </div>
   <div class="columns medium-2">
   	<%= f.text_field :fecha, :class => 'datepicker dia_hoy' %>

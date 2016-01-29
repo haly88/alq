@@ -7,6 +7,11 @@ ready = ->
   $.fn.funcionesImpuestos()
   $.fn.funcionesCuotas()
 
+  if action_name == 'edit' or action_name == 'update'
+    $('#contrato_inmueble_id').prop('disabled', true).trigger('chosen:updated')
+    $('#contrato_inquilino_ids').prop('disabled', true).trigger('chosen:updated')
+    $('#contrato_propietario_ids').prop('disabled', true).trigger('chosen:updated')
+
   $('#cuotas_refresh').click ->
     $('.spinner').show()
     $('#cuotas_refresh').hide()
@@ -42,7 +47,7 @@ ready = ->
       $.fn.funcionesCuotas()
       $('.spinner').hide()
       $('#cuotas_refresh').show()
-    ), 1000
+    ), 10
 
   $('#impuestos_refresh').click ->
     $('.spinner').show()
@@ -78,7 +83,7 @@ ready = ->
       $.fn.funcionesImpuestos()
       $('.spinner').hide()
       $('#impuestos_refresh').show()
-    ), 1000
+    ), 10
 
   $('form').on 'change', '.contratos_impuestos_pago', () ->
     $.fn.funcionesImpuestos()

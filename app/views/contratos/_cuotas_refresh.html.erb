@@ -1,3 +1,9 @@
+<div class="panel">
+	<div class="row">
+		<div class="columns medium-2">
+			<%= label_tag 'Creacion Automatica' %>
+		</div>
+	</div>
 <div class="row" >
 	<div class="columns medium-2">
 		<%= label_tag 'Fecha Inicio' %>
@@ -23,19 +29,4 @@
   	<%= link_to '<i class="fa fa-2x fa-refresh"></i>'.html_safe, '#', id: 'cuotas_refresh' %>
   </div>
 </div>
-<div class="row">
-  <div class="columns medium-2">
-  	<%= label_tag 'Fecha_desde' %>
-  </div>
-  <div class="columns medium-2">
-  	<%= label_tag 'Monto' %>
-  </div>
-  <div class="columns medium-2 end">
-  	<%= label_tag 'Cobrado' %>
-  </div>
-</div>
-<%= f.fields_for :contratos_items do |f| %>
-  <%= render "contratos_items_fields", :f => f %>
-<% end %>
-<%= link_to_add_fields '<i class="fa fa-2x fa-plus-square"></i>'.html_safe, f, :contratos_items %>
 </div>

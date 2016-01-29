@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127183518) do
+ActiveRecord::Schema.define(version: 20160129160325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(version: 20160127183518) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "inmueble_id"
+    t.integer  "caja_id",     default: 1
   end
 
+  add_index "contratos", ["caja_id"], name: "index_contratos_on_caja_id", using: :btree
   add_index "contratos", ["inmueble_id"], name: "index_contratos_on_inmueble_id", using: :btree
 
   create_table "contratos_impuestos", force: :cascade do |t|
@@ -183,6 +185,23 @@ ActiveRecord::Schema.define(version: 20160127183518) do
   add_index "liquidaciones", ["contrato_id"], name: "index_liquidaciones_on_contrato_id", using: :btree
   add_index "liquidaciones", ["contratos_item_id"], name: "index_liquidaciones_on_contratos_item_id", using: :btree
 
+  create_table "movimientos", force: :cascade do |t|
+    t.integer  "caja_id"
+    t.date     "fecha"
+    t.integer  "cajas_concepto_id"
+    t.text     "descripcion"
+    t.decimal  "monto",             precision: 12, scale: 4, default: 0.0, null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.integer  "liquidacion_id"
+    t.integer  "pago_id"
+  end
+
+  add_index "movimientos", ["caja_id"], name: "index_movimientos_on_caja_id", using: :btree
+  add_index "movimientos", ["cajas_concepto_id"], name: "index_movimientos_on_cajas_concepto_id", using: :btree
+  add_index "movimientos", ["liquidacion_id"], name: "index_movimientos_on_liquidacion_id", using: :btree
+  add_index "movimientos", ["pago_id"], name: "index_movimientos_on_pago_id", using: :btree
+
   create_table "pagos", force: :cascade do |t|
     t.integer  "contrato_id"
     t.integer  "contratos_item_id"
@@ -224,6 +243,7 @@ ActiveRecord::Schema.define(version: 20160127183518) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "contratos", "cajas"
   add_foreign_key "contratos", "inmuebles"
   add_foreign_key "contratos_impuestos", "contratos"
   add_foreign_key "contratos_impuestos", "impuestos"
@@ -234,6 +254,10 @@ ActiveRecord::Schema.define(version: 20160127183518) do
   add_foreign_key "inmuebles", "inmueble_tipos"
   add_foreign_key "liquidaciones", "contratos"
   add_foreign_key "liquidaciones", "contratos_items"
+  add_foreign_key "movimientos", "cajas"
+  add_foreign_key "movimientos", "cajas_conceptos"
+  add_foreign_key "movimientos", "liquidaciones"
+  add_foreign_key "movimientos", "pagos"
   add_foreign_key "pagos", "contratos"
   add_foreign_key "pagos", "contratos_items"
   add_foreign_key "pagos", "liquidaciones"

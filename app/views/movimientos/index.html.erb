@@ -1,0 +1,26 @@
+<div class="panelAcciones">
+  <%= boton_atras_root %><%= boton_nuevo %>
+</div> 
+<table class="dataTable display responsive no-wrap">
+  <thead>
+    <tr>
+      <th>Caja</th>
+      <th>Fecha</th>
+      <th>Concepto</th>
+      <th>Monto</th>
+      <th>Descripcion</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movimientos.each do |movimiento| %>
+      <tr>
+        <td><%= link_to movimiento.caja.nombre, edit_movimiento_path(movimiento) %></td>
+        <td><%= movimiento.fecha %></td>
+        <td><%= movimiento.cajas_concepto.nombre %></td>
+        <td><%= movimiento.monto %></td>
+        <td><%= movimiento.descripcion %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

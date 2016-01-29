@@ -1,0 +1,31 @@
+<%= form_tag estado_de_caja_index_path, :method => 'get', :remote => true do %>
+	<div class="row">
+		<div class="columns medium-3">
+			<%= label_tag 'Fecha_desde' %>
+			<%= text_field_tag 'fecha_desde', nil, :class => 'datepicker' %>
+		</div>
+		<div class="columns medium-3">
+			<%= label_tag 'Fecha_hasta' %>
+			<%= text_field_tag 'fecha_hasta', nil, :class => 'datepicker' %>
+		</div>
+		<div class="columns medium-3 end">
+			<%= label_tag 'Caja' %>
+			<%= select_tag 'caja_id', options_from_collection_for_select(@cajas, :id, :nombre), include_blank: true %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns medium-3">
+			<%= label_tag 'Concepto' %>
+			<%= select_tag 'cajas_concepto_id', options_from_collection_for_select(@cajas_conceptos, :id, :nombre), include_blank: true %>
+		</div>
+		<div class="columns medium-3 end">
+			<%= label_tag 'Totalizado' %>
+			<%= select_tag 'totalizado', options_for_select([['Sin Totalizar', 0], ['Por Caja', 1]]) %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns medium-2">
+			<%= submit_tag 'Aceptar', :class => 'button tiny' %>
+		</div>
+	</div>	
+<% end %>

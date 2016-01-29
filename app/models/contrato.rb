@@ -20,10 +20,10 @@ class Contrato < ActiveRecord::Base
 	accepts_nested_attributes_for :contratos_items, :allow_destroy => true#, :reject_if => lambda { |a| a[:monto].to_d == 0 or a[:fecha_desde].blank? or a[:fecha_hasta].blank?}
 	
   #Validaciones
-	validates :nombre, :inmueble_id, :inquilino_ids, :propietario_ids, presence: true
+	validates :nombre, :caja_id, :inmueble_id, :inquilino_ids, :propietario_ids, presence: true
 	validates :inmueble_id, uniqueness: true
   validates :nombre, :uniqueness => {:case_sensitive => false}
-  validate :liquidado?, :on => :update
+  #validate :liquidado?, :on => :update
 
   def get_primer_cuota_impaga(fecha_desde)
     contratos_items.find_by_sql([
@@ -52,17 +52,17 @@ class Contrato < ActiveRecord::Base
       order by fecha_desde", self.id, fecha_desde]).first
   end
 
-	def direccion_inmueble
-		inmueble.direccion_completa
+	def contrato_selector
+		inmueble.direccion_completa + " | " + nombre + " | " + carpeta
 	end
 
   private
 
-  def liquidado?
-    if liquidaciones.any?
-      errors.add(:base, "El contrato se encuentra liquidado.")
-    end
-  end
+  # def liquidado?
+  #   if liquidaciones.any?
+  #     errors.add(:base, "El contrato se encuentra liquidado.")
+  #   end
+  # end
 
   # def calcular_total_a_pagar(fecha)
   #   total_a_pagar = contratos_items.where('fecha_desde <= ?', fecha).sum(:monto) - calcular_pagado

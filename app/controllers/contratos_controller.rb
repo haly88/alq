@@ -1,6 +1,6 @@
 class ContratosController < ApplicationController
   before_action :set_contrato, only: [:show, :edit, :update, :destroy]
-  before_action :set_selectores, only: [:new, :edit, :update, :create, :destroy]
+  before_action :set_globales, only: [:new, :edit, :update, :create, :destroy]
   before_action :set_inmuebles, only: [:edit, :update, :destroy]
   before_action :set_inmuebles_sin_usar, only: [:new, :create]
 
@@ -64,11 +64,12 @@ class ContratosController < ApplicationController
       @contrato = Contrato.find(params[:id])
     end
 
-    def set_selectores
+    def set_globales
       @impuestos = Impuesto.all
       @inquilinos = Persona.inquilinos
       @propietarios = Persona.propietarios
       @garantes = Persona.garantes
+      @cajas = Caja.all
     end
 
     def set_inmuebles

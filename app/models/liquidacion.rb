@@ -1,5 +1,7 @@
 class Liquidacion < ActiveRecord::Base
 
+  has_one :movimiento, :dependent => :destroy
+
   has_many :comentarios, as: :comentable, :dependent => :destroy
 
   belongs_to :contrato
@@ -12,6 +14,9 @@ class Liquidacion < ActiveRecord::Base
   validate :valor_cobro
 
   before_destroy :cuota_pagada?
+
+  after_create :set_movimiento
+  after_update :update_movimiento
 
   private
 
@@ -26,6 +31,15 @@ class Liquidacion < ActiveRecord::Base
       errors.add(:base, "No puede borrar, la cuota se encuentra pagada")
       return false
     end
+  end
+
+  def set_movimiento
+    Movimiento.create!(:caja_id => contrato.caja_id, :fecha => Date.today, :cajas_concepto_id => 1, :monto => total, :liquidacion_id => id,
+    :descripcion => "Generado por cobro #{id}")
+  end
+
+  def update_movimiento
+    movimiento.update!(:monto => total)
   end
 
 

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  caja_id: 
+  fecha: 2016-01-27
+  cajas_concepto_id: 
+  descripcion: MyText
+  monto: 9.99
+
+two:
+  caja_id: 
+  fecha: 2016-01-27
+  cajas_concepto_id: 
+  descripcion: MyText
+  monto: 9.99

@@ -6,14 +6,20 @@
       <%= f.hidden_field :contratos_item_id %>
       <%= f.hidden_field :inquilino_id %>
       <%= f.hidden_field :fecha %>
-      <%= hidden_field_tag 'liquidacion_fecha_day', @liquidacion.fecha.day %>
-      <%= hidden_field_tag 'mora_fija_dia', @empresa.mora_fija_dia %>
-      <%= hidden_field_tag 'mora_fija_monto', @empresa.mora_fija_monto %>
-      <%= hidden_field_tag 'mora_fija_porc', @empresa.mora_fija_porc %>
-      <%= hidden_field_tag 'mora_var_dia', @empresa.mora_var_dia %>
-      <%= hidden_field_tag 'mora_var_monto', @empresa.mora_var_monto %>
-      <%= hidden_field_tag 'mora_var_porc', @empresa.mora_var_porc %>
+      <%= hidden_field_tag 'liquidacion_fecha_day', @liquidacion.fecha.day, disabled: true %>
+      <%= hidden_field_tag 'mora_fija_dia', @empresa.mora_fija_dia, disabled: true %>
+      <%= hidden_field_tag 'mora_fija_monto', @empresa.mora_fija_monto, disabled: true %>
+      <%= hidden_field_tag 'mora_fija_porc', @empresa.mora_fija_porc, disabled: true %>
+      <%= hidden_field_tag 'mora_var_dia', @empresa.mora_var_dia, disabled: true %>
+      <%= hidden_field_tag 'mora_var_monto', @empresa.mora_var_monto, disabled: true %>
+      <%= hidden_field_tag 'mora_var_porc', @empresa.mora_var_porc, disabled: true %>
       <%= render 'item_info' %>
+      <div class="row">
+        <div class="columns medium-2">
+          <%= label_tag "Numero Interno" %>
+          <%= text_field_tag "Numero Interno", @liquidacion.id, disabled: true %>
+        </div>
+      </div>
       <div class="row">
         <div class="columns medium-2">
           <%= f.text_field :neto, :class => 'currency' %>

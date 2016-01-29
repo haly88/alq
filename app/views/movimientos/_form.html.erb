@@ -1,0 +1,28 @@
+<%= custom_form_for @movimiento, html: {id: 'form_principal'} do |f| %>
+  <%= f.error_messages %>
+  <div class="row">
+    <div class="columns medium-2">
+      <%= label_tag "Numero Interno" %>
+      <%= text_field_tag "Numero Interno", @movimiento.id, disabled: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns medium-2">
+      <%= f.collection_select :caja_id, @cajas, :id, :nombre %>
+    </div>
+    <div class="columns medium-2">
+      <%= f.text_field :fecha, :class => "datepicker dia_hoy" %>
+    </div>
+    <div class="columns medium-2">
+      <%= f.collection_select :cajas_concepto_id, @cajas_conceptos, :id, :nombre %>
+    </div>
+    <div class="columns medium-2 end">
+      <%= f.text_field :monto, :class => "currency" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns medium-6">
+      <%= f.text_area :descripcion %>
+    </div>
+  </div>
+<% end %>

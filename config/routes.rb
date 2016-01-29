@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :movimientos
   resources :cajas_conceptos
   resources :cajas
 
   resources :sesiones
 
   resources :cuenta_corriente, only: :index
+  resources :estado_de_caja, only: :index
 
   resources :empresas, only: [:update, :edit]
   resources :pagos do

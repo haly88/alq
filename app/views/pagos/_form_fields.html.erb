@@ -6,9 +6,15 @@
       <%= f.hidden_field :contratos_item_id %>
       <%= f.hidden_field :propietario_id %>
       <%= f.hidden_field :fecha %>
-      <%= hidden_field_tag 'comision_monto', @empresa.comision_monto %>
-      <%= hidden_field_tag 'comision_porc', @empresa.comision_porc %>
+      <%= hidden_field_tag 'comision_monto', @empresa.comision_monto, disabled: true %>
+      <%= hidden_field_tag 'comision_porc', @empresa.comision_porc, disabled: true %>
       <%= render 'item_info' %>
+      <div class="row">
+        <div class="columns medium-2">
+          <%= label_tag "Numero Interno" %>
+          <%= text_field_tag "Numero Interno", @pago.id, disabled: true %>
+        </div>
+      </div>
       <div class="row">
         <div class="columns medium-2">
           <%= f.text_field :neto, :class => 'currency' %>
