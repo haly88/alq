@@ -13,8 +13,8 @@ class CuentaCorrienteController < ApplicationController
 			sql = "select 
 			personas.tipo as Tipo,
 			personas.nombre as Persona,
-			Case When personas.tipo = 'Inquilino' Then sum(coalesce(contratos_items.monto - coalesce(Liquidaciones.suma,0),0)) Else 0 End as PendienteDeCobro,
-			Case When personas.tipo = 'Propietario' Then sum(coalesce(contratos_items.monto - coalesce(Pagos.suma,0),0)) Else 0 End as PendienteDePago
+			Case When personas.tipo = 'Inquilino' Then sum(coalesce(contratos_items.monto - coalesce(Liquidaciones.suma,0),0)) Else 0 End as Pendiente_De_Cobro,
+			Case When personas.tipo = 'Propietario' Then sum(coalesce(contratos_items.monto - coalesce(Pagos.suma,0),0)) Else 0 End as Pendiente_De_Pago
 			from personas
 			Left Join contratos_personas_tipos ON (contratos_personas_tipos.inquilino_id = personas.id OR contratos_personas_tipos.propietario_id = personas.id) 
 			Left Join contratos ON contratos.id = contratos_personas_tipos.contrato_id
@@ -41,12 +41,12 @@ class CuentaCorrienteController < ApplicationController
 			personas.nombre as Persona,
 			contratos.nombre as Contrato,
 			inmuebles.direccion || ' ' || inmuebles.piso || ' ' || inmuebles.depto as Direccion,
-			contratos_items.fecha_desde as CuotaFecha,
-			contratos_items.monto as CuotaMonto,
+			contratos_items.fecha_desde as Cuota_Fecha,
+			contratos_items.monto as Cuota_Monto,
 			Case When personas.tipo = 'Inquilino' Then coalesce(Liquidaciones.suma,0) Else 0 End as Cobrado,
-			Case When personas.tipo = 'Inquilino' Then coalesce(contratos_items.monto - coalesce(Liquidaciones.suma,0),0) Else 0 End as PendienteDeCobro,
+			Case When personas.tipo = 'Inquilino' Then coalesce(contratos_items.monto - coalesce(Liquidaciones.suma,0),0) Else 0 End as Pendiente_De_Cobro,
 			Case When personas.tipo = 'Propietario' Then coalesce(Pagos.suma,0) Else 0 End as Pagado,
-			Case When personas.tipo = 'Propietario' Then coalesce(contratos_items.monto - coalesce(Pagos.suma,0),0) Else 0 End as PendienteDePago
+			Case When personas.tipo = 'Propietario' Then coalesce(contratos_items.monto - coalesce(Pagos.suma,0),0) Else 0 End as Pendiente_De_Pago
 			from personas
 			Left Join contratos_personas_tipos ON (contratos_personas_tipos.inquilino_id = personas.id OR contratos_personas_tipos.propietario_id = personas.id) 
 			Left Join contratos ON contratos.id = contratos_personas_tipos.contrato_id

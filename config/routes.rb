@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
-  resources :movimientos
-  resources :cajas_conceptos
-  resources :cajas
+  resources :movimientos do
+    resources :comentarios
+  end
+  resources :cajas_conceptos do
+    resources :comentarios
+  end
+  resources :cajas do
+    resources :comentarios
+  end
 
   resources :sesiones
 

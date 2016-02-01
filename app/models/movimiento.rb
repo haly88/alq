@@ -1,4 +1,7 @@
 class Movimiento < ActiveRecord::Base
+
+  has_many :comentarios, as: :comentable, :dependent => :destroy
+  
   belongs_to :liquidacion
   belongs_to :pago
   belongs_to :caja

@@ -24,6 +24,10 @@ module BotonesHelper
 		link_to '<i class="fa fa-2x fa-usd"></i>'.html_safe, new_liquidacion_path(contrato: @contrato), :title => "Cobrar"
 	end
 
+	def boton_pagar
+		link_to '<i class="fa fa-2x fa-usd"></i>'.html_safe, new_pago_path(contrato: @contrato), :title => "Pagar"
+	end
+
 	def boton_impuestos
 		link_to '<i class="fa fa-2x fa-info"></i>'.html_safe, '#', :title => "Impuestos", :id => "impuestos", "data-reveal-id" => "impuestos_modal"
 	end

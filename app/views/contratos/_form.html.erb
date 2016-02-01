@@ -36,8 +36,13 @@
           <div class="columns medium-2">
             <%= f.text_field :fecha, :class => "datepicker dia_hoy" %>
           </div>
-          <div class="columns medium-2 end">
+        </div>
+        <div class="row">
+          <div class="columns medium-2">
             <%= f.collection_select :caja_id, @cajas, :id, :nombre %>
+          </div>
+          <div class="columns medium-2 end">
+            <%= f.check_box :sellado %>
           </div>
         </div>
         <div class="row">
